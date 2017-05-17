@@ -1,0 +1,12 @@
+package space.aiyo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AiyoAdminWebApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AiyoAdminWebApplication.class, args);
+	}
+}
