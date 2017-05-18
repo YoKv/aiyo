@@ -1,4 +1,4 @@
-package space.aiyo.steam.contoller;
+package space.aiyo.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

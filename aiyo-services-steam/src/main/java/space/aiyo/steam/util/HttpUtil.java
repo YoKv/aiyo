@@ -40,6 +40,7 @@ public class HttpUtil {
         // 取得输入流，并使用Reader读取
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 connection.getInputStream()));
+
         StringBuilder sb = new StringBuilder();
         String lines;
         while ((lines = reader.readLine()) != null) {
