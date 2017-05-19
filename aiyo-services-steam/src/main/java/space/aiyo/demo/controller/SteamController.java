@@ -1,11 +1,8 @@
-package space.aiyo.controller;
+package space.aiyo.demo.controller;
 
-
-import com.alibaba.fastjson.JSONObject;
-
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import space.aiyo.demo.entity.Greeting;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +14,12 @@ import java.util.Map;
 /**
  * Created by yo on 2017/5/17.
  */
+
+
+//This code uses Spring 4’s new
+//@RestController annotation,which marks the
+//class as a controller where every method returns a domain object instead of a view.
+//It’s shorthand for@Controller and@ResponseBody rolled together.
 
 /**
  * Spring-boot 请求demo
@@ -37,12 +40,13 @@ public class SteamController {
         return "test";
     }
 
-class A{
-      String a;
-}
+    class A {
+        String a;
+    }
 
     /**
      * RequestBody待研究
+     *
      * @param a
      * @return
      */
@@ -55,11 +59,8 @@ class A{
         lists.add("test12");
         lists.add("test2323");
         lists.add("test23");
-
-        JSONObject fastobj = new JSONObject();
-        fastobj.put("k", "v");
-        lists.add(fastobj);
-
+        Greeting greeting = new Greeting(1L, "ddd");
+        lists.add(greeting);
         return lists;
     }
 
@@ -67,16 +68,16 @@ class A{
     public Map<String, Object> ajaxMap(HttpServletRequest request,
                                        @RequestParam("b") String b,
                                        @RequestParam(name = "c", required = false) String c) {
-       // System.out.println(b);
+        // System.out.println(b);
         System.out.println(c);
 
         Map map = new HashMap();
         map.put("Str", "sd");
         map.put("Strs", "sd");
-
-        JSONObject fastobj = new JSONObject();
-        fastobj.put("k", "v");
-        map.put("fastobj", fastobj);
+        Greeting greeting = new Greeting(1L, "ddd");
+//        As you see in steps below, Spring uses the
+//        Jackson JSON library to automatically marshal instances of type Greeting into JSON.
+        map.put("greeting", greeting);
         return map;
     }
 
