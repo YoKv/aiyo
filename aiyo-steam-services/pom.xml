@@ -47,6 +47,11 @@
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
 		</dependency>
+		<!--MongoDb-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
 		<!--JSON工具-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
