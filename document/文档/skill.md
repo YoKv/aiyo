@@ -4,7 +4,7 @@
 
 UI框架：element ui http://element.eleme.io/#/zh-CN
 
-数据库：MongoDB
+数据库：MySQL,MongoDB,分库分表，读写分离
 
 开发工具： IntelliJ IDEA
 
