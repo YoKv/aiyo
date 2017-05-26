@@ -8,3 +8,6 @@ https://github.com/kamoor/spring-boot-sample
 
 SpringBoot文档
 http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-mongodb
+
+数据库设计参考
+http://www.cnblogs.com/crazylights/archive/2013/05/08/3068098.html
