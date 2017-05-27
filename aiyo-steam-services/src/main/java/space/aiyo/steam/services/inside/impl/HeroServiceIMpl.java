@@ -1,6 +1,7 @@
 package space.aiyo.steam.services.inside.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Component;
 import space.aiyo.steam.contsant.SteamContsant;
@@ -18,18 +19,22 @@ import java.util.List;
 public class HeroServiceIMpl implements HeroService{
     @Override
     public List<Dota2HeroEntity> getHeroFromSteamApi() {
-        String result = "";
+        String returnStr = "";
         String url = SteamContsant.DOTA_IEcon_PATH + "/GetHeroes/v1?key=" + SteamContsant.STEAM_KEY;
         try {
-            result = HttpUtil.sendGet(url);
+            returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {
 
         }
-        JSONObject resultObject = JSON.parseObject(result);
-        String heroes = (String) resultObject.get("heroes");
-        List<Dota2HeroEntity> heroeEntities = JSON.parseArray(heroes, Dota2HeroEntity.class);
-        System.out.println(heroeEntities);
-        return heroeEntities;
+        JSONObject result = (JSONObject)JSON.parseObject(returnStr).get("result");
+
+        JSONArray heroesArray =result.getJSONArray("heroes");
+
+        System.out.println("heroesArray"+heroesArray);
+        List<Dota2HeroEntity> heroes = JSON.parseArray(heroesArray.toJSONString(), Dota2HeroEntity.class);
+
+        System.out.println("HeroServiceIMpl"+heroes);
+        return heroes;
     }
 
 }

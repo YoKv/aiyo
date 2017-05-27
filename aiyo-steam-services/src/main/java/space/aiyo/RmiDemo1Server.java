@@ -5,7 +5,6 @@ package space.aiyo;
  */
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +15,7 @@ import space.aiyo.steam.services.external.impl.RmiDemo1ServiceImpl;
 /**
  * springboot 封装的rmi
  */
-@SpringBootApplication(scanBasePackages = "space.aiyo.steam.services")
+//@SpringBootApplication(scanBasePackages = "space.aiyo.steam.services")
 public class RmiDemo1Server extends SpringBootServletInitializer {
 
     @Override
