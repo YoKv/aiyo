@@ -10,7 +10,7 @@ import space.aiyo.steam.services.external.RmiDemo1Service;
 public class RmiDemo1ServiceImpl implements RmiDemo1Service {
 
     @Override
-    public String serviceDemo(String str){
+    public String serviceDemo(String str) {
         return str + " 服务端serviceDemo方法";
     }
 }

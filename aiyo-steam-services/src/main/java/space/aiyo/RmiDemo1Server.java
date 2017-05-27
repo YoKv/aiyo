@@ -17,20 +17,20 @@ import space.aiyo.steam.services.external.impl.RmiDemo1ServiceImpl;
  * springboot 封装的rmi
  */
 @SpringBootApplication(scanBasePackages = "space.aiyo.steam.services")
-public class RmiDemo1Server extends SpringBootServletInitializer{
+public class RmiDemo1Server extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(RmiDemo1Server.class);
     }
 
-    public static void main(String [] args){
+    public static void main(String[] args) {
         SpringApplication.run(RmiDemo1Server.class);
     }
 
     @Bean
-    public static RmiServiceExporter initRmiServiceExporter(RmiDemo1ServiceImpl rmiDemo1ServiceImpl){
-        RmiServiceExporter exporter=new RmiServiceExporter();
+    public static RmiServiceExporter initRmiServiceExporter(RmiDemo1ServiceImpl rmiDemo1ServiceImpl) {
+        RmiServiceExporter exporter = new RmiServiceExporter();
         exporter.setServiceInterface(RmiDemo1Service.class);
         exporter.setServiceName("rmiDemo1Service");
         exporter.setService(rmiDemo1ServiceImpl);

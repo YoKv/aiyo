@@ -11,7 +11,8 @@ public class Customer {
     public String firstName;
     public String lastName;
 
-    public Customer() {}
+    public Customer() {
+    }
 
 
     public Customer(String firstName, String lastName) {

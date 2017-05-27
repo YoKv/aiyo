@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class AiyoSteamServicesApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AiyoSteamServicesApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AiyoSteamServicesApplication.class, args);
+    }
 
-	@GetMapping("/")
-	public String hello(){
-		return "Hello World";
-	}
+    @GetMapping("/")
+    public String hello() {
+        return "Hello World";
+    }
 
 }

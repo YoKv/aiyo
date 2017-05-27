@@ -7,6 +7,6 @@ import space.aiyo.steam.entity.Dota2ItemEntity;
 /**
  * Created by Yo on 2017/5/26.
  */
-public interface Dota2ItemRepository extends MongoRepository<Dota2ItemEntity, String>{
+public interface Dota2ItemRepository extends MongoRepository<Dota2ItemEntity, String> {
 
 }
