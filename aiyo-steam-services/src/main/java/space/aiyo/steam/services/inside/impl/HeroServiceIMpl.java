@@ -24,14 +24,14 @@ public class HeroServiceIMpl implements HeroService{
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {
-
+            //TODO log
         }
         JSONObject result = (JSONObject)JSON.parseObject(returnStr).get("result");
 
         JSONArray heroesArray =result.getJSONArray("heroes");
-
-        System.out.println("heroesArray"+heroesArray);
+        // TODO 转换失败
         List<Dota2HeroEntity> heroes = JSON.parseArray(heroesArray.toJSONString(), Dota2HeroEntity.class);
+
 
         System.out.println("HeroServiceIMpl"+heroes);
         return heroes;

@@ -13,6 +13,10 @@ public class Dota2HeroEntity {
     private String name;//全名
     private String localized_name;//中文名zh
 
+    public Dota2HeroEntity() {
+
+    }
+
     public Dota2HeroEntity(int id, String name, String localized_name) {
         this.id = id;
         this.name = name;
