@@ -1,4 +1,4 @@
-package space.aiyo.steam.services;
+package space.aiyo.steam.services.external;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;

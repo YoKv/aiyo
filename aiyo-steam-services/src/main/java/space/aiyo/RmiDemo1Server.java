@@ -10,8 +10,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.rmi.RmiServiceExporter;
-import space.aiyo.steam.services.RmiDemo1Service;
-import space.aiyo.steam.services.impl.RmiDemo1ServiceImpl;
+import space.aiyo.steam.services.external.RmiDemo1Service;
+import space.aiyo.steam.services.external.impl.RmiDemo1ServiceImpl;
 
 /**
  * springboot 封装的rmi

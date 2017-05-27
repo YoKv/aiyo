@@ -1,6 +1,4 @@
-package space.aiyo.steam.services;
-
-import org.springframework.stereotype.Component;
+package space.aiyo.steam.services.external;
 
 /**
  * Created by yo on 2017/5/22.

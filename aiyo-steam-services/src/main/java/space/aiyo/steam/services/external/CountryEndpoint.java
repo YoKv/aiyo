@@ -1,4 +1,4 @@
-package space.aiyo.steam.services;
+package space.aiyo.steam.services.external;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
