@@ -1,8 +1,7 @@
 package space.aiyo.steam.entity;
 
+import com.alibaba.fastjson.JSONArray;
 import org.springframework.data.annotation.Id;
-
-import java.util.List;
 
 /**
  * Created by Yo on 2017/5/26.
@@ -10,19 +9,19 @@ import java.util.List;
 public class Dota2MatchEntity {
 
     @Id
-    public  int id;
+    private int id;
     /**
      * The matches unique ID.
      */
-    public int match_id;
+    private int match_id;
     /**
      * A 'sequence number', representing the order in which matches were recorded.
      */
-    public int match_seq_num;
+    private int match_seq_num;
     /**
      *Unix timestamp of when the match began.
      */
-    public int start_time;
+    private int start_time;
     /**
      *
      -1 - Invalid
@@ -36,40 +35,111 @@ public class Dota2MatchEntity {
      7 - Ranked Matchmaking
      8 - 1v1 Solo Mid
      */
-    public int lobby_type;
-    public int radiant_team_id;
-    public int dire_team_id;
-    public List<Dota2MatchPlayerEntity> players;
-
+    private int lobby_type;
+    /**
+     * The season the game was played in.
+     */
+    private int season;
+    private int radiant_team_id;
+    private int dire_team_id;
+    /**
+     *Dictates the winner of the match, true for radiant; false for dire.
+     */
+    private boolean radiant_win;
+    /**
+     *  The length of the match, in seconds since the match began.
+     */
+    private int duration;
+    private int pre_game_duration;
+    /**
+     *  A particular teams tower status is given as a 16-bit unsigned integer.
+     *  The rightmost 11 bits represent individual towers belonging to that team;
+     *  see below for a visual representation.
+     ┌─┬─┬─┬─┬─────────────────────── Not used.
+     │ │ │ │ │ ┌───────────────────── Ancient Bottom
+     │ │ │ │ │ │ ┌─────────────────── Ancient Top
+     │ │ │ │ │ │ │ ┌───────────────── Bottom Tier 3
+     │ │ │ │ │ │ │ │ ┌─────────────── Bottom Tier 2
+     │ │ │ │ │ │ │ │ │ ┌───────────── Bottom Tier 1
+     │ │ │ │ │ │ │ │ │ │ ┌─────────── Middle Tier 3
+     │ │ │ │ │ │ │ │ │ │ │ ┌───────── Middle Tier 2
+     │ │ │ │ │ │ │ │ │ │ │ │ ┌─────── Middle Tier 1
+     │ │ │ │ │ │ │ │ │ │ │ │ │ ┌───── Top Tier 3
+     │ │ │ │ │ │ │ │ │ │ │ │ │ │ ┌─── Top Tier 2
+     │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ ┌─ Top Tier 1
+     │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │
+     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+     */
+    private int tower_status_radiant;
+    private int tower_status_dire;
+    /**
+     * A particular teams tower status is given as an 8-bit unsigned integer.
+     * The rightmost 6 bits represent the barracks belonging to that team;
+     * see below for a visual representation.
+     ┌─┬───────────── Not used.
+     │ │ ┌─────────── Bottom Ranged
+     │ │ │ ┌───────── Bottom Melee
+     │ │ │ │ ┌─────── Middle Ranged
+     │ │ │ │ │ ┌───── Middle Melee
+     │ │ │ │ │ │ ┌─── Top Ranged
+     │ │ │ │ │ │ │ ┌─ Top Melee
+     │ │ │ │ │ │ │ │
+     0 0 0 0 0 0 0 0
+     */
+    private int barracks_status_radiant;
+    private int barracks_status_dire;
+    /**
+     *The server cluster the match was played upon. Used for downloading replays of matches.
+     */
+    private int cluster;
+    private int first_blood_time;
+    private int human_players;
+    /**
+     *The league that this match was a part of.
+     *  A list of league IDs can be found via the GetLeagueListing method.
+     */
+    private int leagueid;
+    private int positive_votes;
+    private int negative_votes;
+    /**
+     *
+     0 - None
+     1 - All Pick
+     2 - Captain's Mode
+     3 - Random Draft
+     4 - Single Draft
+     5 - All Random
+     6 - Intro
+     7 - Diretide
+     8 - Reverse Captain's Mode
+     9 - The Greeviling
+     10 - Tutorial
+     11 - Mid Only
+     12 - Least Played
+     13 - New Player Pool
+     14 - Compendium Matchmaking
+     15 - Co-op vs Bots
+     16 - Captains Draft
+     18 - Ability Draft
+     20 - All Random Deathmatch
+     21 - 1v1 Mid Only
+     22 - Ranked Matchmaking
+     *
+     */
+    private int game_mode;
+    private JSONArray picks_bans;
+    private int flags;
+    private int engine;
+    private int radiant_score;
+    private int dire_score;
+    //  TODO 格式待定
+    private JSONArray players;
 
     @Override
     public String toString() {
         return String.format(
-                "Dota2HeroEntity[id=%s, match_id=%s, match_seq_num='%s', start_time='%s', lobby_type='%s', radiant_team_id='%s', dire_team_id='%s', players='%s']",
-                id, match_id, match_seq_num, start_time, lobby_type, radiant_team_id, dire_team_id, players);
+                "Dota2HeroEntity[id=%s, match_id=%s, match_seq_num='%s', start_time='%s', leagueid='%s', game_mode='%s', radiant_win='%s']",
+                id, match_id, match_seq_num, start_time, leagueid, game_mode, radiant_win);
     }
 
-    class Dota2MatchPlayerEntity{
-        public int account_id;
-        /**
-         * A player's slot is returned via an 8-bit unsigned integer.
-         * The first bit represent the player's team, false if Radiant and true if dire.
-         * The final three bits represent the player's position in that team, from 0-4.
-         ┌─────────────── Team (false if Radiant, true if Dire).
-         │ ┌─┬─┬─┬─────── Not used.
-         │ │ │ │ │ ┌─┬─┬─ The position of a player within their team (0-4).
-         │ │ │ │ │ │ │ │
-         0 0 0 0 0 0 0 0
-         *
-         *
-         */
-        public int player_slot;
-        public int hero_id;
-
-        public Dota2MatchPlayerEntity(int account_id, int player_slot, int hero_id) {
-            this.account_id = account_id;
-            this.player_slot = player_slot;
-            this.hero_id = hero_id;
-        }
-    }
 }

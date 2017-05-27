@@ -9,9 +9,9 @@ import org.springframework.data.annotation.Id;
 public class Dota2HeroEntity {
 
     @Id
-    public int id;//id，以字母排序
-    public String name;//全名
-    public String localized_name;//中文名zh
+    private int id;//id，以字母排序
+    private String name;//全名
+    private String localized_name;//中文名zh
 
     public Dota2HeroEntity(int id, String name, String localized_name) {
         this.id = id;
