@@ -20,7 +20,7 @@ public class HeroServiceIMpl implements HeroService{
     @Override
     public List<Dota2HeroEntity> getHeroFromSteamApi() {
         String returnStr = "";
-        String url = SteamContsant.DOTA_IEcon_PATH + "/GetHeroes/v1?key=" + SteamContsant.STEAM_KEY;
+        String url = SteamContsant.DOTA_IEcon_PATH + "/GetHeroes/v1?language=zh&key=" + SteamContsant.STEAM_KEY;
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {

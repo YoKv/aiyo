@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
  */
 public class Dota2HeroEntity {
 
+
     @Id
     private int id;//id，以字母排序
     private String name;//全名
@@ -28,5 +29,29 @@ public class Dota2HeroEntity {
         return String.format(
                 "Dota2HeroEntity[id=%s, name='%s', localized_name='%s']",
                 id, name, localized_name);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocalized_name() {
+        return localized_name;
+    }
+
+    public void setLocalized_name(String localized_name) {
+        this.localized_name = localized_name;
     }
 }
