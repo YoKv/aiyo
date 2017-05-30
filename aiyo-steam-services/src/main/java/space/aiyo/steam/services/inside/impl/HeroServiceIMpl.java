@@ -3,9 +3,11 @@ package space.aiyo.steam.services.inside.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.entity.Dota2HeroEntity;
+import space.aiyo.steam.repository.Dota2HeroRepository;
 import space.aiyo.steam.services.inside.HeroService;
 import space.aiyo.steam.util.HttpUtil;
 
@@ -17,6 +19,10 @@ import java.util.List;
  */
 @Component
 public class HeroServiceIMpl implements HeroService{
+
+    @Autowired
+    private Dota2HeroRepository repository;
+
     @Override
     public List<Dota2HeroEntity> getHeroFromSteamApi() {
         String returnStr = "";
@@ -34,6 +40,11 @@ public class HeroServiceIMpl implements HeroService{
 
 
         System.out.println("HeroServiceIMpl"+heroes);
+
+        for (Dota2HeroEntity hero:
+             heroes) {
+            repository.save(hero);
+        }
         return heroes;
     }
 
