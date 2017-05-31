@@ -1,11 +1,13 @@
 package space.aiyo.steam.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Dota2英雄
  * Created by Yo on 2017/5/26.
  */
+@Document(collection="hero")
 public class Dota2HeroEntity {
 
 
