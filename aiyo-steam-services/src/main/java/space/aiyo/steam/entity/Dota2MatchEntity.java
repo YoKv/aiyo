@@ -2,10 +2,13 @@ package space.aiyo.steam.entity;
 
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by Yo on 2017/5/26.
  */
+
+@Document(collection="dotaMatch")
 public class Dota2MatchEntity {
 
     @Id

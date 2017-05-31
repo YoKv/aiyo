@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Dota2英雄
  * Created by Yo on 2017/5/26.
  */
-@Document(collection="hero")
+@Document(collection="dotaHero")
 public class Dota2HeroEntity {
 
 
