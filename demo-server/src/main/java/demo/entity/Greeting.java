@@ -1,4 +1,4 @@
-package space.aiyo.demo.entity;
+package demo.entity;
 
 /**
  * Created by yo on 2017/5/19.

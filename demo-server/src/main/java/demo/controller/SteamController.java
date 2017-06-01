@@ -1,9 +1,8 @@
-package space.aiyo.demo.controller;
+package demo.controller;
 
+import demo.entity.Greeting;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import space.aiyo.demo.entity.Greeting;
-
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

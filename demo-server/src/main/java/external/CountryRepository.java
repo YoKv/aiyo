@@ -1,4 +1,4 @@
-package space.aiyo.steam.services.external;
+package external;
 
 import io.spring.guides.gs_producing_web_service.Country;
 import io.spring.guides.gs_producing_web_service.Currency;

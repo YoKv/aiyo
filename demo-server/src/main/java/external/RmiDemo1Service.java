@@ -1,4 +1,4 @@
-package space.aiyo.steam.services.external;
+package external;
 
 /**
  * Created by yo on 2017/5/22.

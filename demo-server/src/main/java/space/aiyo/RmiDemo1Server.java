@@ -4,18 +4,19 @@ package space.aiyo;
  * Created by yo on 2017/5/22.
  */
 
+import external.RmiDemo1Service;
+import external.impl.RmiDemo1ServiceImpl;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.rmi.RmiServiceExporter;
-import space.aiyo.steam.services.external.RmiDemo1Service;
-import space.aiyo.steam.services.external.impl.RmiDemo1ServiceImpl;
 
 /**
  * springboot 封装的rmi
  */
-//@SpringBootApplication(scanBasePackages = "space.aiyo.steam.services")
+@SpringBootApplication(scanBasePackages = "external")
 public class RmiDemo1Server extends SpringBootServletInitializer {
 
     @Override

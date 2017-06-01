@@ -1,7 +1,7 @@
-package space.aiyo.steam.services.external.impl;
+package external.impl;
 
+import external.RmiDemo1Service;
 import org.springframework.stereotype.Service;
-import space.aiyo.steam.services.external.RmiDemo1Service;
 
 /**
  * Created by yo on 2017/5/22.
