@@ -38,7 +38,11 @@ public class HttpUtil {
         }
 
         connection.connect();
-        // 取得输入流，并使用Reader读取
+        // 取得输入流，并使用Reader读取 暂时使用utf-8
+//        The ISO639-1 language code for the language all tokenized strings should be returned in.
+//                Not all strings have been translated to every language.
+//        If a language does not have a string, the English string will be returned instead.
+//        If this parameter is omitted the string token will be returned for the strings.
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 connection.getInputStream(),"utf-8"));
 
