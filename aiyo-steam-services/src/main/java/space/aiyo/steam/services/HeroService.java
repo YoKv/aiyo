@@ -1,4 +1,4 @@
-package space.aiyo.steam.services.inside;
+package space.aiyo.steam.services;
 
 import space.aiyo.steam.entity.Dota2HeroEntity;
 
@@ -25,4 +25,11 @@ public interface HeroService {
      * 从steam平台新建或更新英雄信息
      */
     void saveHeroFromSteamApi();
+
+    /**
+     * 获取英雄列表
+     *
+     * @return
+     */
+    List<Dota2HeroEntity> getHeroes();
 }

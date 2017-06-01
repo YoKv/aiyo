@@ -1,4 +1,4 @@
-package space.aiyo.steam.services.inside.impl;
+package space.aiyo.steam.services.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.entity.Dota2HeroEntity;
 import space.aiyo.steam.repository.Dota2HeroRepository;
-import space.aiyo.steam.services.inside.HeroService;
+import space.aiyo.steam.services.HeroService;
 import space.aiyo.steam.util.HttpUtil;
 
 import java.io.IOException;
@@ -59,5 +59,10 @@ public class HeroServiceImpl implements HeroService {
                 heroes) {
             saveHero(hero);
         }
+    }
+
+    @Override
+    public List<Dota2HeroEntity> getHeroes() {
+        return repository.findAll();
     }
 }

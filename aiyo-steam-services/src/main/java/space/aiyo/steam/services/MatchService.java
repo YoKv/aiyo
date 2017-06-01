@@ -1,4 +1,4 @@
-package space.aiyo.steam.services.inside;
+package space.aiyo.steam.services;
 
 import com.alibaba.fastjson.JSONObject;
 

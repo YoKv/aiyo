@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Created by Yo on 2017/5/26.
  */
 
-@Document(collection="dotaMatch")
+@Document(collection = "dotaMatch")
 public class Dota2MatchEntity {
 
     @Id

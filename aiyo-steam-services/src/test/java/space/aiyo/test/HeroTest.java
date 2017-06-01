@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import space.aiyo.steam.services.inside.HeroService;
+import space.aiyo.steam.services.HeroService;
 
 /**
  * Created by yo on 2017/5/27.

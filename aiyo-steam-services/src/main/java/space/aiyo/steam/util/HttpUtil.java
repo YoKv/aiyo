@@ -44,7 +44,7 @@ public class HttpUtil {
 //        If a language does not have a string, the English string will be returned instead.
 //        If this parameter is omitted the string token will be returned for the strings.
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-                connection.getInputStream(),"utf-8"));
+                connection.getInputStream(), "utf-8"));
 
         StringBuilder sb = new StringBuilder();
         String lines;
