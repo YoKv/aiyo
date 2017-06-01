@@ -35,12 +35,12 @@ public class SteamController {
      */
     @GetMapping(value = "/getUserMatch")
     public String getUserMatch(HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView();
+//        ModelAndView mv = new ModelAndView();
 
         return "test";
     }
 
-    class A {
+    static class A {
         String a;
     }
 

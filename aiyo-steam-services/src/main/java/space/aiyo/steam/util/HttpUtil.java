@@ -40,7 +40,7 @@ public class HttpUtil {
         connection.connect();
         // 取得输入流，并使用Reader读取
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-                connection.getInputStream()));
+                connection.getInputStream(),"utf-8"));
 
         StringBuilder sb = new StringBuilder();
         String lines;

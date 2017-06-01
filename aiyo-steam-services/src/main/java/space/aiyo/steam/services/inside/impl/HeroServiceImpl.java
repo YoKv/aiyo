@@ -3,6 +3,8 @@ package space.aiyo.steam.services.inside.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import space.aiyo.steam.contsant.SteamContsant;
@@ -18,7 +20,9 @@ import java.util.List;
  * Created by yo on 2017/5/27.
  */
 @Component
-public class HeroServiceIMpl implements HeroService{
+public class HeroServiceImpl implements HeroService {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private Dota2HeroRepository repository;
@@ -30,22 +34,30 @@ public class HeroServiceIMpl implements HeroService{
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {
-            //TODO log
+            logger.info("调用steam接口失败: " + e.toString());
         }
-        JSONObject result = (JSONObject)JSON.parseObject(returnStr).get("result");
+        JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
+        JSONArray heroesArray = result.getJSONArray("heroes");
 
-        JSONArray heroesArray =result.getJSONArray("heroes");
-        // TODO 转换失败
         List<Dota2HeroEntity> heroes = JSON.parseArray(heroesArray.toJSONString(), Dota2HeroEntity.class);
-
-
-        System.out.println("HeroServiceIMpl"+heroes);
-
-        for (Dota2HeroEntity hero:
-             heroes) {
-            repository.save(hero);
-        }
         return heroes;
     }
 
+    @Override
+    public void saveHero(Dota2HeroEntity hero) {
+        try {
+            repository.save(hero);
+        } catch (Exception e) {
+            logger.info("英雄数据存入数据库失败: " + e.toString());
+        }
+    }
+
+    @Override
+    public void saveHeroFromSteamApi() {
+        List<Dota2HeroEntity> heroes = getHeroFromSteamApi();
+        for (Dota2HeroEntity hero :
+                heroes) {
+            saveHero(hero);
+        }
+    }
 }

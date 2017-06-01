@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Created by yo on 2017/5/17.
  */
-public class steamApiTest {
+public class SteamApiTest {
 
     @Test
     public void test() {
