@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.entity.Dota2HeroEntity;
+import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.repository.Dota2HeroRepository;
 import space.aiyo.steam.services.HeroService;
 import space.aiyo.steam.util.HttpUtil;
@@ -30,7 +31,7 @@ public class HeroServiceImpl implements HeroService {
     @Override
     public List<Dota2HeroEntity> getHeroFromSteamApi() {
         String returnStr = "";
-        String url = SteamContsant.DOTA_IEcon_PATH + "/GetHeroes/v1?language=zh&key=" + SteamContsant.STEAM_KEY;
+        String url = SteamContsant.STEAM_PATH + SteamApiEnum.GetHeroes.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {
