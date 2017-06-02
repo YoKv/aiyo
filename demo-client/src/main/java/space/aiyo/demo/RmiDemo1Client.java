@@ -8,7 +8,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.rmi.RmiProxyFactoryBean;
-import space.aiyo.steam.services.RmiDemo1Service;
+import space.aiyo.RmiDemo1Service;
+
 
 /**
  * Created by Yo on 2017/5/22.
