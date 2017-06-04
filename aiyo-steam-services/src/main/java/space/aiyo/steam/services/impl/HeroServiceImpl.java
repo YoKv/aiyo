@@ -18,20 +18,25 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * 英雄相关服务接口
  * Created by yo on 2017/5/27.
  */
 @Component
 public class HeroServiceImpl implements HeroService {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private final Dota2HeroRepository repository;
 
     @Autowired
-    private Dota2HeroRepository repository;
+    public HeroServiceImpl(Dota2HeroRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Dota2HeroEntity> getHeroFromSteamApi() {
         String returnStr = "";
-        String url = SteamContsant.STEAM_PATH + SteamApiEnum.GetHeroes.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
+        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetHeroes.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {
@@ -40,8 +45,7 @@ public class HeroServiceImpl implements HeroService {
         JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
         JSONArray heroesArray = result.getJSONArray("heroes");
 
-        List<Dota2HeroEntity> heroes = JSON.parseArray(heroesArray.toJSONString(), Dota2HeroEntity.class);
-        return heroes;
+        return JSON.parseArray(heroesArray.toJSONString(), Dota2HeroEntity.class);
     }
 
     @Override

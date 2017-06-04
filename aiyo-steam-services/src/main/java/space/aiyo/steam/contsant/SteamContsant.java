@@ -1,6 +1,7 @@
 package space.aiyo.steam.contsant;
 
 /**
+ * Steam相关静态变量
  * Created by yo on 2017/5/27.
  */
 public class SteamContsant {
@@ -11,6 +12,6 @@ public class SteamContsant {
     /**
      * steam接口路径
      */
-    public static final String STEAM_PATH = "http://api.steampowered.com";
+    public static final String STEAM_API_PATH = "http://api.steampowered.com";
 
 }

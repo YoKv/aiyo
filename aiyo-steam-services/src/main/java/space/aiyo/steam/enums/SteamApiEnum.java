@@ -6,10 +6,10 @@ package space.aiyo.steam.enums;
  */
 public enum SteamApiEnum {
 
-    GetMatchHistory("GetMatchHistory","/IDOTA2Match_570/GetMatchHistory/v1","获取比赛列表"),
-    GetMatchHistoryBySequenceNum("GetMatchHistoryBySequenceNum","/IDOTA2Match_570/GetMatchHistoryBySequenceNum/v1","通过序列号获取比赛列表"),
-    GetHeroes("GetHeroes","/IEconDOTA2_570/GetHeroes/v1","获取英雄列表"),
-    GetGameItems("GetGameItems","/IEconDOTA2_570/GetGameItems/v1","获取装备列表");
+    GetMatchHistory("GetMatchHistory", "/IDOTA2Match_570/GetMatchHistory/v1", "获取比赛列表"),
+    GetMatchHistoryBySequenceNum("GetMatchHistoryBySequenceNum", "/IDOTA2Match_570/GetMatchHistoryBySequenceNum/v1", "通过序列号获取比赛列表"),
+    GetHeroes("GetHeroes", "/IEconDOTA2_570/GetHeroes/v1", "获取英雄列表"),
+    GetGameItems("GetGameItems", "/IEconDOTA2_570/GetGameItems/v1", "获取装备列表");
     /**
      * 接口名
      */
