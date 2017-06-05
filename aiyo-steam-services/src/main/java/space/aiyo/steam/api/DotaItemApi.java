@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 游戏装备相关 RESTful API
- * Created by yo on 2017/6/1.
+ * Created by yo on 2017/6/5.
  */
 @RestController
 public class DotaItemApi {
