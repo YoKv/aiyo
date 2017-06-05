@@ -6,12 +6,12 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import space.aiyo.steam.contsant.SteamContsant;
-import space.aiyo.steam.entity.Dota2HeroEntity;
+import space.aiyo.steam.entity.DotaHeroEntity;
 import space.aiyo.steam.enums.SteamApiEnum;
-import space.aiyo.steam.repository.Dota2HeroRepository;
-import space.aiyo.steam.services.HeroService;
+import space.aiyo.steam.repository.DotaHeroRepository;
+import space.aiyo.steam.services.DotaHeroService;
 import space.aiyo.steam.util.HttpUtil;
 
 import java.io.IOException;
@@ -21,20 +21,20 @@ import java.util.List;
  * 英雄相关服务接口
  * Created by yo on 2017/5/27.
  */
-@Component
-public class HeroServiceImpl implements HeroService {
+@Service
+public class DotaHeroServiceImpl implements DotaHeroService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final Dota2HeroRepository repository;
+    private final DotaHeroRepository repository;
 
     @Autowired
-    public HeroServiceImpl(Dota2HeroRepository repository) {
+    public DotaHeroServiceImpl(DotaHeroRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public List<Dota2HeroEntity> getHeroFromSteamApi() {
+    public List<DotaHeroEntity> getHeroFromSteamApi() {
         String returnStr = "";
         String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetHeroes.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
         try {
@@ -45,11 +45,11 @@ public class HeroServiceImpl implements HeroService {
         JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
         JSONArray heroesArray = result.getJSONArray("heroes");
 
-        return JSON.parseArray(heroesArray.toJSONString(), Dota2HeroEntity.class);
+        return JSON.parseArray(heroesArray.toJSONString(), DotaHeroEntity.class);
     }
 
     @Override
-    public void saveHero(Dota2HeroEntity hero) {
+    public void saveHero(DotaHeroEntity hero) {
         try {
             repository.save(hero);
         } catch (Exception e) {
@@ -59,15 +59,15 @@ public class HeroServiceImpl implements HeroService {
 
     @Override
     public void saveHeroFromSteamApi() {
-        List<Dota2HeroEntity> heroes = getHeroFromSteamApi();
-        for (Dota2HeroEntity hero :
+        List<DotaHeroEntity> heroes = getHeroFromSteamApi();
+        for (DotaHeroEntity hero :
                 heroes) {
             saveHero(hero);
         }
     }
 
     @Override
-    public List<Dota2HeroEntity> getHeroes() {
+    public List<DotaHeroEntity> getHeroes() {
         return repository.findAll();
     }
 }

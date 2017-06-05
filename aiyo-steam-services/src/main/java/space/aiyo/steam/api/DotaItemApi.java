@@ -3,23 +3,23 @@ package space.aiyo.steam.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import space.aiyo.steam.entity.Dota2HeroEntity;
-import space.aiyo.steam.services.HeroService;
+import space.aiyo.steam.entity.DotaItemEntity;
+import space.aiyo.steam.services.DotaItemService;
 
 import java.util.List;
 
 /**
- * 英雄相关 RESTful API
+ * 游戏装备相关 RESTful API
  * Created by yo on 2017/6/1.
  */
 @RestController
-public class HeroApi {
+public class DotaItemApi {
 
     @Autowired
-    private HeroService heroService;
+    private DotaItemService dotaItemService;
 
-    @RequestMapping("/heroes")
-    public List<Dota2HeroEntity> getHeros() {
-        return heroService.getHeroes();
+    @RequestMapping("/items")
+    public List<DotaItemEntity> getHeros() {
+        return dotaItemService.getItems();
     }
 }

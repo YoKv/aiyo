@@ -7,9 +7,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import space.aiyo.steam.services.HeroService;
+import space.aiyo.steam.services.DotaHeroService;
 
 /**
+ * 英雄测试
  * Created by yo on 2017/5/27.
  */
 
@@ -20,7 +21,7 @@ public class HeroTest {
     long endTime = 0;
 
     @Autowired
-    HeroService heroService;
+    DotaHeroService dotaHeroService;
 
     @Before
     public void before() {
@@ -29,7 +30,7 @@ public class HeroTest {
 
     @Test
     public void test() {
-        heroService.saveHeroFromSteamApi();
+        dotaHeroService.saveHeroFromSteamApi();
     }
 
     @After

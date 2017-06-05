@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 
 @Document(collection = "dotaItem")
-public class Dota2ItemEntity {
+public class DotaItemEntity {
     @Id
     private int id;
     private String name;//全名
@@ -19,7 +19,9 @@ public class Dota2ItemEntity {
     private int recipe;//卷轴 0否1是
     private String localized_name;//中文名zh
 
-    public Dota2ItemEntity(int id, String name, int cost, int secret_shop, int side_shop, int recipe, String localized_name) {
+    public DotaItemEntity() {
+    }
+    public DotaItemEntity(int id, String name, int cost, int secret_shop, int side_shop, int recipe, String localized_name) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -32,7 +34,7 @@ public class Dota2ItemEntity {
     @Override
     public String toString() {
         return String.format(
-                "Dota2HeroEntity[id=%s, name='%s', cost='%s', localized_name='%s']",
+                "DotaHeroEntity[id=%s, name='%s', cost='%s', localized_name='%s']",
                 id, name, cost, localized_name);
     }
 

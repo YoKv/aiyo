@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Created by Yo on 2017/5/26.
  */
 @Document(collection = "dotaHero")
-public class Dota2HeroEntity {
+public class DotaHeroEntity {
 
 
     @Id
@@ -20,10 +20,10 @@ public class Dota2HeroEntity {
      * 无参构造方法
      * 兼容fastjson
      */
-    public Dota2HeroEntity() {
+    public DotaHeroEntity() {
     }
 
-    public Dota2HeroEntity(int id, String name, String localized_name) {
+    public DotaHeroEntity(int id, String name, String localized_name) {
         this.id = id;
         this.name = name;
         this.localized_name = localized_name;
@@ -32,7 +32,7 @@ public class Dota2HeroEntity {
     @Override
     public String toString() {
         return String.format(
-                "Dota2HeroEntity[id=%s, name='%s', localized_name='%s']",
+                "DotaHeroEntity[id=%s, name='%s', localized_name='%s']",
                 id, name, localized_name);
     }
 

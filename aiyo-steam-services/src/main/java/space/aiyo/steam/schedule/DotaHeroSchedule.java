@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import space.aiyo.steam.services.HeroService;
+import space.aiyo.steam.services.DotaHeroService;
 
 /**
  * 与dota英雄相关的定时任务
@@ -13,10 +13,10 @@ import space.aiyo.steam.services.HeroService;
  */
 @Component
 public class DotaHeroSchedule {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private HeroService heroService;
+    private DotaHeroService dotaHeroService;
 
     /**
      * 定时更新dota英雄信息
@@ -25,7 +25,7 @@ public class DotaHeroSchedule {
 //    @Scheduled(initialDelay = 1000, fixedRate = 2505600000L) //启动更新一次，顺延一个月更新一次
     public void getDotaHero() {
         logger.info("定时任务，同步英雄信息");
-        heroService.saveHeroFromSteamApi();
+        dotaHeroService.saveHeroFromSteamApi();
     }
 
 }

@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONArray;
  * 一场比赛中的选手数据
  * Created by yo on 2017/5/27.
  */
-public class Dota2MatchPlayerEntity {
+public class DotaMatchPlayerEntity {
 
     private int account_id;
     /**
@@ -49,7 +49,7 @@ public class Dota2MatchPlayerEntity {
     private int scaled_hero_healing;
     private JSONArray ability_upgrades;
 
-    public Dota2MatchPlayerEntity(int account_id, int player_slot, int hero_id) {
+    public DotaMatchPlayerEntity(int account_id, int player_slot, int hero_id) {
         this.account_id = account_id;
         this.player_slot = player_slot;
         this.hero_id = hero_id;

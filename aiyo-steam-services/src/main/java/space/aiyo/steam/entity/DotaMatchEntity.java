@@ -5,11 +5,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
+ * 比赛实体
  * Created by Yo on 2017/5/26.
  */
 
 @Document(collection = "dotaMatch")
-public class Dota2MatchEntity {
+public class DotaMatchEntity {
 
     @Id
     private int id;
@@ -138,7 +139,7 @@ public class Dota2MatchEntity {
     @Override
     public String toString() {
         return String.format(
-                "Dota2HeroEntity[id=%s, match_id=%s, match_seq_num='%s', start_time='%s', leagueid='%s', game_mode='%s', radiant_win='%s']",
+                "DotaHeroEntity[id=%s, match_id=%s, match_seq_num='%s', start_time='%s', leagueid='%s', game_mode='%s', radiant_win='%s']",
                 id, match_id, match_seq_num, start_time, leagueid, game_mode, radiant_win);
     }
 
