@@ -11,6 +11,7 @@ import java.util.List;
 public interface DotaHeroService {
     /**
      * TODO 参数
+     * mongodb 查询方法补全，批量操作
      */
 
     /**

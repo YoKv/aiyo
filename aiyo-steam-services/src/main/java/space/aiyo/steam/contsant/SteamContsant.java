@@ -1,7 +1,7 @@
 package space.aiyo.steam.contsant;
 
 /**
- * Steam相关静态变量
+ * Steam 相关静态变量
  * Created by yo on 2017/5/27.
  */
 public class SteamContsant {
@@ -10,7 +10,7 @@ public class SteamContsant {
      */
     public static final String STEAM_KEY = "B012552DE5DD0A220085EE8B21FBEC32";
     /**
-     * steam接口路径
+     * Steam 接口路径
      */
     public static final String STEAM_API_PATH = "http://api.steampowered.com";
 

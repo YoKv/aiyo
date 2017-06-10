@@ -5,11 +5,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Dota2英雄
+ * TODO 技能点
  * Created by Yo on 2017/5/26.
  */
 @Document(collection = "dotaHero")
 public class DotaHeroEntity {
-
 
     @Id
     private int id;//id，以字母排序

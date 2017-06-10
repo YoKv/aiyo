@@ -34,7 +34,7 @@ public class DotaItemEntity {
     @Override
     public String toString() {
         return String.format(
-                "DotaHeroEntity[id=%s, name='%s', cost='%s', localized_name='%s']",
+                "DotaItemEntity[id=%s, name='%s', cost='%s', localized_name='%s']",
                 id, name, cost, localized_name);
     }
 
