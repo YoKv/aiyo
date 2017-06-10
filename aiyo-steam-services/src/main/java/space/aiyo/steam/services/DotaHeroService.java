@@ -10,6 +10,10 @@ import java.util.List;
  */
 public interface DotaHeroService {
     /**
+     * TODO 参数
+     */
+
+    /**
      * 从steam平台获取英雄信息
      *
      * @return 英雄列表

@@ -1,7 +1,7 @@
 package space.aiyo.steam.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import space.aiyo.steam.entity.DotaMatchEntity;
+import space.aiyo.steam.entity.match.DotaMatchEntity;
 
 
 /**

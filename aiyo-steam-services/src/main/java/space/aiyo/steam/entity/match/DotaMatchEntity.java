@@ -1,27 +1,24 @@
-package space.aiyo.steam.entity;
+package space.aiyo.steam.entity.match;
 
-import com.alibaba.fastjson.JSONArray;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 /**
- * 比赛实体
+ * 比赛详情实体
  * Created by Yo on 2017/5/26.
  */
 
 @Document(collection = "dotaMatch")
 public class DotaMatchEntity {
 
-    @Id
-    private int id;
-    /**
-     * The matches unique ID.
-     */
-    private int match_id;
+    private long match_id;
     /**
      * A 'sequence number', representing the order in which matches were recorded.
      */
-    private int match_seq_num;
+    @Id
+    private long match_seq_num;
     /**
      * Unix timestamp of when the match began.
      */
@@ -128,42 +125,40 @@ public class DotaMatchEntity {
      * 22 - Ranked Matchmaking
      */
     private int game_mode;
-    private JSONArray picks_bans;
+    /**
+     * A list of the picks and bans in the match, if the game mode is Captains Mode.
+     */
+    private List<PicksBansEntity> picks_bans;
     private int flags;
     private int engine;
     private int radiant_score;
     private int dire_score;
-    //  TODO 格式待定
-    private JSONArray players;
+    private List<MatchPlayerEntity> players;
+
+    public DotaMatchEntity() {
+    }
 
     @Override
     public String toString() {
         return String.format(
-                "DotaHeroEntity[id=%s, match_id=%s, match_seq_num='%s', start_time='%s', leagueid='%s', game_mode='%s', radiant_win='%s']",
-                id, match_id, match_seq_num, start_time, leagueid, game_mode, radiant_win);
+                "DotaMatchEntity[match_id=%s, match_seq_num='%s', start_time='%s', leagueid='%s', game_mode='%s', radiant_win='%s']",
+                 match_id, match_seq_num, start_time, leagueid, game_mode, radiant_win);
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getMatch_id() {
+    public long getMatch_id() {
         return match_id;
     }
 
-    public void setMatch_id(int match_id) {
+    public void setMatch_id(long match_id) {
         this.match_id = match_id;
     }
 
-    public int getMatch_seq_num() {
+    public long getMatch_seq_num() {
         return match_seq_num;
     }
 
-    public void setMatch_seq_num(int match_seq_num) {
+    public void setMatch_seq_num(long match_seq_num) {
         this.match_seq_num = match_seq_num;
     }
 
@@ -319,11 +314,11 @@ public class DotaMatchEntity {
         this.game_mode = game_mode;
     }
 
-    public JSONArray getPicks_bans() {
+    public List<PicksBansEntity> getPicks_bans() {
         return picks_bans;
     }
 
-    public void setPicks_bans(JSONArray picks_bans) {
+    public void setPicks_bans(List<PicksBansEntity> picks_bans) {
         this.picks_bans = picks_bans;
     }
 
@@ -359,11 +354,11 @@ public class DotaMatchEntity {
         this.dire_score = dire_score;
     }
 
-    public JSONArray getPlayers() {
+    public List<MatchPlayerEntity> getPlayers() {
         return players;
     }
 
-    public void setPlayers(JSONArray players) {
+    public void setPlayers(List<MatchPlayerEntity> players) {
         this.players = players;
     }
 }

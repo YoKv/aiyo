@@ -10,6 +10,10 @@ import java.util.List;
  */
 public interface DotaItemService {
     /**
+     * TODO 参数
+     */
+
+    /**
      * 从steam平台获取游戏装备信息
      *
      * @return 游戏装备列表
