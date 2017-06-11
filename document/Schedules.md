@@ -10,7 +10,7 @@
 * 0601-0605  steam项目,web项目
 
 >   *   1.hero 对外接口
->   *   2.jersey框架了解
+>   *   2.jersey,swagger框架了解
 >   *   3.设计模式
 >   *   4.访问数据库基本demo
 >   *   5.httpUtil连接池设计

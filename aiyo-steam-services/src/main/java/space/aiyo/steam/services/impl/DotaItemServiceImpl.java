@@ -33,6 +33,18 @@ public class DotaItemServiceImpl implements DotaItemService {
         this.repository = repository;
     }
 
+    /**
+     * 通过id查找一个装备
+     *
+     * @param id
+     * @return DotaItemEntity
+     */
+    @Override
+    public DotaItemEntity findById(int id) {
+        return repository.findDotaItemEntityById(id);
+    }
+
+
     @Override
     public List<DotaItemEntity> getItemFromSteamApi() {
         String returnStr = "";

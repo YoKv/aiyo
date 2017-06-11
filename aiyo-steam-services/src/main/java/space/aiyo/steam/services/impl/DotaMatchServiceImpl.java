@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.entity.DotaItemEntity;
@@ -29,12 +31,42 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final DotaMatchRepository repository;
+
     @Autowired
     public DotaMatchServiceImpl(DotaMatchRepository repository) {
         this.repository = repository;
     }
 
     //批量插入 TODO
+
+
+    /**
+     * 查出全部记录
+     *
+     * @return
+     */
+    public List<DotaMatchEntity> findAll() {
+        return repository.findAll();
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param page
+     * @param rows
+     * @return
+     */
+    public Page<DotaMatchEntity> findByPages(int page, int rows) {
+        PageRequest request = new PageRequest(page - 1, rows);
+        return repository.findAll(request);
+    }
+
+    public int count() {
+        long size = repository.count();
+        int count = Integer.valueOf(String.valueOf(size));
+        return count;
+    }
+
 
     @Override
     public void saveMatch(DotaMatchEntity match) {
@@ -47,13 +79,14 @@ public class DotaMatchServiceImpl implements DotaMatchService {
 
     /**
      * 一次100条 后期通过admin配置 TODO
+     *
      * @param sequenceNumber
      * @return
      */
     private List<DotaMatchEntity> getMatchFromSteamApi(long sequenceNumber) {
         String returnStr = "";
         String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetMatchHistoryBySequenceNum.getUrl()
-                + "?start_at_match_seq_num="+sequenceNumber+"&matches_requested=100&key=" + SteamContsant.STEAM_KEY;
+                + "?start_at_match_seq_num=" + sequenceNumber + "&matches_requested=100&key=" + SteamContsant.STEAM_KEY;
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {
