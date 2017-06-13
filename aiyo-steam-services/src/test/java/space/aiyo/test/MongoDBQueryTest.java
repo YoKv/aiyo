@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import space.aiyo.steam.services.DotaItemService;
+import space.aiyo.steam.services.DotaMatchService;
 
 /**
  * mongo复杂查询
@@ -23,6 +24,9 @@ public class MongoDBQueryTest {
     @Autowired
     DotaItemService dotaItemService;
 
+    @Autowired
+    DotaMatchService dotaMatchService;
+
     @Before
     public void before() {
         startTime = System.currentTimeMillis();
@@ -31,7 +35,8 @@ public class MongoDBQueryTest {
     @Test
     public void test() {
 
-        System.out.println( dotaItemService.findById(12));
+//        System.out.println( dotaItemService.findById(12));
+        System.out.println( dotaMatchService.maxSeqNum());
     }
 
     @After

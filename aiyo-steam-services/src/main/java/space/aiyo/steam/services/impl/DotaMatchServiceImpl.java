@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.entity.DotaItemEntity;
@@ -114,5 +116,12 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     @Override
     public long getRecentSequenceNumber() {
         return 0;
+    }
+
+    @Override
+    public long maxSeqNum() {
+//        DotaMatchEntity match = repository.findFirstBysort(new Sort(Sort.Direction.DESC, "match_seq_num"));
+        DotaMatchEntity match = repository.findTopByMatchSeqNum();
+        return match.getMatch_seq_num();
     }
 }
