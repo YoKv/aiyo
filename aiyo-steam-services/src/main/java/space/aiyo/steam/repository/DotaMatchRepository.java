@@ -1,5 +1,6 @@
 package space.aiyo.steam.repository;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import space.aiyo.steam.entity.match.DotaMatchEntity;
@@ -9,7 +10,8 @@ import space.aiyo.steam.entity.match.DotaMatchEntity;
  * 比赛repository
  * Created by Yo on 2017/5/26.
  */
-public interface DotaMatchRepository extends MongoRepository<DotaMatchEntity, String> {
+public interface DotaMatchRepository extends MongoRepository<DotaMatchEntity, ObjectId> {
 
-    DotaMatchEntity findTopByMatchSeqNum();
+    DotaMatchEntity findTopByEngine(int engine,Sort sort);
+
 }

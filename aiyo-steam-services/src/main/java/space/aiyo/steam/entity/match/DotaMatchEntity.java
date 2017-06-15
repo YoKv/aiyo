@@ -1,6 +1,7 @@
 package space.aiyo.steam.entity.match;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -12,12 +13,14 @@ import java.util.List;
 
 @Document(collection = "dotaMatch")
 public class DotaMatchEntity {
+    @Id
+    private int id;
 
     private long match_id;
     /**
      * A 'sequence number', representing the order in which matches were recorded.
      */
-    @Id
+    @Indexed
     private long match_seq_num;
     /**
      * Unix timestamp of when the match began.
@@ -145,6 +148,13 @@ public class DotaMatchEntity {
                  match_id, match_seq_num, start_time, leagueid, game_mode, radiant_win);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public long getMatch_id() {
         return match_id;

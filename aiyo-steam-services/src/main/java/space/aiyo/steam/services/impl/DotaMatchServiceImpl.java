@@ -6,18 +6,22 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import space.aiyo.steam.contsant.DotaContsant;
 import space.aiyo.steam.contsant.SteamContsant;
-import space.aiyo.steam.entity.DotaItemEntity;
 import space.aiyo.steam.entity.match.DotaMatchEntity;
 import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.repository.DotaMatchRepository;
 import space.aiyo.steam.services.DotaMatchService;
 import space.aiyo.steam.util.HttpUtil;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -40,7 +44,8 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     }
 
     //批量插入 TODO
-
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     /**
      * 查出全部记录
@@ -51,17 +56,17 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         return repository.findAll();
     }
 
-    /**
-     * 分页查询
-     *
-     * @param page
-     * @param rows
-     * @return
-     */
-    public Page<DotaMatchEntity> findByPages(int page, int rows) {
-        PageRequest request = new PageRequest(page - 1, rows);
-        return repository.findAll(request);
-    }
+//    /**
+//     * 分页查询
+//     *
+//     * @param page
+//     * @param rows
+//     * @return
+//     */
+//    public Page<DotaMatchEntity> findByPages(int page, int rows) {
+//        PageRequest request = new PageRequest(page - 1, rows);
+//        return repository.findAll(request);
+//    }
 
     public int count() {
         long size = repository.count();
@@ -75,7 +80,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         try {
             repository.save(match);
         } catch (Exception e) {
-            logger.info("游戏装备数据存入数据库失败: " + e.toString());
+            logger.info("游戏比赛数据存入数据库失败: " + e.toString());
         }
     }
 
@@ -120,8 +125,13 @@ public class DotaMatchServiceImpl implements DotaMatchService {
 
     @Override
     public long maxSeqNum() {
-//        DotaMatchEntity match = repository.findFirstBysort(new Sort(Sort.Direction.DESC, "match_seq_num"));
-        DotaMatchEntity match = repository.findTopByMatchSeqNum();
+        long skip = repository.count() - 1;
+//        DotaMatchEntity match = repository.findOne(Query.query(Criteria.where("match_seq_num").gt(DotaContsant.FIRST_MATCH_SEQ_NUM)).skip(skip).limit(1), DotaMatchEntity.class);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("match_seq_num").gt(DotaContsant.FIRST_MATCH_SEQ_NUM));
+        query.limit(1);
+        DotaMatchEntity match =mongoTemplate.findOne(query,DotaMatchEntity.class);
+        System.out.println(match);
         return match.getMatch_seq_num();
     }
 }
