@@ -19,9 +19,11 @@ import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.repository.DotaMatchRepository;
 import space.aiyo.steam.services.DotaMatchService;
 import space.aiyo.steam.util.HttpUtil;
+import space.aiyo.steam.util.StringUtil;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,10 +91,15 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         } catch (IOException e) {
             logger.info("调用steam接口失败,url:" + url + e.toString());
         }
-        JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
-        JSONArray matchArray = result.getJSONArray("matches");
+        if (!returnStr.equals("")) {
+            JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
+            JSONArray matchArray = result.getJSONArray("matches");
 
-        return JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
+            return JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
+        } else {
+            return new ArrayList<>();
+        }
+
     }
 
     /**
@@ -121,7 +128,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         query.with(new Sort(Sort.Order.desc("_id")));
         query.limit(1);
         DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
-        System.out.println(match);
         if (null != match) {
             return match.getMatchSeqNum();
         } else {
@@ -143,7 +149,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         query.addCriteria(Criteria.where("_id").gt(DotaContsant.FIRST_MATCH_SEQ_NUM));
         query.limit(1);
         DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
-        System.out.println(match);
         return match.getMatchSeqNum();
     }
 

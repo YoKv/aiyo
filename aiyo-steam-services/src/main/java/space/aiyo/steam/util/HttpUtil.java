@@ -1,5 +1,8 @@
 package space.aiyo.steam.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,9 +10,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
+ * TODO 连接池
  * Created by yo on 2017/5/17.
  */
 public class HttpUtil {
+    private static Logger logger = LoggerFactory.getLogger(HttpUtil.class);
+
     /**
      * 模拟发送get请求
      */
@@ -38,6 +44,11 @@ public class HttpUtil {
         }
 
         connection.connect();
+        int status = connection.getResponseCode();
+        if (status == 429) {
+            logger.warn("HTTP status 429, Too Many Requests (太多请求)");
+            return "";
+        }
         // 取得输入流，并使用Reader读取 暂时使用utf-8
 //        The ISO639-1 language code for the language all tokenized strings should be returned in.
 //                Not all strings have been translated to every language.
