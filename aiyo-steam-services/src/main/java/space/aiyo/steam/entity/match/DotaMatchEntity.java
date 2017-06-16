@@ -13,14 +13,15 @@ import java.util.List;
 
 @Document(collection = "dotaMatch")
 public class DotaMatchEntity {
+    /**
+     * 复制match_seq_num
+     */
     @Id
-    private int id;
-
+    private long id;
     private long match_id;
     /**
      * A 'sequence number', representing the order in which matches were recorded.
      */
-    @Indexed
     private long match_seq_num;
     /**
      * Unix timestamp of when the match began.
@@ -145,14 +146,14 @@ public class DotaMatchEntity {
     public String toString() {
         return String.format(
                 "DotaMatchEntity[match_id=%s, match_seq_num='%s', start_time='%s', leagueid='%s', game_mode='%s', radiant_win='%s']",
-                 match_id, match_seq_num, start_time, leagueid, game_mode, radiant_win);
+                match_id, match_seq_num, start_time, leagueid, game_mode, radiant_win);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

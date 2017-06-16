@@ -14,7 +14,7 @@ public class DotaHeroEntity {
     @Id
     private int id;//id，以字母排序
     private String name;//全名
-    private String localized_name;//中文名zh
+    private String localizedName;//中文名zh
 
     /**
      * 无参构造方法
@@ -23,17 +23,17 @@ public class DotaHeroEntity {
     public DotaHeroEntity() {
     }
 
-    public DotaHeroEntity(int id, String name, String localized_name) {
+    public DotaHeroEntity(int id, String name, String localizedName) {
         this.id = id;
         this.name = name;
-        this.localized_name = localized_name;
+        this.localizedName = localizedName;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "DotaHeroEntity[id=%s, name='%s', localized_name='%s']",
-                id, name, localized_name);
+                "DotaHeroEntity[id=%s, name='%s', localizedName='%s']",
+                id, name, localizedName);
     }
 
     public int getId() {
@@ -52,11 +52,11 @@ public class DotaHeroEntity {
         this.name = name;
     }
 
-    public String getLocalized_name() {
-        return localized_name;
+    public String getLocalizedName() {
+        return localizedName;
     }
 
-    public void setLocalized_name(String localized_name) {
-        this.localized_name = localized_name;
+    public void setLocalizedName(String localizedName) {
+        this.localizedName = localizedName;
     }
 }

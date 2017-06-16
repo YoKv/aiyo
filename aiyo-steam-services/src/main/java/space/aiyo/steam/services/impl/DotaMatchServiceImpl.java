@@ -10,6 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -78,9 +79,11 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     @Override
     public void saveMatch(DotaMatchEntity match) {
         try {
+            //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
+            match.setId(match.getMatch_seq_num());
             repository.save(match);
         } catch (Exception e) {
-            logger.info("游戏比赛数据存入数据库失败: " + e.toString());
+            logger.info("id" + match.getId() + "游戏比赛数据存入数据库失败: " + e.toString());
         }
     }
 
@@ -116,22 +119,34 @@ public class DotaMatchServiceImpl implements DotaMatchService {
                 matches) {
             saveMatch(match);
         }
+        System.out.println(System.currentTimeMillis());
     }
 
     @Override
     public long getRecentSequenceNumber() {
-        return 0;
+        Query query = new Query();
+        query.with(new Sort(Sort.Order.desc("_id")));
+        query.limit(1);
+        DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
+        System.out.println(match);
+
+        return match.getMatch_seq_num();
     }
 
     @Override
     public long maxSeqNum() {
         long skip = repository.count() - 1;
-//        DotaMatchEntity match = repository.findOne(Query.query(Criteria.where("match_seq_num").gt(DotaContsant.FIRST_MATCH_SEQ_NUM)).skip(skip).limit(1), DotaMatchEntity.class);
+//      DotaMatchEntity match = repository.findOne(Query.query(Criteria.where("match_seq_num").gt(DotaContsant.FIRST_MATCH_SEQ_NUM)).skip(skip).limit(1), DotaMatchEntity.class);
         Query query = new Query();
-        query.addCriteria(Criteria.where("match_seq_num").gt(DotaContsant.FIRST_MATCH_SEQ_NUM));
+        query.addCriteria(Criteria.where("_id").gt(DotaContsant.FIRST_MATCH_SEQ_NUM));
         query.limit(1);
-        DotaMatchEntity match =mongoTemplate.findOne(query,DotaMatchEntity.class);
+        DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
         System.out.println(match);
         return match.getMatch_seq_num();
     }
+
+    //获取最大的match_seq_num几种方案
+    //skip n-1 并发可能有问题
+    //sort limit
+    //db.dotaMatch.find({},{_id:1}).sort({_id:-1}).limit(1)
 }

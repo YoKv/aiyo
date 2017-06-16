@@ -36,7 +36,8 @@ public class MongoDBQueryTest {
     public void test() {
 
 //        System.out.println( dotaItemService.findById(12));
-        System.out.println( dotaMatchService.maxSeqNum());
+//        System.out.println( dotaMatchService.maxSeqNum());
+        System.out.println( dotaMatchService.getRecentSequenceNumber());
     }
 
     @After
