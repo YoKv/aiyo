@@ -12,27 +12,27 @@ public class AdditionalUnitsEntity {
     /**
      * ID of the top-left inventory item.
      */
-    private int item_0;
+    private int item0;
     /**
      * ID of the top-center inventory item.
      */
-    private int item_1;
+    private int item1;
     /**
      * ID of the top-right inventory item.
      */
-    private int item_2;
+    private int item2;
     /**
      * ID of the bottom-left inventory item.
      */
-    private int item_3;
+    private int item3;
     /**
      * ID of the bottom-center inventory item.
      */
-    private int item_4;
+    private int item4;
     /**
      * ID of the bottom-right inventory item.
      */
-    private int item_5;
+    private int item5;
 
     public AdditionalUnitsEntity() {
     }
@@ -41,12 +41,12 @@ public class AdditionalUnitsEntity {
     public String toString() {
         return "AdditionalUnitsEntity{" +
                 "unitname='" + unitname + '\'' +
-                ", item_0=" + item_0 +
-                ", item_1=" + item_1 +
-                ", item_2=" + item_2 +
-                ", item_3=" + item_3 +
-                ", item_4=" + item_4 +
-                ", item_5=" + item_5 +
+                ", item0=" + item0 +
+                ", item1=" + item1 +
+                ", item2=" + item2 +
+                ", item3=" + item3 +
+                ", item4=" + item4 +
+                ", item5=" + item5 +
                 '}';
     }
 
@@ -58,51 +58,51 @@ public class AdditionalUnitsEntity {
         this.unitname = unitname;
     }
 
-    public int getItem_0() {
-        return item_0;
+    public int getItem0() {
+        return item0;
     }
 
-    public void setItem_0(int item_0) {
-        this.item_0 = item_0;
+    public void setItem0(int item0) {
+        this.item0 = item0;
     }
 
-    public int getItem_1() {
-        return item_1;
+    public int getItem1() {
+        return item1;
     }
 
-    public void setItem_1(int item_1) {
-        this.item_1 = item_1;
+    public void setItem1(int item1) {
+        this.item1 = item1;
     }
 
-    public int getItem_2() {
-        return item_2;
+    public int getItem2() {
+        return item2;
     }
 
-    public void setItem_2(int item_2) {
-        this.item_2 = item_2;
+    public void setItem2(int item2) {
+        this.item2 = item2;
     }
 
-    public int getItem_3() {
-        return item_3;
+    public int getItem3() {
+        return item3;
     }
 
-    public void setItem_3(int item_3) {
-        this.item_3 = item_3;
+    public void setItem3(int item3) {
+        this.item3 = item3;
     }
 
-    public int getItem_4() {
-        return item_4;
+    public int getItem4() {
+        return item4;
     }
 
-    public void setItem_4(int item_4) {
-        this.item_4 = item_4;
+    public void setItem4(int item4) {
+        this.item4 = item4;
     }
 
-    public int getItem_5() {
-        return item_5;
+    public int getItem5() {
+        return item5;
     }
 
-    public void setItem_5(int item_5) {
-        this.item_5 = item_5;
+    public void setItem5(int item5) {
+        this.item5 = item5;
     }
 }

@@ -4,8 +4,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import space.aiyo.steam.entity.DotaItemEntity;
 
-import java.util.List;
-
 /**
  * 游戏装备repository
  * 代替使用MongoTemplate作为Dao层
@@ -21,15 +19,19 @@ public interface DotaItemRepository extends MongoRepository<DotaItemEntity, Stri
 //    private int recipe;//卷轴 0否1是
 //    private String localized_name;//中文名zh
 
+    //TODO 补上一些常用查询
+
     /**
-     *通过id查找一个装备
+     * 通过id查找一个装备
+     *
      * @param id
      * @return
      */
-     DotaItemEntity findDotaItemEntityById(int id);
+    DotaItemEntity findDotaItemEntityById(int id);
 
     @Query("{ 'localized_name' : ?0 }")
     DotaItemEntity findByZHName(String localized_name);
+
     DotaItemEntity findByNameLike(String name);
 
 

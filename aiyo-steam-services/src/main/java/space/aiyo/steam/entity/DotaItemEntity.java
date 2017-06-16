@@ -14,28 +14,28 @@ public class DotaItemEntity {
     private int id;
     private String name;//全名
     private int cost;//价格
-    private int secret_shop;//神秘商店 0否1是
-    private int side_shop;//边路商店 0否1是
+    private int secretShop;//神秘商店 0否1是
+    private int sideShop;//边路商店 0否1是
     private int recipe;//卷轴 0否1是
-    private String localized_name;//中文名zh
+    private String localizedName;//中文名zh
 
     public DotaItemEntity() {
     }
-    public DotaItemEntity(int id, String name, int cost, int secret_shop, int side_shop, int recipe, String localized_name) {
+    public DotaItemEntity(int id, String name, int cost, int secretShop, int sideShop, int recipe, String localizedName) {
         this.id = id;
         this.name = name;
         this.cost = cost;
-        this.secret_shop = secret_shop;
-        this.side_shop = side_shop;
+        this.secretShop = secretShop;
+        this.sideShop = sideShop;
         this.recipe = recipe;
-        this.localized_name = localized_name;
+        this.localizedName = localizedName;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "DotaItemEntity[id=%s, name='%s', cost='%s', localized_name='%s']",
-                id, name, cost, localized_name);
+                "DotaItemEntity[id=%s, name='%s', cost='%s', localizedName='%s']",
+                id, name, cost, localizedName);
     }
 
     public int getId() {
@@ -62,20 +62,20 @@ public class DotaItemEntity {
         this.cost = cost;
     }
 
-    public int getSecret_shop() {
-        return secret_shop;
+    public int getSecretShop() {
+        return secretShop;
     }
 
-    public void setSecret_shop(int secret_shop) {
-        this.secret_shop = secret_shop;
+    public void setSecretShop(int secretShop) {
+        this.secretShop = secretShop;
     }
 
-    public int getSide_shop() {
-        return side_shop;
+    public int getSideShop() {
+        return sideShop;
     }
 
-    public void setSide_shop(int side_shop) {
-        this.side_shop = side_shop;
+    public void setSideShop(int sideShop) {
+        this.sideShop = sideShop;
     }
 
     public int getRecipe() {
@@ -86,11 +86,11 @@ public class DotaItemEntity {
         this.recipe = recipe;
     }
 
-    public String getLocalized_name() {
-        return localized_name;
+    public String getLocalizedName() {
+        return localizedName;
     }
 
-    public void setLocalized_name(String localized_name) {
-        this.localized_name = localized_name;
+    public void setLocalizedName(String localizedName) {
+        this.localizedName = localizedName;
     }
 }

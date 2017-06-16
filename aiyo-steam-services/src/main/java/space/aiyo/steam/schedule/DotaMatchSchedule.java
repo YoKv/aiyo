@@ -15,7 +15,6 @@ import space.aiyo.steam.services.DotaMatchService;
 
 @Component
 public class DotaMatchSchedule {
-    //使用GetMatchHistoryBySequenceNum接口获取到详细的比赛信息 TODO
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -25,13 +24,13 @@ public class DotaMatchSchedule {
      * 定时更新dota游戏比赛信息
      */
 //    @Scheduled(cron = "0 0 9 * * *")  //每天的上午09:00触发
-//    @Scheduled(fixedRate = 10000L) //10s更新一次
+    @Scheduled(fixedRate = 10000L) //10s更新一次
     public void getDotaHero() {
         System.out.println(System.currentTimeMillis());
         logger.info("定时任务，同步游戏比赛信息");
+        //获取本地最大的队列num
         long sequenceNumber = dotaMatchService.getRecentSequenceNumber();
-        System.out.println("------"+sequenceNumber);//FIXME
-        if (sequenceNumber == 0){
+        if (sequenceNumber == 0) {
             sequenceNumber = DotaContsant.FIRST_MATCH_SEQ_NUM;//从7.00版本开始
         }
         dotaMatchService.saveMatchFromSteamApiBySequenceNumber(sequenceNumber);

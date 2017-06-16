@@ -14,11 +14,13 @@ public interface DotaItemService {
      */
 
     /**
-     *通过id查找一个装备
+     * 通过id查找一个装备
+     *
      * @param id
      * @return DotaItemEntity
      */
     DotaItemEntity findById(int id);
+
     /**
      * 从steam平台获取游戏装备信息
      *

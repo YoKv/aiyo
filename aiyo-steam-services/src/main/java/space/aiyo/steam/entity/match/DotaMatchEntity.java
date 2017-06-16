@@ -1,7 +1,6 @@
 package space.aiyo.steam.entity.match;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -18,15 +17,15 @@ public class DotaMatchEntity {
      */
     @Id
     private long id;
-    private long match_id;
+    private long matchId;
     /**
      * A 'sequence number', representing the order in which matches were recorded.
      */
-    private long match_seq_num;
+    private long matchSeqNum;
     /**
      * Unix timestamp of when the match began.
      */
-    private int start_time;
+    private int startTime;
     /**
      * -1 - Invalid
      * 0 - Public matchmaking
@@ -39,22 +38,22 @@ public class DotaMatchEntity {
      * 7 - Ranked Matchmaking
      * 8 - 1v1 Solo Mid
      */
-    private int lobby_type;
+    private int lobbyType;
     /**
      * The season the game was played in.
      */
     private int season;
-    private int radiant_team_id;
-    private int dire_team_id;
+    private int radiantTeamId;
+    private int direTeamId;
     /**
      * Dictates the winner of the match, true for radiant; false for dire.
      */
-    private boolean radiant_win;
+    private boolean radiantWin;
     /**
      * The length of the match, in seconds since the match began.
      */
     private int duration;
-    private int pre_game_duration;
+    private int preGameDuration;
     /**
      * A particular teams tower status is given as a 16-bit unsigned integer.
      * The rightmost 11 bits represent individual towers belonging to that team;
@@ -74,8 +73,8 @@ public class DotaMatchEntity {
      * │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │
      * 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
      */
-    private int tower_status_radiant;
-    private int tower_status_dire;
+    private int towerStatusRadiant;
+    private int towerStatusDire;
     /**
      * A particular teams tower status is given as an 8-bit unsigned integer.
      * The rightmost 6 bits represent the barracks belonging to that team;
@@ -90,21 +89,21 @@ public class DotaMatchEntity {
      * │ │ │ │ │ │ │ │
      * 0 0 0 0 0 0 0 0
      */
-    private int barracks_status_radiant;
-    private int barracks_status_dire;
+    private int barracksStatusRadiant;
+    private int barracksStatusDire;
     /**
      * The server cluster the match was played upon. Used for downloading replays of matches.
      */
     private int cluster;
-    private int first_blood_time;
-    private int human_players;
+    private int firstBloodTime;
+    private int humanPlayers;
     /**
      * The league that this match was a part of.
      * A list of league IDs can be found via the GetLeagueListing method.
      */
-    private int leagueid;
-    private int positive_votes;
-    private int negative_votes;
+    private int leagueId;
+    private int positiveVotes;
+    private int negativeVotes;
     /**
      * 0 - None
      * 1 - All Pick
@@ -128,15 +127,15 @@ public class DotaMatchEntity {
      * 21 - 1v1 Mid Only
      * 22 - Ranked Matchmaking
      */
-    private int game_mode;
+    private int gameMode;
     /**
      * A list of the picks and bans in the match, if the game mode is Captains Mode.
      */
-    private List<PicksBansEntity> picks_bans;
+    private List<PicksBansEntity> picksBans;
     private int flags;
     private int engine;
-    private int radiant_score;
-    private int dire_score;
+    private int radiantScore;
+    private int direScore;
     private List<MatchPlayerEntity> players;
 
     public DotaMatchEntity() {
@@ -145,8 +144,8 @@ public class DotaMatchEntity {
     @Override
     public String toString() {
         return String.format(
-                "DotaMatchEntity[match_id=%s, match_seq_num='%s', start_time='%s', leagueid='%s', game_mode='%s', radiant_win='%s']",
-                match_id, match_seq_num, start_time, leagueid, game_mode, radiant_win);
+                "DotaMatchEntity[matchId=%s, matchSeqNum='%s', startTime='%s', leagueId='%s', gameMode='%s', radiantWin='%s']",
+                matchId, matchSeqNum, startTime, leagueId, gameMode, radiantWin);
     }
 
     public long getId() {
@@ -157,36 +156,36 @@ public class DotaMatchEntity {
         this.id = id;
     }
 
-    public long getMatch_id() {
-        return match_id;
+    public long getMatchId() {
+        return matchId;
     }
 
-    public void setMatch_id(long match_id) {
-        this.match_id = match_id;
+    public void setMatchId(long matchId) {
+        this.matchId = matchId;
     }
 
-    public long getMatch_seq_num() {
-        return match_seq_num;
+    public long getMatchSeqNum() {
+        return matchSeqNum;
     }
 
-    public void setMatch_seq_num(long match_seq_num) {
-        this.match_seq_num = match_seq_num;
+    public void setMatchSeqNum(long matchSeqNum) {
+        this.matchSeqNum = matchSeqNum;
     }
 
-    public int getStart_time() {
-        return start_time;
+    public int getStartTime() {
+        return startTime;
     }
 
-    public void setStart_time(int start_time) {
-        this.start_time = start_time;
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
     }
 
-    public int getLobby_type() {
-        return lobby_type;
+    public int getLobbyType() {
+        return lobbyType;
     }
 
-    public void setLobby_type(int lobby_type) {
-        this.lobby_type = lobby_type;
+    public void setLobbyType(int lobbyType) {
+        this.lobbyType = lobbyType;
     }
 
     public int getSeason() {
@@ -197,28 +196,28 @@ public class DotaMatchEntity {
         this.season = season;
     }
 
-    public int getRadiant_team_id() {
-        return radiant_team_id;
+    public int getRadiantTeamId() {
+        return radiantTeamId;
     }
 
-    public void setRadiant_team_id(int radiant_team_id) {
-        this.radiant_team_id = radiant_team_id;
+    public void setRadiantTeamId(int radiantTeamId) {
+        this.radiantTeamId = radiantTeamId;
     }
 
-    public int getDire_team_id() {
-        return dire_team_id;
+    public int getDireTeamId() {
+        return direTeamId;
     }
 
-    public void setDire_team_id(int dire_team_id) {
-        this.dire_team_id = dire_team_id;
+    public void setDireTeamId(int direTeamId) {
+        this.direTeamId = direTeamId;
     }
 
-    public boolean isRadiant_win() {
-        return radiant_win;
+    public boolean isRadiantWin() {
+        return radiantWin;
     }
 
-    public void setRadiant_win(boolean radiant_win) {
-        this.radiant_win = radiant_win;
+    public void setRadiantWin(boolean radiantWin) {
+        this.radiantWin = radiantWin;
     }
 
     public int getDuration() {
@@ -229,44 +228,44 @@ public class DotaMatchEntity {
         this.duration = duration;
     }
 
-    public int getPre_game_duration() {
-        return pre_game_duration;
+    public int getPreGameDuration() {
+        return preGameDuration;
     }
 
-    public void setPre_game_duration(int pre_game_duration) {
-        this.pre_game_duration = pre_game_duration;
+    public void setPreGameDuration(int preGameDuration) {
+        this.preGameDuration = preGameDuration;
     }
 
-    public int getTower_status_radiant() {
-        return tower_status_radiant;
+    public int getTowerStatusRadiant() {
+        return towerStatusRadiant;
     }
 
-    public void setTower_status_radiant(int tower_status_radiant) {
-        this.tower_status_radiant = tower_status_radiant;
+    public void setTowerStatusRadiant(int towerStatusRadiant) {
+        this.towerStatusRadiant = towerStatusRadiant;
     }
 
-    public int getTower_status_dire() {
-        return tower_status_dire;
+    public int getTowerStatusDire() {
+        return towerStatusDire;
     }
 
-    public void setTower_status_dire(int tower_status_dire) {
-        this.tower_status_dire = tower_status_dire;
+    public void setTowerStatusDire(int towerStatusDire) {
+        this.towerStatusDire = towerStatusDire;
     }
 
-    public int getBarracks_status_radiant() {
-        return barracks_status_radiant;
+    public int getBarracksStatusRadiant() {
+        return barracksStatusRadiant;
     }
 
-    public void setBarracks_status_radiant(int barracks_status_radiant) {
-        this.barracks_status_radiant = barracks_status_radiant;
+    public void setBarracksStatusRadiant(int barracksStatusRadiant) {
+        this.barracksStatusRadiant = barracksStatusRadiant;
     }
 
-    public int getBarracks_status_dire() {
-        return barracks_status_dire;
+    public int getBarracksStatusDire() {
+        return barracksStatusDire;
     }
 
-    public void setBarracks_status_dire(int barracks_status_dire) {
-        this.barracks_status_dire = barracks_status_dire;
+    public void setBarracksStatusDire(int barracksStatusDire) {
+        this.barracksStatusDire = barracksStatusDire;
     }
 
     public int getCluster() {
@@ -277,60 +276,60 @@ public class DotaMatchEntity {
         this.cluster = cluster;
     }
 
-    public int getFirst_blood_time() {
-        return first_blood_time;
+    public int getFirstBloodTime() {
+        return firstBloodTime;
     }
 
-    public void setFirst_blood_time(int first_blood_time) {
-        this.first_blood_time = first_blood_time;
+    public void setFirstBloodTime(int firstBloodTime) {
+        this.firstBloodTime = firstBloodTime;
     }
 
-    public int getHuman_players() {
-        return human_players;
+    public int getHumanPlayers() {
+        return humanPlayers;
     }
 
-    public void setHuman_players(int human_players) {
-        this.human_players = human_players;
+    public void setHumanPlayers(int humanPlayers) {
+        this.humanPlayers = humanPlayers;
     }
 
-    public int getLeagueid() {
-        return leagueid;
+    public int getLeagueId() {
+        return leagueId;
     }
 
-    public void setLeagueid(int leagueid) {
-        this.leagueid = leagueid;
+    public void setLeagueId(int leagueId) {
+        this.leagueId = leagueId;
     }
 
-    public int getPositive_votes() {
-        return positive_votes;
+    public int getPositiveVotes() {
+        return positiveVotes;
     }
 
-    public void setPositive_votes(int positive_votes) {
-        this.positive_votes = positive_votes;
+    public void setPositiveVotes(int positiveVotes) {
+        this.positiveVotes = positiveVotes;
     }
 
-    public int getNegative_votes() {
-        return negative_votes;
+    public int getNegativeVotes() {
+        return negativeVotes;
     }
 
-    public void setNegative_votes(int negative_votes) {
-        this.negative_votes = negative_votes;
+    public void setNegativeVotes(int negativeVotes) {
+        this.negativeVotes = negativeVotes;
     }
 
-    public int getGame_mode() {
-        return game_mode;
+    public int getGameMode() {
+        return gameMode;
     }
 
-    public void setGame_mode(int game_mode) {
-        this.game_mode = game_mode;
+    public void setGameMode(int gameMode) {
+        this.gameMode = gameMode;
     }
 
-    public List<PicksBansEntity> getPicks_bans() {
-        return picks_bans;
+    public List<PicksBansEntity> getPicksBans() {
+        return picksBans;
     }
 
-    public void setPicks_bans(List<PicksBansEntity> picks_bans) {
-        this.picks_bans = picks_bans;
+    public void setPicksBans(List<PicksBansEntity> picksBans) {
+        this.picksBans = picksBans;
     }
 
     public int getFlags() {
@@ -349,20 +348,20 @@ public class DotaMatchEntity {
         this.engine = engine;
     }
 
-    public int getRadiant_score() {
-        return radiant_score;
+    public int getRadiantScore() {
+        return radiantScore;
     }
 
-    public void setRadiant_score(int radiant_score) {
-        this.radiant_score = radiant_score;
+    public void setRadiantScore(int radiantScore) {
+        this.radiantScore = radiantScore;
     }
 
-    public int getDire_score() {
-        return dire_score;
+    public int getDireScore() {
+        return direScore;
     }
 
-    public void setDire_score(int dire_score) {
-        this.dire_score = dire_score;
+    public void setDireScore(int direScore) {
+        this.direScore = direScore;
     }
 
     public List<MatchPlayerEntity> getPlayers() {

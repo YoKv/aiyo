@@ -8,11 +8,11 @@ public class PicksBansEntity {
     /**
      * Whether this entry is a pick (true) or a ban (false).
      */
-    private boolean is_pick;
+    private boolean isPick;
     /**
      * The hero's unique ID. A list of hero IDs can be found via the GetHeroes method.
      */
-    private int hero_id;
+    private int heroId;
     /**
      *The team who chose the pick or ban; 0 for Radiant, 1 for Dire.
      */
@@ -28,27 +28,27 @@ public class PicksBansEntity {
     @Override
     public String toString() {
         return "PicksBansEntity{" +
-                "is_pick=" + is_pick +
-                ", hero_id=" + hero_id +
+                "isPick=" + isPick +
+                ", heroId=" + heroId +
                 ", team=" + team +
                 ", order=" + order +
                 '}';
     }
 
-    public boolean isIs_pick() {
-        return is_pick;
+    public boolean isPick() {
+        return isPick;
     }
 
-    public void setIs_pick(boolean is_pick) {
-        this.is_pick = is_pick;
+    public void setPick(boolean pick) {
+        this.isPick = pick;
     }
 
-    public int getHero_id() {
-        return hero_id;
+    public int getHeroId() {
+        return heroId;
     }
 
-    public void setHero_id(int hero_id) {
-        this.hero_id = hero_id;
+    public void setHeroId(int heroId) {
+        this.heroId = heroId;
     }
 
     public int getTeam() {

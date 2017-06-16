@@ -6,9 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -44,7 +41,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         this.repository = repository;
     }
 
-    //批量插入 TODO
     @Autowired
     private MongoTemplate mongoTemplate;
 
@@ -57,30 +53,17 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         return repository.findAll();
     }
 
-//    /**
-//     * 分页查询
-//     *
-//     * @param page
-//     * @param rows
-//     * @return
-//     */
-//    public Page<DotaMatchEntity> findByPages(int page, int rows) {
-//        PageRequest request = new PageRequest(page - 1, rows);
-//        return repository.findAll(request);
-//    }
-
     public int count() {
         long size = repository.count();
-        int count = Integer.valueOf(String.valueOf(size));
+        int count = Integer.parseInt(String.valueOf(size));
         return count;
     }
-
 
     @Override
     public void saveMatch(DotaMatchEntity match) {
         try {
             //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-            match.setId(match.getMatch_seq_num());
+            match.setId(match.getMatchSeqNum());
             repository.save(match);
         } catch (Exception e) {
             logger.info("id" + match.getId() + "游戏比赛数据存入数据库失败: " + e.toString());
@@ -88,19 +71,23 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     }
 
     /**
-     * 一次100条 后期通过admin配置 TODO
+     * 从steam 获取比赛信息
      *
-     * @param sequenceNumber
+     * @param matchSeqNum
      * @return
      */
-    private List<DotaMatchEntity> getMatchFromSteamApi(long sequenceNumber) {
+    private List<DotaMatchEntity> getMatchFromSteamApi(long matchSeqNum) {
         String returnStr = "";
-        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetMatchHistoryBySequenceNum.getUrl()
-                + "?start_at_match_seq_num=" + sequenceNumber + "&matches_requested=100&key=" + SteamContsant.STEAM_KEY;
+        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetMatchHistoryBySequenceNum.getUrl() +
+                "?start_at_match_seq_num=" +
+                matchSeqNum +
+                "&matches_requested=" +
+                SteamContsant.STEAM_MATCH_PULLNUM_ONCE +
+                "&key=" + SteamContsant.STEAM_KEY;
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {
-            logger.info("调用steam接口失败: " + e.toString());
+            logger.info("调用steam接口失败,url:" + url + e.toString());
         }
         JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
         JSONArray matchArray = result.getJSONArray("matches");
@@ -109,19 +96,25 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     }
 
     /**
-     * @param sequenceNumber
+     * 保存 TODO 批量
+     *
+     * @param matchSeqNum
      * @return
      */
     @Override
-    public void saveMatchFromSteamApiBySequenceNumber(long sequenceNumber) {
-        List<DotaMatchEntity> matches = getMatchFromSteamApi(sequenceNumber);
+    public void saveMatchFromSteamApiBySequenceNumber(long matchSeqNum) {
+        List<DotaMatchEntity> matches = getMatchFromSteamApi(matchSeqNum);
         for (DotaMatchEntity match :
                 matches) {
             saveMatch(match);
         }
-        System.out.println(System.currentTimeMillis());
     }
 
+    /**
+     * 获取本地最大的sequenceNumber
+     *
+     * @return
+     */
     @Override
     public long getRecentSequenceNumber() {
         Query query = new Query();
@@ -129,20 +122,29 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         query.limit(1);
         DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
         System.out.println(match);
+        if (null != match) {
+            return match.getMatchSeqNum();
+        } else {
+            return 0;
+        }
 
-        return match.getMatch_seq_num();
     }
 
+    /**
+     * 再找最优的方案
+     *
+     * @return
+     */
     @Override
     public long maxSeqNum() {
-        long skip = repository.count() - 1;
+//        long skip = repository.count() - 1;
 //      DotaMatchEntity match = repository.findOne(Query.query(Criteria.where("match_seq_num").gt(DotaContsant.FIRST_MATCH_SEQ_NUM)).skip(skip).limit(1), DotaMatchEntity.class);
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").gt(DotaContsant.FIRST_MATCH_SEQ_NUM));
         query.limit(1);
         DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
         System.out.println(match);
-        return match.getMatch_seq_num();
+        return match.getMatchSeqNum();
     }
 
     //获取最大的match_seq_num几种方案
