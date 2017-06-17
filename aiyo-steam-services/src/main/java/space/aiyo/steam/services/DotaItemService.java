@@ -9,9 +9,6 @@ import java.util.List;
  * Created by yo on 2017/6/5.
  */
 public interface DotaItemService {
-    /**
-     * TODO 参数
-     */
 
     /**
      * 通过id查找一个装备
@@ -22,26 +19,8 @@ public interface DotaItemService {
     DotaItemEntity findById(int id);
 
     /**
-     * 从steam平台获取游戏装备信息
-     *
-     * @return 游戏装备列表
-     */
-    List<DotaItemEntity> getItemFromSteamApi();
-
-    /**
-     * 新建或更新单条游戏装备信息
-     */
-    void saveItem(DotaItemEntity item);
-
-    /**
      * 从steam平台新建或更新游戏装备信息
      */
     void saveItemFromSteamApi();
 
-    /**
-     * 获取游戏装备列表
-     *
-     * @return 游戏装备列表
-     */
-    List<DotaItemEntity> getItems();
 }

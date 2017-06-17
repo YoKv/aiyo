@@ -25,15 +25,15 @@ public class MatchTest {
     @Test
     public void test() {
         long sequenceNumber = dotaMatchService.getRecentSequenceNumber();
-        endTime = System.currentTimeMillis();
-        System.out.println("sequenceNumber time spend: " + String.valueOf(endTime - startTime) + "ms");
+//        endTime = System.currentTimeMillis();
+//        System.out.println("sequenceNumber time spend: " + String.valueOf(endTime - startTime) + "ms");
         if (sequenceNumber == 0) {
             sequenceNumber = DotaContsant.FIRST_MATCH_SEQ_NUM;//从7.00版本开始
         }
-        dotaMatchService.saveMatchFromSteamApiBySequenceNumber(sequenceNumber);
+        dotaMatchService.saveMatchFromSteamByMatchSeqNum(sequenceNumber);
 
         endTime = System.currentTimeMillis();
-        System.out.println("saveMatchFromSteamApiBySequenceNumber time spend: " + String.valueOf(endTime - startTime) + "ms");
+        System.out.println("saveMatchFromSteamByMatchSeqNum time spend: " + String.valueOf(endTime - startTime) + "ms");
     }
 
     long startTime = 0;

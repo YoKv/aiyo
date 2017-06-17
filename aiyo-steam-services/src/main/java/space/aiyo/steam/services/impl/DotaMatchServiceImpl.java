@@ -19,8 +19,6 @@ import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.repository.DotaMatchRepository;
 import space.aiyo.steam.services.DotaMatchService;
 import space.aiyo.steam.util.HttpUtil;
-import space.aiyo.steam.util.StringUtil;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,39 +44,33 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+
     /**
-     * 查出全部记录
+     * 从steam获取数据，并入库
      *
-     * @return
+     * @param matchSeqNum
      */
-    public List<DotaMatchEntity> findAll() {
-        return repository.findAll();
-    }
-
-    public int count() {
-        long size = repository.count();
-        int count = Integer.parseInt(String.valueOf(size));
-        return count;
-    }
-
     @Override
-    public void saveMatch(DotaMatchEntity match) {
+    public void saveMatchFromSteamByMatchSeqNum(long matchSeqNum) {
+        List<DotaMatchEntity> matches = getMatchFromSteamApiByMatchSeqNum(matchSeqNum);
         try {
-            //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-            match.setId(match.getMatchSeqNum());
-            repository.save(match);
+            insertAll(matches); //200ms
+//        saveAll(matches); //240ms
         } catch (Exception e) {
-            logger.info("id" + match.getId() + "游戏比赛数据存入数据库失败: " + e.toString());
+            logger.error("match数据库插入出错 " + e.getMessage());
         }
     }
 
     /**
      * 从steam 获取比赛信息
+     * TODO 速度慢 8s
      *
      * @param matchSeqNum
      * @return
      */
-    private List<DotaMatchEntity> getMatchFromSteamApi(long matchSeqNum) {
+    private List<DotaMatchEntity> getMatchFromSteamApiByMatchSeqNum(long matchSeqNum) {
+        //从下一个开始,避免第一条与本地数据库最后一条重复
+        matchSeqNum++;
         String returnStr = "";
         String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetMatchHistoryBySequenceNum.getUrl() +
                 "?start_at_match_seq_num=" +
@@ -89,12 +81,11 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {
-            logger.info("调用steam接口失败,url:" + url + e.toString());
+            logger.info("调用steam接口失败,url:" + url + " *_* " + e.toString());
         }
-        if (!returnStr.equals("")) {
+        if (!returnStr.isEmpty()) {
             JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
             JSONArray matchArray = result.getJSONArray("matches");
-
             return JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
         } else {
             return new ArrayList<>();
@@ -102,20 +93,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
 
     }
 
-    /**
-     * 保存 TODO 批量
-     *
-     * @param matchSeqNum
-     * @return
-     */
-    @Override
-    public void saveMatchFromSteamApiBySequenceNumber(long matchSeqNum) {
-        List<DotaMatchEntity> matches = getMatchFromSteamApi(matchSeqNum);
-        for (DotaMatchEntity match :
-                matches) {
-            saveMatch(match);
-        }
-    }
 
     /**
      * 获取本地最大的sequenceNumber
@@ -141,7 +118,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
      *
      * @return
      */
-    @Override
     public long maxSeqNum() {
 //        long skip = repository.count() - 1;
 //      DotaMatchEntity match = repository.findOne(Query.query(Criteria.where("match_seq_num").gt(DotaContsant.FIRST_MATCH_SEQ_NUM)).skip(skip).limit(1), DotaMatchEntity.class);
@@ -156,4 +132,101 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     //skip n-1 并发可能有问题
     //sort limit
     //db.dotaMatch.find({},{_id:1}).sort({_id:-1}).limit(1)
+
+    /**---------------------------------------------------------------数-------------------------------------------------------------**/
+    /**---------------------------------------------------------------据-------------------------------------------------------------**/
+    /**---------------------------------------------------------------库-------------------------------------------------------------**/
+    /**---------------------------------------------------------------方-------------------------------------------------------------**/
+    /**---------------------------------------------------------------法-------------------------------------------------------------**/
+    /**---------------------------------------------------------------封-------------------------------------------------------------**/
+    /**---------------------------------------------------------------装-------------------------------------------------------------**/
+
+    /**
+     * 单条插入
+     *
+     * @param match
+     * @return 插入数据库后的记录
+     */
+    public DotaMatchEntity insert(DotaMatchEntity match) {
+        match.setId(match.getMatchSeqNum());
+        return repository.insert(match);
+    }
+
+    /**
+     * 批量插入
+     *
+     * @param matches
+     * @return 插入的数据
+     */
+    private List<DotaMatchEntity> insertAll(List<DotaMatchEntity> matches) {
+        //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
+        for (DotaMatchEntity match :
+                matches) {
+            match.setId(match.getMatchSeqNum());
+        }
+        return repository.insert(matches);
+    }
+
+    /**
+     * 保存
+     * 无记录insert
+     * 有记录update
+     *
+     * @param match
+     * @return 插入数据库后的记录
+     */
+    private DotaMatchEntity save(DotaMatchEntity match) {
+        match.setId(match.getMatchSeqNum());
+        return repository.save(match);
+    }
+
+    /**
+     * 批量保存
+     *
+     * @param matches
+     * @return 插入的数据
+     */
+    private List<DotaMatchEntity> saveAll(List<DotaMatchEntity> matches) {
+        //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
+        for (DotaMatchEntity match :
+                matches) {
+            match.setId(match.getMatchSeqNum());
+        }
+        return repository.saveAll(matches);
+    }
+
+    /**
+     * 总数
+     *
+     * @return 总数
+     */
+    private int count() {
+        long size = repository.count();
+        int count = Integer.parseInt(String.valueOf(size));
+        return count;
+    }
+
+    //TODO
+
+    private void more() {
+        repository.insert(new ArrayList<>());
+        repository.insert(new DotaMatchEntity());
+        repository.save(new DotaMatchEntity());
+        repository.saveAll(new ArrayList<>());
+
+//        repository.findAll(new Sort());
+//        repository.findAll(Example);
+//        repository.findAll(Example,Sort);
+//        repository.findAll(Page);
+//        repository.findAll(Example,Page);
+//        repository.findAll(Page);
+//        repository.findAllById(new ArrayList<>());
+//        repository.count(Example.of());
+//
+//        repository.d
+
+
+    }
+
+
 }

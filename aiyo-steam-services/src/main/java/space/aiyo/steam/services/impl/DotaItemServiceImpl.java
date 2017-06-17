@@ -46,7 +46,12 @@ public class DotaItemServiceImpl implements DotaItemService {
 
 
     @Override
-    public List<DotaItemEntity> getItemFromSteamApi() {
+    public void saveItemFromSteamApi() {
+        List<DotaItemEntity> items = getItemFromSteamApi();
+        saveAll(items);
+    }
+
+    private List<DotaItemEntity> getItemFromSteamApi() {
         String returnStr = "";
         String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetGameItems.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
         try {
@@ -60,26 +65,15 @@ public class DotaItemServiceImpl implements DotaItemService {
         return JSON.parseArray(itemsArray.toJSONString(), DotaItemEntity.class);
     }
 
-    @Override
-    public void saveItem(DotaItemEntity item) {
-        try {
-            repository.save(item);
-        } catch (Exception e) {
-            logger.info("游戏装备数据存入数据库失败: " + e.toString());
-        }
-    }
+    /**---------------------------------------------------------------数-------------------------------------------------------------**/
+    /**---------------------------------------------------------------据-------------------------------------------------------------**/
+    /**---------------------------------------------------------------库-------------------------------------------------------------**/
+    /**---------------------------------------------------------------方-------------------------------------------------------------**/
+    /**---------------------------------------------------------------法-------------------------------------------------------------**/
+    /**---------------------------------------------------------------封-------------------------------------------------------------**/
+    /**---------------------------------------------------------------装-------------------------------------------------------------**/
 
-    @Override
-    public void saveItemFromSteamApi() {
-        List<DotaItemEntity> items = getItemFromSteamApi();
-        for (DotaItemEntity item :
-                items) {
-            saveItem(item);
-        }
-    }
-
-    @Override
-    public List<DotaItemEntity> getItems() {
-        return repository.findAll();
+    private List<DotaItemEntity> saveAll(List<DotaItemEntity> items) {
+        return repository.saveAll(items);
     }
 }

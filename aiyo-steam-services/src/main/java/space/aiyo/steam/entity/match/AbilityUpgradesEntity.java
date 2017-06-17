@@ -1,10 +1,12 @@
 package space.aiyo.steam.entity.match;
 
+import java.io.Serializable;
+
 /**
  * 技能加点
  * Created by Yo on 2017/6/10.
  */
-public class AbilityUpgradesEntity {
+public class AbilityUpgradesEntity implements Serializable {
     /**
      * ID of the ability upgraded.
      */

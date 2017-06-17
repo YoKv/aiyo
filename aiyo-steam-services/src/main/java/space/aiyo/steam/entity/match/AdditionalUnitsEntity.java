@@ -1,10 +1,12 @@
 package space.aiyo.steam.entity.match;
 
+import java.io.Serializable;
+
 /**
  * 玩家控制的额外的单位信息,如德鲁伊小熊
  * Created by Yo on 2017/6/10.
  */
-public class AdditionalUnitsEntity {
+public class AdditionalUnitsEntity implements Serializable {
     /**
      * The name of the unit
      */

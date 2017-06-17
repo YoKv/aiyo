@@ -3,6 +3,7 @@ package space.aiyo.steam.entity.match;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  */
 
 @Document(collection = "dotaMatch")
-public class DotaMatchEntity {
+public class DotaMatchEntity implements Serializable {
     /**
      * 复制match_seq_num
      */

@@ -20,6 +20,6 @@ public class DotaItemApi {
 
     @RequestMapping("/items")
     public List<DotaItemEntity> getHeros() {
-        return dotaItemService.getItems();
+        return null;
     }
 }

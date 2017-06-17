@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.entity.DotaHeroEntity;
@@ -15,6 +16,7 @@ import space.aiyo.steam.services.DotaHeroService;
 import space.aiyo.steam.util.HttpUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,8 +35,14 @@ public class DotaHeroServiceImpl implements DotaHeroService {
         this.repository = repository;
     }
 
+
     @Override
-    public List<DotaHeroEntity> getHeroFromSteamApi() {
+    public void saveHeroFromSteamApi() {
+        List<DotaHeroEntity> heroes = getHeroFromSteamApi();
+        saveAll(heroes);
+    }
+
+    private List<DotaHeroEntity> getHeroFromSteamApi() {
         String returnStr = "";
         String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetHeroes.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
         try {
@@ -42,32 +50,30 @@ public class DotaHeroServiceImpl implements DotaHeroService {
         } catch (IOException e) {
             logger.info("调用steam接口失败: " + e.toString());
         }
-        JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
-        JSONArray heroesArray = result.getJSONArray("heroes");
-
-        return JSON.parseArray(heroesArray.toJSONString(), DotaHeroEntity.class);
-    }
-
-    @Override
-    public void saveHero(DotaHeroEntity hero) {
-        try {
-            repository.save(hero);
-        } catch (Exception e) {
-            logger.info("英雄数据存入数据库失败: " + e.toString());
+        if (!returnStr.isEmpty()) {
+            JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
+            JSONArray heroesArray = result.getJSONArray("heroes");
+            return JSON.parseArray(heroesArray.toJSONString(), DotaHeroEntity.class);
+        } else {
+            return new ArrayList<>();
         }
-    }
 
-    @Override
-    public void saveHeroFromSteamApi() {
-        List<DotaHeroEntity> heroes = getHeroFromSteamApi();
-        for (DotaHeroEntity hero :
-                heroes) {
-            saveHero(hero);
-        }
     }
+    /**---------------------------------------------------------------数-------------------------------------------------------------**/
+    /**---------------------------------------------------------------据-------------------------------------------------------------**/
+    /**---------------------------------------------------------------库-------------------------------------------------------------**/
+    /**---------------------------------------------------------------方-------------------------------------------------------------**/
+    /**---------------------------------------------------------------法-------------------------------------------------------------**/
+    /**---------------------------------------------------------------封-------------------------------------------------------------**/
+    /**---------------------------------------------------------------装-------------------------------------------------------------**/
 
-    @Override
+
     public List<DotaHeroEntity> getHeroes() {
         return repository.findAll();
     }
+
+    private List<DotaHeroEntity> saveAll(List<DotaHeroEntity> heroes) {
+        return repository.saveAll(heroes);
+    }
+
 }

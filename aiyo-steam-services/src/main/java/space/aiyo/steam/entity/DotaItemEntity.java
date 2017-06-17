@@ -3,13 +3,15 @@ package space.aiyo.steam.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 /**
  * Dota2游戏装备
  * Created by Yo on 2017/5/26.
  */
 
 @Document(collection = "dotaItem")
-public class DotaItemEntity {
+public class DotaItemEntity implements Serializable{
     @Id
     private int id;
     private String name;//全名

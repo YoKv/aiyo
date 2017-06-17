@@ -12,16 +12,11 @@ import java.util.List;
 
 public interface DotaMatchService {
 
-    void saveMatch(DotaMatchEntity match);
-
-    void saveMatchFromSteamApiBySequenceNumber(long sequenceNumber);
+    void saveMatchFromSteamByMatchSeqNum(long sequenceNumber);
 
     /**
      * 获取数据库中最新的sequence number
-     *
-     * @return
      */
     long getRecentSequenceNumber();
 
-    long maxSeqNum();
 }
