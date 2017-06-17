@@ -36,6 +36,10 @@ public class AdditionalUnitsEntity implements Serializable {
      */
     private int item5;
 
+    /**
+     * 无参构造方法
+     * 兼容fastjson
+     */
     public AdditionalUnitsEntity() {
     }
 

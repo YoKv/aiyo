@@ -9,19 +9,19 @@ public enum SteamApiEnum {
     /**
      * 获取比赛列表
      */
-    GetMatchHistory("GetMatchHistory", "/IDOTA2Match_570/GetMatchHistory/v1"),
+    GET_MATCH_HISTORY("GET_MATCH_HISTORY", "/IDOTA2Match_570/GetMatchHistory/v1"),
     /**
      * 通过序列号获取比赛列表
      */
-    GetMatchHistoryBySequenceNum("GetMatchHistoryBySequenceNum", "/IDOTA2Match_570/GetMatchHistoryBySequenceNum/v1"),
+    GET_MATCH_HISTORY_BY_SEQUENCE_NUM("GetMatchHistoryBySequenceNum", "/IDOTA2Match_570/GetMatchHistoryBySequenceNum/v1"),
     /**
      * 获取英雄列表
      */
-    GetHeroes("GetHeroes", "/IEconDOTA2_570/GetHeroes/v1"),
+    GET_HEROES("GetHeroes", "/IEconDOTA2_570/GetHeroes/v1"),
     /**
      * 获取装备列表
      */
-    GetGameItems("GetGameItems", "/IEconDOTA2_570/GetGameItems/v1");
+    GET_GAME_ITEMS("GetGameItems", "/IEconDOTA2_570/GetGameItems/v1");
     /**
      * 接口名
      */

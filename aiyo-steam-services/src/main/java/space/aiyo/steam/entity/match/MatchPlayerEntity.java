@@ -120,6 +120,10 @@ public class MatchPlayerEntity implements Serializable {
         this.heroId = heroId;
     }
 
+    /**
+     * 无参构造方法
+     * 兼容fastjson
+     */
     public MatchPlayerEntity() {
     }
 

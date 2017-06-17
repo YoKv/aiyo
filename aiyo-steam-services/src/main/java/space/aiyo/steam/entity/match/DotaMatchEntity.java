@@ -139,6 +139,10 @@ public class DotaMatchEntity implements Serializable {
     private int direScore;
     private List<MatchPlayerEntity> players;
 
+    /**
+     * 无参构造方法
+     * 兼容fastjson
+     */
     public DotaMatchEntity() {
     }
 

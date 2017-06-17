@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 
 @Document(collection = "dotaItem")
-public class DotaItemEntity implements Serializable{
+public class DotaItemEntity implements Serializable {
     @Id
     private int id;
     private String name;//全名
@@ -21,8 +21,13 @@ public class DotaItemEntity implements Serializable{
     private int recipe;//卷轴 0否1是
     private String localizedName;//中文名zh
 
+    /**
+     * 无参构造方法
+     * 兼容fastjson
+     */
     public DotaItemEntity() {
     }
+
     public DotaItemEntity(int id, String name, int cost, int secretShop, int sideShop, int recipe, String localizedName) {
         this.id = id;
         this.name = name;

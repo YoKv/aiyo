@@ -20,6 +20,10 @@ public class AbilityUpgradesEntity implements Serializable {
      */
     private int level;
 
+    /**
+     * 无参构造方法
+     * 兼容fastjson
+     */
     public AbilityUpgradesEntity() {
     }
 

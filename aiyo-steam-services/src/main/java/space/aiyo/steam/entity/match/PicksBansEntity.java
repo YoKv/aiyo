@@ -16,14 +16,18 @@ public class PicksBansEntity implements Serializable {
      */
     private int heroId;
     /**
-     *The team who chose the pick or ban; 0 for Radiant, 1 for Dire.
+     * The team who chose the pick or ban; 0 for Radiant, 1 for Dire.
      */
     private int team;
     /**
-     *The order of which the picks and bans were selected; 0-19.
+     * The order of which the picks and bans were selected; 0-19.
      */
     private int order;
 
+    /**
+     * 无参构造方法
+     * 兼容fastjson
+     */
     public PicksBansEntity() {
     }
 

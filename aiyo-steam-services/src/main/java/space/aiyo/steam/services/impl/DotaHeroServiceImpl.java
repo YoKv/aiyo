@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.entity.DotaHeroEntity;
@@ -44,7 +43,7 @@ public class DotaHeroServiceImpl implements DotaHeroService {
 
     private List<DotaHeroEntity> getHeroFromSteamApi() {
         String returnStr = "";
-        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetHeroes.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
+        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_HEROES.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {

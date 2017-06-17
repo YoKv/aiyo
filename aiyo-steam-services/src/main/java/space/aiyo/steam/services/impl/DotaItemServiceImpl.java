@@ -53,7 +53,7 @@ public class DotaItemServiceImpl implements DotaItemService {
 
     private List<DotaItemEntity> getItemFromSteamApi() {
         String returnStr = "";
-        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetGameItems.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
+        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_GAME_ITEMS.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
         try {
             returnStr = HttpUtil.sendGet(url);
         } catch (IOException e) {

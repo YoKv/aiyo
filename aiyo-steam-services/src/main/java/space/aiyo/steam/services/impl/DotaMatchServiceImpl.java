@@ -72,7 +72,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         //从下一个开始,避免第一条与本地数据库最后一条重复
         matchSeqNum++;
         String returnStr = "";
-        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GetMatchHistoryBySequenceNum.getUrl() +
+        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getUrl() +
                 "?start_at_match_seq_num=" +
                 matchSeqNum +
                 "&matches_requested=" +
