@@ -24,7 +24,9 @@ public class DotaMatchSchedule {
      * 定时更新dota游戏比赛信息
      * 定时任务是阻塞的，前一个未结束，不会开始下一个,符合需求
      */
-//    @Scheduled(cron = "0 0 9 * * *")  //每天的上午09:00触发  执行速度慢会有问题,选用其它方式实现定时任务 FIXME
+//    @Scheduled(cron = "0 0 9 * * *")  //每天的上午09:00触发
+//    运行几小时后，不再执行，没有任何信息
+//    执行速度慢会有问题,选用其它方式实现定时任务 FIXME
     @Scheduled(fixedRate = 8000L) //8s更新一次
     public void getDotaHero() {
         logger.info("定时任务，开始同步游戏比赛信息");
