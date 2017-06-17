@@ -48,6 +48,9 @@ public class HttpUtil {
         if (status == 429) {
             logger.warn("HTTP status 429, Too Many Requests (太多请求)");
             return "";
+        } else if (status == 503) {
+            logger.warn("HTTP status 503, 服务器目前无法使用（由于超载或停机维护）");
+            return "";
         }
         // 取得输入流，并使用Reader读取 暂时使用utf-8
 //        The ISO639-1 language code for the language all tokenized strings should be returned in.

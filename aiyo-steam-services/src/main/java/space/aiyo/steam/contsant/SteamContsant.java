@@ -10,7 +10,7 @@ public class SteamContsant {
     /**
      * Steam 开发者key，每个steam请求都要带上
      */
-    public static final String STEAM_KEY = "FE2198E547427C905904A154925EAEBF";
+    public static final String STEAM_KEY = "1069288B68FDCE1C5B1EF883B561E40A";
 
     /**
      * Steam 接口路径
