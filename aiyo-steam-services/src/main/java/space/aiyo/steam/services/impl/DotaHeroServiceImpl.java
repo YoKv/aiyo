@@ -41,6 +41,10 @@ public class DotaHeroServiceImpl implements DotaHeroService {
         saveAll(heroes);
     }
 
+    /**
+     * 接口不稳定，处理机制 TODO
+     *
+     */
     private List<DotaHeroEntity> getHeroFromSteamApi() {
         String returnStr = "";
         String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_HEROES.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
