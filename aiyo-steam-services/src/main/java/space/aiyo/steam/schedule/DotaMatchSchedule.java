@@ -25,9 +25,9 @@ public class DotaMatchSchedule {
      * 定时任务是阻塞的，前一个未结束，不会开始下一个,符合需求
      */
 //    @Scheduled(cron = "0 0 9 * * *")  //每天的上午09:00触发
-//    运行几小时后，不再执行，没有任何信息
+//    运行几小时后，不再执行，没有任何信息,初步判断是 执行间隔太快，执行速度慢，执行时间久了，spring待执行的任务多到某个值，停止定时任务了
 //    执行速度慢会有问题,选用其它方式实现定时任务 FIXME
-    @Scheduled(fixedRate = 8000L) //8s更新一次
+    @Scheduled(fixedRate = 8888L) //更新频率
     public void getDotaHero() {
         logger.info("定时任务，开始同步游戏比赛信息");
         //获取本地最大的队列num
