@@ -9,7 +9,7 @@ package space.aiyo.steam.services;
 public interface DotaMatchService {
 
     void saveMatchFromSteamByMatchSeqNum(long sequenceNumber);
-
+    void getMatchFromSteamApiByMatchSeqNum(long matchSeqNum);
     /**
      * 获取数据库中最新的sequence number
      */

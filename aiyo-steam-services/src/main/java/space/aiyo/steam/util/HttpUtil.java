@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.stream.Stream;
 
 /**
  * TODO 连接池
@@ -31,6 +34,7 @@ public class HttpUtil {
     }
 
     private static String send(String urlStr, String type) throws IOException {
+
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         // 服务器连接
@@ -42,7 +46,7 @@ public class HttpUtil {
             connection.setDoOutput(true);
             connection.setDoInput(true);
         }
-
+        logger.info("bef connect"  + LocalTime.now());
         connection.connect();
         int status = connection.getResponseCode();
         if (status == 429) {
@@ -52,6 +56,9 @@ public class HttpUtil {
             logger.warn("HTTP status 503, 服务器目前无法使用（由于超载或停机维护）");
             return "";
         }
+
+        logger.info("after connect"  + LocalTime.now());
+
         // 取得输入流，并使用Reader读取 暂时使用utf-8
 //        The ISO639-1 language code for the language all tokenized strings should be returned in.
 //                Not all strings have been translated to every language.
@@ -59,12 +66,16 @@ public class HttpUtil {
 //        If this parameter is omitted the string token will be returned for the strings.
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 connection.getInputStream(), "utf-8"));
-
+        logger.info("after getInputStream"  + LocalTime.now());
         StringBuilder sb = new StringBuilder();
-        String lines;
-        while ((lines = reader.readLine()) != null) {
-            sb.append(lines);
-        }
+        Stream<String> stringStream = reader.lines();
+        logger.info("after Stream"  + LocalTime.now());
+        stringStream.forEach((String s) -> sb.append(s));
+        logger.info("reader"  + LocalTime.now());
+//        while ((lines = reader.readLine()) != null) {
+//            sb.append(lines);
+//        }
+
         reader.close();
         // 断开连接
         connection.disconnect();

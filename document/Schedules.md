@@ -34,7 +34,9 @@ steam项目：
 
 docker 容器
 
-
+连接要1-2秒
+bufferedreader 转为string  要3s多,慢的时候要10s，
+严重影响效率
 
 
 
