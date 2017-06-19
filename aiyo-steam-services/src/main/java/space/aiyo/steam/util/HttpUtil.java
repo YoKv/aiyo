@@ -34,7 +34,7 @@ public class HttpUtil {
     }
 
     private static String send(String urlStr, String type) throws IOException {
-
+        logger.info("定时任务，开始同步游戏比赛信息"+ LocalTime.now());
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         // 服务器连接

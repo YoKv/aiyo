@@ -14,5 +14,5 @@ public interface DotaMatchService {
      * 获取数据库中最新的sequence number
      */
     long getRecentSequenceNumber();
-
+    void recursion(long sequenceNumber);
 }

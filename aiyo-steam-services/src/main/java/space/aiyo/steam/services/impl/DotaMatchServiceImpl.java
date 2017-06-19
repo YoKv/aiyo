@@ -44,7 +44,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-
     /**
      * 从steam获取数据，并入库
      *
@@ -68,6 +67,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
      * @param matchSeqNum
      * @return
      */
+    @Override
     public void getMatchFromSteamApiByMatchSeqNum(long matchSeqNum) {
         //从下一个开始,避免第一条与本地数据库最后一条重复
         matchSeqNum++;
@@ -102,6 +102,15 @@ public class DotaMatchServiceImpl implements DotaMatchService {
 //                }
 //        ).start();
 
+    }
+    @Override
+    public void recursion(long sequenceNumber){
+        if (sequenceNumber == 0) {
+            sequenceNumber = DotaContsant.FIRST_MATCH_SEQ_NUM;//从7.00版本开始
+        }
+        getMatchFromSteamApiByMatchSeqNum(sequenceNumber);
+        sequenceNumber = getRecentSequenceNumber();
+        recursion(sequenceNumber);
     }
 
 
