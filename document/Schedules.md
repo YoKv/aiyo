@@ -38,6 +38,8 @@ docker 容器
 bufferedreader 转为string  要3s多,慢的时候要10s，
 严重影响效率
 
+考虑使用多线程，解决sequenceNumber问题
+
 
 
 
