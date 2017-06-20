@@ -20,6 +20,6 @@ public class SteamContsant {
     /**
      * GetMatchHistoryBySequenceNum 每次请求获取比赛数量 目前测试结果最大是100
      */
-    public static final int STEAM_MATCH_PULLNUM_ONCE = 60;
+    public static final int STEAM_MATCH_PULLNUM_ONCE = 100;
 
 }
