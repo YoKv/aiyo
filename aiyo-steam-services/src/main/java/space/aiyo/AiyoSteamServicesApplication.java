@@ -20,9 +20,9 @@ public class AiyoSteamServicesApplication {
 
     public static void main(String[] args) {
        final ConfigurableApplicationContext applicationContext = SpringApplication.run(AiyoSteamServicesApplication.class, args);
-        DotaMatchService dotaMatchService = applicationContext.getBean(DotaMatchService.class);
-        long sequenceNumber = dotaMatchService.getRecentSequenceNumber();
-        dotaMatchService.recursion(sequenceNumber);
+//        DotaMatchService dotaMatchService = applicationContext.getBean(DotaMatchService.class);
+//        long sequenceNumber = dotaMatchService.getRecentSequenceNumber();
+//        dotaMatchService.recursion(sequenceNumber);
     }
 
     @GetMapping("/")

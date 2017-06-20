@@ -10,7 +10,7 @@ public class SteamContsant {
     /**
      * Steam 开发者key，每个steam请求都要带上
      */
-    public static final String STEAM_KEY = "1069288B68FDCE1C5B1EF883B561E40A";
+    public static final String STEAM_KEY = "98CF82CC99D17626554397F956680044";
 
     /**
      * Steam 接口路径
@@ -20,6 +20,6 @@ public class SteamContsant {
     /**
      * GetMatchHistoryBySequenceNum 每次请求获取比赛数量 目前测试结果最大是100
      */
-    public static final int STEAM_MATCH_PULLNUM_ONCE = 100;
+    public static final int STEAM_MATCH_PULLNUM_ONCE = 60;
 
 }
