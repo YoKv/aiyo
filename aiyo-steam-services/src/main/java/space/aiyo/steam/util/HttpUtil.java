@@ -37,6 +37,7 @@ public class HttpUtil {
         logger.info("定时任务，开始同步游戏比赛信息"+ LocalTime.now());
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
         // 服务器连接
         if ("POST".equals(type)) {
             connection.setRequestMethod("POST");// 提交模式
@@ -67,8 +68,10 @@ public class HttpUtil {
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 connection.getInputStream(), "utf-8"));
         logger.info("after getInputStream"  + LocalTime.now());
+
         StringBuilder sb = new StringBuilder();
         Stream<String> stringStream = reader.lines();
+
         logger.info("after Stream"  + LocalTime.now());
         stringStream.forEach((String s) -> sb.append(s));
         logger.info("reader"  + LocalTime.now());
