@@ -96,6 +96,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
                         JSONArray matchArray = result.getJSONArray("matches");
                         List<DotaMatchEntity> matches = JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
                         saveAll(matches);
+
                     } catch (IOException e) {
                         logger.info("调用steam接口保存失败,url:" + url + " *_* " + e.toString());
                     }
