@@ -6,14 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 类，接口，枚举的注解，不能用于注解
  * Created by Yo on 2017/7/3.
  */
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TestAnnotation {
-    String printStr() default "default";
-    String printStr2() default "default2";
+public @interface TypeAnnotation {
+    String str() default "str";
+    int intValue() default 0;
+
 }
-
-
