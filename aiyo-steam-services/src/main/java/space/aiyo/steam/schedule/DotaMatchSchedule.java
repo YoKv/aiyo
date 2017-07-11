@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import space.aiyo.steam.contsant.DotaContsant;
+import space.aiyo.steam.repository.DotaMatchRepository;
 import space.aiyo.steam.services.DotaMatchService;
 
 import java.time.LocalTime;
@@ -21,6 +22,8 @@ public class DotaMatchSchedule {
 
     @Autowired
     private DotaMatchService dotaMatchService;
+    @Autowired
+    private DotaMatchRepository dotaMatchRepository;
 
     /**
      * 定时更新dota游戏比赛信息
@@ -31,7 +34,7 @@ public class DotaMatchSchedule {
 //    执行速度慢会有问题,选用其它方式实现定时任务 FIXME
     @Scheduled(fixedRate = 4100L) //更新频率
     public void getDotaHero() {
-        logger.info("定时任务，开始同步游戏比赛信息"+ LocalTime.now());
+        logger.info("定时任务，开始同步游戏比赛信息"+ LocalTime.now() + "  数据库总记录数:" + dotaMatchRepository.count());
         //获取本地最大的队列num
         long sequenceNumber = dotaMatchService.getRecentSequenceNumber();
         if (sequenceNumber == 0) {

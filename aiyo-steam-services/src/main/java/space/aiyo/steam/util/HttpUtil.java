@@ -34,7 +34,6 @@ public class HttpUtil {
     }
 
     private static String send(String urlStr, String type) throws IOException {
-        logger.info("定时任务，开始同步游戏比赛信息"+ LocalTime.now());
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -47,7 +46,6 @@ public class HttpUtil {
             connection.setDoOutput(true);
             connection.setDoInput(true);
         }
-        logger.info("bef connect"  + LocalTime.now());
         connection.connect();
         int status = connection.getResponseCode();
         if (status == 429) {
@@ -63,21 +61,18 @@ public class HttpUtil {
 //                Not all strings have been translated to every language.
 //        If a language does not have a string, the English string will be returned instead.
 //        If this parameter is omitted the string token will be returned for the strings.
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                connection.getInputStream(), "utf-8"));
-        StringBuilder sb = new StringBuilder();
-        Stream<String> stringStream = reader.lines();
 
-        stringStream.forEach((String s) -> sb.append(s));
-        logger.info("reader"  + LocalTime.now());
-//        while ((lines = reader.readLine()) != null) {
-//            sb.append(lines);
-//        }
+        // try-with-resources写法 不用close reader
+        try ( BufferedReader reader = new BufferedReader(new InputStreamReader(
+                connection.getInputStream(), "utf-8"));){
+            StringBuilder sb = new StringBuilder();
+            Stream<String> stringStream = reader.lines();
 
-        reader.close();
-        // 断开连接
-        connection.disconnect();
-        return sb.toString();
+            stringStream.forEach((String s) -> sb.append(s));
+            // 断开连接
+            connection.disconnect();
+            return sb.toString();
+        }
     }
 
 }

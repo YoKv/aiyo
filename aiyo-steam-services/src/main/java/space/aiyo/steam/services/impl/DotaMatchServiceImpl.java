@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import space.aiyo.steam.contsant.DotaContsant;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.entity.match.DotaMatchEntity;
@@ -19,6 +20,7 @@ import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.repository.DotaMatchRepository;
 import space.aiyo.steam.services.DotaMatchService;
 import space.aiyo.steam.util.HttpUtil;
+import space.aiyo.steam.util.StringUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,16 +89,16 @@ public class DotaMatchServiceImpl implements DotaMatchService {
 //        } catch (IOException e) {
 //            logger.info("调用steam接口保存失败,url:" + url + " *_* " + e.toString());
 //        }
-        //不能用线程做，会造成_id冲突,考虑用递归 TODO
         new Thread(
                 () -> {
                     try {
                         String returnStr = HttpUtil.sendGet(url);
-                        JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
-                        JSONArray matchArray = result.getJSONArray("matches");
-                        List<DotaMatchEntity> matches = JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
-                        saveAll(matches);
-
+                        if(!StringUtils.isEmpty(returnStr)){
+                            JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
+                            JSONArray matchArray = result.getJSONArray("matches");
+                            List<DotaMatchEntity> matches = JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
+                            saveAll(matches);
+                        }
                     } catch (IOException e) {
                         logger.info("调用steam接口保存失败,url:" + url + " *_* " + e.toString());
                     }
