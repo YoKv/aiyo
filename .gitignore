@@ -147,3 +147,4 @@ aiyo-steam-services/target/classes/space/aiyo/steam/repository/DotaMatchReposito
 .idea/libraries/Maven__org_springframework_spring_beans_5_0_0_BUILD_SNAPSHOT.xml
 .idea/libraries/Maven__org_springframework_spring_aop_5_0_0_BUILD_SNAPSHOT.xml
 .idea/libraries/Maven__org_springframework_data_spring_data_mongodb_2_0_0_BUILD_SNAPSHOT.xml
+steam-services.log.6
