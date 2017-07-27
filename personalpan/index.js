@@ -1,7 +1,11 @@
-var expressVue = require('express-vue');
- 
-var app = express();
-app.set('views', __dirname + '/app/views');
+const path = require('path');
+const express = require('express');
+const expressVue = require('express-vue');
+const app = express();
+
+app.engine('vue', expressVue);
+app.set('view engine', 'vue');
+app.set('views', path.join(__dirname, '/views'));
 //Optional if you want to specify the components directory separate to your views, and/or specify a custom layout. 
 app.set('vue', {
     //ComponentsDir is optional if you are storing your components in a different directory than your views 
@@ -10,5 +14,7 @@ app.set('vue', {
     //If you want a custom layout set this to the location of your layout.vue file. 
     defaultLayout: 'layout'
 });
-app.engine('vue', expressVue);
-app.set('view engine', 'vue');
+
+const routes = require(path.join(__dirname, '/routes/routes'));
+
+app.listen(3000);
