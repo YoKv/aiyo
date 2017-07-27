@@ -175,3 +175,4 @@ personalpan/.mvn/wrapper/maven-wrapper.properties
 personalpan/.mvn/wrapper/maven-wrapper.jar
 personalpan/.gitignore
 .idea/libraries/Maven__org_springframework_spring_test_5_0_0_RC3.xml
+personalpan/node_modules/
