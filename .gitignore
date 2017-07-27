@@ -163,3 +163,15 @@ aiyo-steam-services/target/surefire-reports/TEST-space.aiyo.test.MatchTest.xml
 aiyo-steam-services/target/surefire-reports/space.aiyo.test.SteamApiTest.txt
 aiyo-steam-services/target/surefire-reports/space.aiyo.test.MongoDBQueryTest.txt
 aiyo-steam-services/target/surefire-reports/TEST-space.aiyo.AiyoSteamServicesApplicationTests.xml
+.idea/libraries/Maven__org_springframework_spring_jcl_5_0_0_RC3.xml
+.idea/libraries/Maven__org_springframework_spring_expression_5_0_0_RC3.xml
+.idea/libraries/Maven__org_springframework_spring_core_5_0_0_RC3.xml
+.idea/libraries/Maven__org_springframework_spring_context_5_0_0_RC3.xml
+.idea/libraries/Maven__org_springframework_spring_beans_5_0_0_RC3.xml
+.idea/libraries/Maven__org_springframework_spring_aop_5_0_0_RC3.xml
+personalpan/mvnw.cmd
+personalpan/mvnw
+personalpan/.mvn/wrapper/maven-wrapper.properties
+personalpan/.mvn/wrapper/maven-wrapper.jar
+personalpan/.gitignore
+.idea/libraries/Maven__org_springframework_spring_test_5_0_0_RC3.xml
