@@ -187,3 +187,7 @@ personalpan/personalpan.iml
 \.idea/libraries/Maven__org_springframework_spring_tx_5_0_0_RC3\.xml
 
 \.idea/libraries/Maven__org_yaml_snakeyaml_1_17\.xml
+
+\.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_0\.xml
+
+\.idea/libraries/
