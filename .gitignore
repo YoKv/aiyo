@@ -177,3 +177,13 @@ personalpan/.gitignore
 .idea/libraries/Maven__org_springframework_spring_test_5_0_0_RC3.xml
 personalpan/node_modules/
 personalpan/personalpan.iml
+
+\.idea/libraries/Maven__org_springframework_spring_web_5_0_0_RC3\.xml
+
+\.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_0_0_RC2\.xml
+
+\.idea/libraries/Maven__org_springframework_data_spring_data_mongodb_2_0_0_RC2\.xml
+
+\.idea/libraries/Maven__org_springframework_spring_tx_5_0_0_RC3\.xml
+
+\.idea/libraries/Maven__org_yaml_snakeyaml_1_17\.xml
