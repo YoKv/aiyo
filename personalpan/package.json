@@ -2,8 +2,10 @@
   "name": "personalpan",
   "version": "0.0.1",
   "description": "express-vue qiniu",
+
   "dependencies": {
     "express": "^4.15.2",
-    "express-vue": "^3.14.2"
+    "express-vue": "^3.14.2",
+    "qiniu": "^7.0.5"
   }
 }

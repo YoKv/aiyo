@@ -191,3 +191,6 @@ personalpan/personalpan.iml
 \.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_0\.xml
 
 \.idea/libraries/
+personalpan/.idea/modules.xml
+personalpan/.idea/personalpan.iml
+personalpan/.idea/workspace.xml
