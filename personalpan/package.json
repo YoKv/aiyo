@@ -5,8 +5,7 @@
   "dependencies": {
     "express": "^4.15.2",
     "express-vue": "^3.14.2",
-    "qiniu": "^7.0.5",
-    "pm2": "^2.6.1"
+    "qiniu": "^7.0.5"
   },
   "scripts": {
     "start": "node ./",
