@@ -29,7 +29,6 @@
 		<dependency>
 			<groupId>space.aiyo</groupId>
 			<artifactId>aiyo-plugins</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
