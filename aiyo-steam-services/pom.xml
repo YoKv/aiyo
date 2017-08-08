@@ -25,6 +25,13 @@
 	</properties>
 
 	<dependencies>
+		<!--项目公用插件-->
+		<dependency>
+			<groupId>space.aiyo</groupId>
+			<artifactId>aiyo-plugins</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -38,11 +45,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<!--MongoDB-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+
 		<!--JSON工具-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
