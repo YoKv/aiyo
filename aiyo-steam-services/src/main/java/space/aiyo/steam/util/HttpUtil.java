@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.stream.Stream;
 
 /**
@@ -64,7 +62,7 @@ public class HttpUtil {
 
         // try-with-resources写法 不用close reader
         try ( BufferedReader reader = new BufferedReader(new InputStreamReader(
-                connection.getInputStream(), "utf-8"));){
+                connection.getInputStream(), "utf-8"))){
             StringBuilder sb = new StringBuilder();
             Stream<String> stringStream = reader.lines();
 
