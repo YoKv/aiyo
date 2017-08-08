@@ -1,4 +1,4 @@
-package space.aiyo.steam.util;
+package space.aiyo.util;
 
 /**
  * Created by yo on 2017/6/1.

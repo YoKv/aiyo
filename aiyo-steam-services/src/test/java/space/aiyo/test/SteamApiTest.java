@@ -1,7 +1,7 @@
 package space.aiyo.test;
 
 import org.junit.Test;
-import space.aiyo.steam.util.HttpUtil;
+import space.aiyo.util.HttpUtil;
 
 import java.io.IOException;
 

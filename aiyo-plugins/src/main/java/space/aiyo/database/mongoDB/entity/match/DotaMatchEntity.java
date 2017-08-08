@@ -1,4 +1,4 @@
-package space.aiyo.steam.entity.match;
+package space.aiyo.database.mongoDB.entity.match;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

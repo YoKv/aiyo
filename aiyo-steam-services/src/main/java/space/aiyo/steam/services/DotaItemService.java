@@ -1,8 +1,6 @@
 package space.aiyo.steam.services;
 
-import space.aiyo.steam.entity.DotaItemEntity;
-
-import java.util.List;
+import space.aiyo.database.mongoDB.entity.DotaItemEntity;
 
 /**
  * Dota游戏装备接口

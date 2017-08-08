@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import space.aiyo.steam.contsant.DotaContsant;
-import space.aiyo.steam.repository.DotaMatchRepository;
+import space.aiyo.database.mongoDB.repository.DotaMatchRepository;
 import space.aiyo.steam.services.DotaMatchService;
 
 import java.time.LocalTime;

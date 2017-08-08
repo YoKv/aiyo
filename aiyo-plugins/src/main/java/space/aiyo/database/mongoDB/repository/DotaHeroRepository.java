@@ -1,7 +1,7 @@
-package space.aiyo.steam.repository;
+package space.aiyo.database.mongoDB.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import space.aiyo.steam.entity.DotaHeroEntity;
+import space.aiyo.database.mongoDB.entity.DotaHeroEntity;
 
 
 /**

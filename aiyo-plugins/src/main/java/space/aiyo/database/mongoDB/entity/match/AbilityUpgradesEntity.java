@@ -1,4 +1,4 @@
-package space.aiyo.steam.entity.match;
+package space.aiyo.database.mongoDB.entity.match;
 
 import java.io.Serializable;
 

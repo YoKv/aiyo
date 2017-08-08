@@ -1,8 +1,8 @@
-package space.aiyo.steam.repository;
+package space.aiyo.database.mongoDB.repository;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import space.aiyo.steam.entity.match.DotaMatchEntity;
+import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
 
 
 /**

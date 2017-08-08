@@ -23,7 +23,7 @@ public class HttpRequestSentAspect {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("execution(public * space.aiyo.steam.util.HttpUtil.send*(..))")
+    @Pointcut("execution(public * space.aiyo.util.HttpUtil.send*(..))")
     public void methods(){
         System.out.println("methods");
     }
