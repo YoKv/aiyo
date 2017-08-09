@@ -72,12 +72,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     public void getMatchFromSteamApiByMatchSeqNum(long matchSeqNum) {
         //从下一个开始,避免第一条与本地数据库最后一条重复
         matchSeqNum++;
-        final String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getUrl() +
-                "?start_at_match_seq_num=" +
-                matchSeqNum +
-                "&matches_requested=" +
-                SteamContsant.STEAM_MATCH_PULLNUM_ONCE +
-                "&key=" + SteamContsant.STEAM_KEY;
+        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getUrl() + "?start_at_match_seq_num=" + matchSeqNum + "&matches_requested=" + SteamContsant.STEAM_MATCH_PULLNUM_ONCE + "&key=" + SteamContsant.STEAM_KEY;
 
 //        try {
 //            String returnStr = HttpUtil.sendGet(url);
@@ -88,25 +83,24 @@ public class DotaMatchServiceImpl implements DotaMatchService {
 //        } catch (IOException e) {
 //            logger.info("调用steam接口保存失败,url:" + url + " *_* " + e.toString());
 //        }
-        new Thread(
-                () -> {
-                    try {
-                        String returnStr = HttpUtil.sendGet(url);
-                        if(!StringUtils.isEmpty(returnStr)){
-                            JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
-                            JSONArray matchArray = result.getJSONArray("matches");
-                            List<DotaMatchEntity> matches = JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
-                            saveAll(matches);
-                        }
-                    } catch (IOException e) {
-                        logger.info("调用steam接口保存失败,url:" + url + " *_* " + e.toString());
-                    }
+        new Thread(() -> {
+            try {
+                String returnStr = HttpUtil.sendGet(url);
+                if (!StringUtils.isEmpty(returnStr)) {
+                    JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
+                    JSONArray matchArray = result.getJSONArray("matches");
+                    List<DotaMatchEntity> matches = JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
+                    saveAll(matches);
                 }
-        ).start();
+            } catch (IOException e) {
+                logger.info("调用steam接口保存失败,url:" + url + " *_* " + e.toString());
+            }
+        }).start();
 
     }
+
     @Override
-    public void recursion(long sequenceNumber){
+    public void recursion(long sequenceNumber) {
         if (sequenceNumber == 0) {
             sequenceNumber = DotaContsant.FIRST_MATCH_SEQ_NUM;//从7.00版本开始
         }
@@ -182,8 +176,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
      */
     private List<DotaMatchEntity> insertAll(List<DotaMatchEntity> matches) {
         //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-        for (DotaMatchEntity match :
-                matches) {
+        for (DotaMatchEntity match : matches) {
             match.setId(match.getMatchSeqNum());
         }
         return repository.insert(matches);
@@ -210,8 +203,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
      */
     private List<DotaMatchEntity> saveAll(List<DotaMatchEntity> matches) {
         //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-        for (DotaMatchEntity match :
-                matches) {
+        for (DotaMatchEntity match : matches) {
             match.setId(match.getMatchSeqNum());
         }
         return repository.saveAll(matches);

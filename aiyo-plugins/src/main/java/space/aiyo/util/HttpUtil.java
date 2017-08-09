@@ -32,6 +32,7 @@ public class HttpUtil {
     }
 
     private static String send(String urlStr, String type) throws IOException {
+        //System.setProperty("http.keepAlive", "false");
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -44,6 +45,7 @@ public class HttpUtil {
             connection.setDoOutput(true);
             connection.setDoInput(true);
         }
+//        connection.setRequestProperty("Connection", "close");
         connection.connect();
         int status = connection.getResponseCode();
         if (status == 429) {
