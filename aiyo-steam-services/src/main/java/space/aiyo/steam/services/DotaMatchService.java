@@ -15,4 +15,5 @@ public interface DotaMatchService {
      */
     long getRecentSequenceNumber();
     void recursion(long sequenceNumber);
+    int count();
 }

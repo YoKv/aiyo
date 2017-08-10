@@ -20,6 +20,6 @@ public class DotaHeroApi {
 
     @RequestMapping("/heroes")
     public List<DotaHeroEntity> getHeros() {
-        return null;
+        return dotaHeroService.getHeroes();
     }
 }

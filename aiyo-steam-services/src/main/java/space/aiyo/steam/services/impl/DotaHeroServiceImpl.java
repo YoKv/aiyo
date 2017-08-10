@@ -23,16 +23,9 @@ import java.util.List;
  * Created by yo on 2017/5/27.
  */
 @Service
-public class DotaHeroServiceImpl implements DotaHeroService {
+public class DotaHeroServiceImpl extends DotaHeroDao implements DotaHeroService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private final DotaHeroDao dotaHeroDao;
-
-    @Autowired
-    public DotaHeroServiceImpl(DotaHeroDao dotaHeroDao) {
-        this.dotaHeroDao = dotaHeroDao;
-    }
 
 
     @Override
@@ -62,21 +55,14 @@ public class DotaHeroServiceImpl implements DotaHeroService {
         }
 
     }
-    /**---------------------------------------------------------------数-------------------------------------------------------------**/
-    /**---------------------------------------------------------------据-------------------------------------------------------------**/
-    /**---------------------------------------------------------------库-------------------------------------------------------------**/
-    /**---------------------------------------------------------------方-------------------------------------------------------------**/
-    /**---------------------------------------------------------------法-------------------------------------------------------------**/
-    /**---------------------------------------------------------------封-------------------------------------------------------------**/
-    /**---------------------------------------------------------------装-------------------------------------------------------------**/
 
-
+    @Override
     public List<DotaHeroEntity> getHeroes() {
-        return dotaHeroDao.findAll();
+        return findAll();
     }
-
-    private List<DotaHeroEntity> saveAll(List<DotaHeroEntity> heroes) {
-        return dotaHeroDao.saveAll(heroes);
+    @Override
+    public List<DotaHeroEntity> saveAll(List<DotaHeroEntity> heroes) {
+        return saveAll(heroes);
     }
 
 }

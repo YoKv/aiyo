@@ -6,23 +6,21 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import space.aiyo.database.mongoDB.dao.DotaMatchDao;
+import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
 import space.aiyo.steam.contsant.DotaContsant;
 import space.aiyo.steam.contsant.SteamContsant;
-import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
 import space.aiyo.steam.enums.SteamApiEnum;
-import space.aiyo.database.mongoDB.repository.DotaMatchRepository;
 import space.aiyo.steam.services.DotaMatchService;
 import space.aiyo.util.HttpUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,16 +29,10 @@ import java.util.List;
  */
 
 @Service
-public class DotaMatchServiceImpl implements DotaMatchService {
+public class DotaMatchServiceImpl extends DotaMatchDao implements DotaMatchService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final DotaMatchRepository repository;
-
-    @Autowired
-    public DotaMatchServiceImpl(DotaMatchRepository repository) {
-        this.repository = repository;
-    }
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -109,7 +101,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         recursion(sequenceNumber);
     }
 
-
     /**
      * 获取本地最大的sequenceNumber
      *
@@ -129,6 +120,11 @@ public class DotaMatchServiceImpl implements DotaMatchService {
 
     }
 
+    @Override
+    public int count() {
+        return super.count();
+    }
+
     /**
      * 再找最优的方案
      *
@@ -142,104 +138,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         query.limit(1);
         DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
         return match.getMatchSeqNum();
-    }
-
-    //获取最大的match_seq_num几种方案
-    //skip n-1 并发可能有问题
-    //sort limit
-    //db.dotaMatch.find({},{_id:1}).sort({_id:-1}).limit(1)
-
-    /**---------------------------------------------------------------数-------------------------------------------------------------**/
-    /**---------------------------------------------------------------据-------------------------------------------------------------**/
-    /**---------------------------------------------------------------库-------------------------------------------------------------**/
-    /**---------------------------------------------------------------方-------------------------------------------------------------**/
-    /**---------------------------------------------------------------法-------------------------------------------------------------**/
-    /**---------------------------------------------------------------封-------------------------------------------------------------**/
-    /**---------------------------------------------------------------装-------------------------------------------------------------**/
-
-    /**
-     * 单条插入
-     *
-     * @param match
-     * @return 插入数据库后的记录
-     */
-    public DotaMatchEntity insert(DotaMatchEntity match) {
-        match.setId(match.getMatchSeqNum());
-        return repository.insert(match);
-    }
-
-    /**
-     * 批量插入
-     *
-     * @param matches
-     * @return 插入的数据
-     */
-    private List<DotaMatchEntity> insertAll(List<DotaMatchEntity> matches) {
-        //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-        for (DotaMatchEntity match : matches) {
-            match.setId(match.getMatchSeqNum());
-        }
-        return repository.insert(matches);
-    }
-
-    /**
-     * 保存
-     * 无记录insert
-     * 有记录update
-     *
-     * @param match
-     * @return 插入数据库后的记录
-     */
-    private DotaMatchEntity save(DotaMatchEntity match) {
-        match.setId(match.getMatchSeqNum());
-        return repository.save(match);
-    }
-
-    /**
-     * 批量保存
-     *
-     * @param matches
-     * @return 插入的数据
-     */
-    private List<DotaMatchEntity> saveAll(List<DotaMatchEntity> matches) {
-        //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-        for (DotaMatchEntity match : matches) {
-            match.setId(match.getMatchSeqNum());
-        }
-        return repository.saveAll(matches);
-    }
-
-    /**
-     * 总数
-     *
-     * @return 总数
-     */
-    private int count() {
-        long size = repository.count();
-        int count = Integer.parseInt(String.valueOf(size));
-        return count;
-    }
-
-    //TODO
-
-    private void more() {
-        repository.insert(new ArrayList<>());
-        repository.insert(new DotaMatchEntity());
-        repository.save(new DotaMatchEntity());
-        repository.saveAll(new ArrayList<>());
-
-//        repository.findAll(new Sort());
-//        repository.findAll(Example);
-//        repository.findAll(Example,Sort);
-//        repository.findAll(Page);
-//        repository.findAll(Example,Page);
-//        repository.findAll(Page);
-//        repository.findAllById(new ArrayList<>());
-//        repository.count(Example.of());
-//
-//        repository.d
-
-
     }
 
 

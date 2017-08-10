@@ -7,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import space.aiyo.database.mongoDB.dao.DotaItemDao;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.database.mongoDB.entity.DotaItemEntity;
 import space.aiyo.steam.enums.SteamApiEnum;
-import space.aiyo.database.mongoDB.repository.DotaItemRepository;
 import space.aiyo.steam.services.DotaItemService;
 import space.aiyo.util.HttpUtil;
 
@@ -22,16 +22,9 @@ import java.util.List;
  * Created by yo on 2017/6/5.
  */
 @Service
-public class DotaItemServiceImpl implements DotaItemService {
+public class DotaItemServiceImpl extends DotaItemDao implements DotaItemService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private final DotaItemRepository repository;
-
-    @Autowired
-    public DotaItemServiceImpl(DotaItemRepository repository) {
-        this.repository = repository;
-    }
 
     /**
      * 通过id查找一个装备
@@ -41,7 +34,7 @@ public class DotaItemServiceImpl implements DotaItemService {
      */
     @Override
     public DotaItemEntity findById(int id) {
-        return repository.findDotaItemEntityById(id);
+        return findDotaItemEntityById(id);
     }
 
 
@@ -65,15 +58,4 @@ public class DotaItemServiceImpl implements DotaItemService {
         return JSON.parseArray(itemsArray.toJSONString(), DotaItemEntity.class);
     }
 
-    /**---------------------------------------------------------------数-------------------------------------------------------------**/
-    /**---------------------------------------------------------------据-------------------------------------------------------------**/
-    /**---------------------------------------------------------------库-------------------------------------------------------------**/
-    /**---------------------------------------------------------------方-------------------------------------------------------------**/
-    /**---------------------------------------------------------------法-------------------------------------------------------------**/
-    /**---------------------------------------------------------------封-------------------------------------------------------------**/
-    /**---------------------------------------------------------------装-------------------------------------------------------------**/
-
-    private List<DotaItemEntity> saveAll(List<DotaItemEntity> items) {
-        return repository.saveAll(items);
-    }
 }

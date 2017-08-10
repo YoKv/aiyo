@@ -8,15 +8,15 @@ import space.aiyo.database.mongoDB.entity.DotaHeroEntity;
 import java.util.List;
 
 /**
+ * hero持久层
  * Created by tang on 2017/8/10.
  */
-@Component
-public class DotaHeroDao {
-    final private DotaHeroRepository repository;
 
+public class DotaHeroDao {
     @Autowired
-    public DotaHeroDao(DotaHeroRepository repository) {
-        this.repository = repository;
+    private DotaHeroRepository repository;
+
+    public DotaHeroDao() {
     }
 
     public List<DotaHeroEntity> findAll() {
