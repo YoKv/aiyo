@@ -7,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import space.aiyo.steam.contsant.SteamContsant;
+import space.aiyo.database.mongoDB.dao.DotaHeroDao;
 import space.aiyo.database.mongoDB.entity.DotaHeroEntity;
+import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.enums.SteamApiEnum;
-import space.aiyo.database.mongoDB.repository.DotaHeroRepository;
 import space.aiyo.steam.services.DotaHeroService;
 import space.aiyo.util.HttpUtil;
 
@@ -27,11 +27,11 @@ public class DotaHeroServiceImpl implements DotaHeroService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final DotaHeroRepository repository;
+    private final DotaHeroDao dotaHeroDao;
 
     @Autowired
-    public DotaHeroServiceImpl(DotaHeroRepository repository) {
-        this.repository = repository;
+    public DotaHeroServiceImpl(DotaHeroDao dotaHeroDao) {
+        this.dotaHeroDao = dotaHeroDao;
     }
 
 
@@ -72,11 +72,11 @@ public class DotaHeroServiceImpl implements DotaHeroService {
 
 
     public List<DotaHeroEntity> getHeroes() {
-        return repository.findAll();
+        return dotaHeroDao.findAll();
     }
 
     private List<DotaHeroEntity> saveAll(List<DotaHeroEntity> heroes) {
-        return repository.saveAll(heroes);
+        return dotaHeroDao.saveAll(heroes);
     }
 
 }

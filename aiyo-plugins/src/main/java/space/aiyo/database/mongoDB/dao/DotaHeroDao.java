@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Component
 public class DotaHeroDao {
-
     final private DotaHeroRepository repository;
 
     @Autowired
@@ -20,12 +19,15 @@ public class DotaHeroDao {
         this.repository = repository;
     }
 
-    private interface DotaHeroRepository extends MongoRepository<DotaHeroEntity, String> {
-        DotaHeroEntity findDistinctFirstById(String id);
+    public List<DotaHeroEntity> findAll() {
+        return repository.findAll();
     }
 
-    public List<DotaHeroEntity> findAll(){
-      
+    public List<DotaHeroEntity> saveAll(List<DotaHeroEntity> lists) {
+        return repository.saveAll(lists);
     }
 
+}
+
+interface DotaHeroRepository extends MongoRepository<DotaHeroEntity, String> {
 }
