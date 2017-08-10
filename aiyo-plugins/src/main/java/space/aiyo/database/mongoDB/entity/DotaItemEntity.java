@@ -40,9 +40,7 @@ public class DotaItemEntity implements Serializable {
 
     @Override
     public String toString() {
-        return String.format(
-                "DotaItemEntity[id=%s, name='%s', cost='%s', localizedName='%s']",
-                id, name, cost, localizedName);
+        return String.format("DotaItemEntity[id=%s, name='%s', cost='%s', localizedName='%s']", id, name, cost, localizedName);
     }
 
     public int getId() {
