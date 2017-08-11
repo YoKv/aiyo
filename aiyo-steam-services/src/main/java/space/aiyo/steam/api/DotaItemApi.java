@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import space.aiyo.database.mongoDB.entity.DotaItemEntity;
 import space.aiyo.steam.services.DotaItemService;
 
-import java.util.List;
-
 /**
  * 游戏装备相关 RESTful API
  * Created by yo on 2017/6/5.
@@ -19,7 +17,7 @@ public class DotaItemApi {
     private DotaItemService dotaItemService;
 
     @RequestMapping("/items")
-    public List<DotaItemEntity> getHeros() {
-        return null;
+    public DotaItemEntity getItem() {
+        return dotaItemService.findById(1);
     }
 }

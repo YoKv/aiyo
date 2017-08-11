@@ -129,14 +129,7 @@ public class MatchPlayerEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "MatchPlayerEntity{" +
-                "accountId=" + accountId +
-                ", playerSlot=" + playerSlot +
-                ", heroId=" + heroId +
-                ", kills=" + kills +
-                ", deaths=" + deaths +
-                ", assists=" + assists +
-                '}';
+        return "MatchPlayerEntity{" + "accountId=" + accountId + ", playerSlot=" + playerSlot + ", heroId=" + heroId + ", kills=" + kills + ", deaths=" + deaths + ", assists=" + assists + '}';
     }
 
     public long getAccountId() {

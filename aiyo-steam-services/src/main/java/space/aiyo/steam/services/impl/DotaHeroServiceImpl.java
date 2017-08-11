@@ -23,46 +23,70 @@ import java.util.List;
  * Created by yo on 2017/5/27.
  */
 @Service
-public class DotaHeroServiceImpl extends DotaHeroDao implements DotaHeroService {
-
+public class DotaHeroServiceImpl implements DotaHeroService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    final private DotaHeroDao heroDao;
 
-    @Override
-    public void saveHeroFromSteamApi() {
-        List<DotaHeroEntity> heroes = getHeroFromSteamApi();
-        saveAll(heroes);
+    @Autowired
+    public DotaHeroServiceImpl(DotaHeroDao heroDao) {
+        this.heroDao = heroDao;
+        Inner.heroDao = heroDao;
+        Inner.logger = logger;
     }
 
     /**
-     * 接口不稳定，处理机制 TODO
+     * 从steam获取英雄信息，并保存
      *
+     * @return List<DotaHeroEntity>
      */
-    private List<DotaHeroEntity> getHeroFromSteamApi() {
-        String returnStr = "";
-        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_HEROES.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
-        try {
-            returnStr = HttpUtil.sendGet(url);
-        } catch (IOException e) {
-            logger.info("调用steam接口失败: " + e.toString());
-        }
-        if (!returnStr.isEmpty()) {
-            JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
-            JSONArray heroesArray = result.getJSONArray("heroes");
-            return JSON.parseArray(heroesArray.toJSONString(), DotaHeroEntity.class);
-        } else {
-            return new ArrayList<>();
-        }
-
+    @Override
+    public List<DotaHeroEntity> saveHeroFromSteamApi() {
+        List<DotaHeroEntity> heroes = Inner.getHeroFromSteamApi();
+        return heroDao.saveAll(heroes);
     }
 
     @Override
     public List<DotaHeroEntity> getHeroes() {
-        return findAll();
+        return heroDao.findAll();
     }
+
     @Override
-    public List<DotaHeroEntity> saveAll(List<DotaHeroEntity> heroes) {
-        return saveAll(heroes);
+    public List<DotaHeroEntity> save(List<DotaHeroEntity> heroes) {
+        return heroDao.saveAll(heroes);
+    }
+
+    /**
+     * 提供静态方法
+     */
+    private static class Inner {
+        static DotaHeroDao heroDao;
+        static Logger logger;
+
+        /**
+         * 从steam获取英雄信息
+         *
+         * @return List<DotaHeroEntity>
+         */
+        private static List<DotaHeroEntity> getHeroFromSteamApi() {
+            String returnStr = "";
+            StringBuilder url = new StringBuilder();
+            url.append(SteamContsant.STEAM_API_PATH).append(SteamApiEnum.GET_HEROES.getUrl());
+            url.append("?language=zh&key=").append(SteamContsant.STEAM_KEY);
+            try {
+                returnStr = HttpUtil.sendGet(url.toString());
+            } catch (IOException e) {
+                logger.info("调用steam接口失败: " + e.toString());
+            }
+            if (!returnStr.isEmpty()) {
+                JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
+                JSONArray heroesArray = result.getJSONArray("heroes");
+                return JSON.parseArray(heroesArray.toJSONString(), DotaHeroEntity.class);
+            } else {
+                return new ArrayList<>();
+            }
+        }
+
     }
 
 }

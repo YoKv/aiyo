@@ -33,12 +33,7 @@ public class PicksBansEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "PicksBansEntity{" +
-                "isPick=" + isPick +
-                ", heroId=" + heroId +
-                ", team=" + team +
-                ", order=" + order +
-                '}';
+        return "PicksBansEntity{" + "isPick=" + isPick + ", heroId=" + heroId + ", team=" + team + ", order=" + order + '}';
     }
 
     public boolean isPick() {

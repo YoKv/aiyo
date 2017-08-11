@@ -5,11 +5,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.aiyo.database.mongoDB.dao.DotaItemDao;
-import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.database.mongoDB.entity.DotaItemEntity;
+import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.services.DotaItemService;
 import space.aiyo.util.HttpUtil;
@@ -22,9 +21,14 @@ import java.util.List;
  * Created by yo on 2017/6/5.
  */
 @Service
-public class DotaItemServiceImpl extends DotaItemDao implements DotaItemService {
+public class DotaItemServiceImpl implements DotaItemService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    final private DotaItemDao itemDao;
+
+    public DotaItemServiceImpl(DotaItemDao itemDao) {
+        this.itemDao = itemDao;
+    }
 
     /**
      * 通过id查找一个装备
@@ -34,14 +38,14 @@ public class DotaItemServiceImpl extends DotaItemDao implements DotaItemService 
      */
     @Override
     public DotaItemEntity findById(int id) {
-        return findDotaItemEntityById(id);
+        return itemDao.findDotaItemEntityById(id);
     }
 
 
     @Override
     public void saveItemFromSteamApi() {
         List<DotaItemEntity> items = getItemFromSteamApi();
-        saveAll(items);
+        itemDao.saveAll(items);
     }
 
     private List<DotaItemEntity> getItemFromSteamApi() {

@@ -29,10 +29,14 @@ import java.util.List;
  */
 
 @Service
-public class DotaMatchServiceImpl extends DotaMatchDao implements DotaMatchService {
+public class DotaMatchServiceImpl implements DotaMatchService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    final private DotaMatchDao matchDao;
 
+    public DotaMatchServiceImpl(DotaMatchDao matchDao) {
+        this.matchDao = matchDao;
+    }
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -82,7 +86,7 @@ public class DotaMatchServiceImpl extends DotaMatchDao implements DotaMatchServi
                     JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
                     JSONArray matchArray = result.getJSONArray("matches");
                     List<DotaMatchEntity> matches = JSON.parseArray(matchArray.toJSONString(), DotaMatchEntity.class);
-                    saveAll(matches);
+                    matchDao.saveAll(matches);
                 }
             } catch (IOException e) {
                 logger.info("调用steam接口保存失败,url:" + url + " *_* " + e.toString());
@@ -120,9 +124,68 @@ public class DotaMatchServiceImpl extends DotaMatchDao implements DotaMatchServi
 
     }
 
-    @Override
+    /**
+     * 单条插入
+     *
+     * @param match
+     * @return 插入数据库后的记录
+     */
+    public DotaMatchEntity insert(DotaMatchEntity match) {
+        match.setId(match.getMatchSeqNum());
+        return matchDao.insert(match);
+    }
+
+    /**
+     * 批量插入
+     *
+     * @param matches
+     * @return 插入的数据
+     */
+    public List<DotaMatchEntity> insertAll(List<DotaMatchEntity> matches) {
+        //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
+        for (DotaMatchEntity match : matches) {
+            match.setId(match.getMatchSeqNum());
+        }
+        return matchDao.insert(matches);
+    }
+
+    /**
+     * 保存
+     * 无记录insert
+     * 有记录update
+     *
+     * @param match
+     * @return 插入数据库后的记录
+     */
+    public DotaMatchEntity save(DotaMatchEntity match) {
+        match.setId(match.getMatchSeqNum());
+        return matchDao.save(match);
+    }
+
+
+    /**
+     * 批量保存
+     *
+     * @param matches
+     * @return 插入的数据
+     */
+    public List<DotaMatchEntity> saveAll(List<DotaMatchEntity> matches) {
+        //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
+        for (DotaMatchEntity match : matches) {
+            match.setId(match.getMatchSeqNum());
+        }
+        return matchDao.saveAll(matches);
+    }
+
+    /**
+     * 总数
+     *
+     * @return 总数
+     */
     public int count() {
-        return super.count();
+        long size = matchDao.count();
+        int count = Integer.parseInt(String.valueOf(size));
+        return count;
     }
 
     /**

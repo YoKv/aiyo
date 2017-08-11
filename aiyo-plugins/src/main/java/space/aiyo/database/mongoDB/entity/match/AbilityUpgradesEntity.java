@@ -29,11 +29,7 @@ public class AbilityUpgradesEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "AbilityUpgradesEntity{" +
-                "ability=" + ability +
-                ", time=" + time +
-                ", level=" + level +
-                '}';
+        return "AbilityUpgradesEntity{" + "ability=" + ability + ", time=" + time + ", level=" + level + '}';
     }
 
     public int getAbility() {

@@ -33,9 +33,7 @@ public class DotaHeroEntity implements Serializable {
 
     @Override
     public String toString() {
-        return String.format(
-                "DotaHeroEntity[id=%s, name='%s', localizedName='%s']",
-                id, name, localizedName);
+        return String.format("DotaHeroEntity[id=%s, name='%s', localizedName='%s']", id, name, localizedName);
     }
 
     public int getId() {

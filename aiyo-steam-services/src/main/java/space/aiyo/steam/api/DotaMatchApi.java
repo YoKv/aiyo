@@ -3,10 +3,7 @@ package space.aiyo.steam.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
-import space.aiyo.steam.services.DotaItemService;
-
-import java.util.List;
+import space.aiyo.steam.services.DotaMatchService;
 
 /**
  * 游戏装备相关 RESTful API
@@ -16,11 +13,11 @@ import java.util.List;
 public class DotaMatchApi {
 
     @Autowired
-    private DotaItemService dotaItemService;
+    private DotaMatchService dotaMatchService;
 
-    @RequestMapping("/matches")
-    public List<DotaMatchEntity> getHeros() {
+    @RequestMapping("/counts")
+    public int getMatches() {
 
-        return null;
+        return dotaMatchService.count();
     }
 }

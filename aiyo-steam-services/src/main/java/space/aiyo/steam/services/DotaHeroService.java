@@ -12,10 +12,10 @@ public interface DotaHeroService {
     /**
      * 从steam平台新建或更新英雄信息
      */
-    void saveHeroFromSteamApi();
+    List<DotaHeroEntity>  saveHeroFromSteamApi();
 
     List<DotaHeroEntity> getHeroes();
 
-    List<DotaHeroEntity> saveAll(List<DotaHeroEntity> heroes);
+    List<DotaHeroEntity> save(List<DotaHeroEntity> heroes);
 
 }

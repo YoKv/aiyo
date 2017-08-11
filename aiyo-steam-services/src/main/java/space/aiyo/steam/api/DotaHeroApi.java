@@ -22,4 +22,9 @@ public class DotaHeroApi {
     public List<DotaHeroEntity> getHeros() {
         return dotaHeroService.getHeroes();
     }
+
+    @RequestMapping("/syncHeroes")
+    public List<DotaHeroEntity> syncHeroes() {
+        return dotaHeroService.saveHeroFromSteamApi();
+    }
 }
