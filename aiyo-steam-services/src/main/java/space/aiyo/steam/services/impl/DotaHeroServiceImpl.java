@@ -31,7 +31,7 @@ public class DotaHeroServiceImpl implements DotaHeroService {
     @Autowired
     public DotaHeroServiceImpl(DotaHeroDao heroDao) {
         this.heroDao = heroDao;
-        Inner.heroDao = heroDao;
+        InnerMethod.setHeroDao(heroDao);
     }
 
     /**
@@ -41,7 +41,7 @@ public class DotaHeroServiceImpl implements DotaHeroService {
      */
     @Override
     public List<DotaHeroEntity> saveHeroFromSteamApi() {
-        List<DotaHeroEntity> heroes = Inner.getHeroFromSteamApi();
+        List<DotaHeroEntity> heroes = InnerMethod.getHeroFromSteamApi();
         return heroDao.saveAll(heroes);
     }
 
@@ -55,12 +55,14 @@ public class DotaHeroServiceImpl implements DotaHeroService {
         return heroDao.saveAll(heroes);
     }
 
+
     /**
      * 提供静态方法
      */
-    private static class Inner {
-        private static Logger logger = LoggerFactory.getLogger(Inner.class);
-        static DotaHeroDao heroDao;
+    private static class InnerMethod {
+        private static Logger logger = LoggerFactory.getLogger(InnerMethod.class);
+        private static DotaHeroDao heroDao;
+
         /**
          * 从steam获取英雄信息
          *
@@ -85,6 +87,9 @@ public class DotaHeroServiceImpl implements DotaHeroService {
             }
         }
 
+        private static void setHeroDao(DotaHeroDao heroDao) {
+            InnerMethod.heroDao = heroDao;
+        }
     }
 
 }

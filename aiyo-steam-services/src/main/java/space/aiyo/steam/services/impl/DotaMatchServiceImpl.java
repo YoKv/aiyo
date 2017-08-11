@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import space.aiyo.database.mongoDB.dao.DotaHeroDao;
 import space.aiyo.database.mongoDB.dao.DotaMatchDao;
 import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
 import space.aiyo.steam.contsant.DotaContsant;
@@ -199,6 +200,15 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         query.limit(1);
         DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
         return match.getMatchSeqNum();
+    }
+
+
+    /**
+     * 提供静态方法
+     */
+    private static class InnerMethod {
+        private static Logger logger = LoggerFactory.getLogger(DotaMatchServiceImpl.InnerMethod.class);
+        private static DotaHeroDao heroDao;
     }
 
 

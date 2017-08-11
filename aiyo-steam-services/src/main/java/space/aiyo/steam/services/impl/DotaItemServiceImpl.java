@@ -30,6 +30,7 @@ public class DotaItemServiceImpl implements DotaItemService {
     @Autowired
     public DotaItemServiceImpl(DotaItemDao itemDao) {
         this.itemDao = itemDao;
+        InnerMethod.setItemDao(itemDao);
     }
 
     /**
@@ -46,22 +47,37 @@ public class DotaItemServiceImpl implements DotaItemService {
 
     @Override
     public void saveItemFromSteamApi() {
-        List<DotaItemEntity> items = getItemFromSteamApi();
+        List<DotaItemEntity> items = InnerMethod.getItemFromSteamApi();
         itemDao.saveAll(items);
     }
 
-    private List<DotaItemEntity> getItemFromSteamApi() {
-        String returnStr = "";
-        String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_GAME_ITEMS.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
-        try {
-            returnStr = HttpUtil.sendGet(url);
-        } catch (IOException e) {
-            logger.info("调用steam接口失败: " + e.toString());
-        }
-        JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
-        JSONArray itemsArray = result.getJSONArray("items");
 
-        return JSON.parseArray(itemsArray.toJSONString(), DotaItemEntity.class);
+    /**
+     * 提供静态方法
+     */
+    private static class InnerMethod {
+        private static Logger logger = LoggerFactory.getLogger(DotaItemServiceImpl.InnerMethod.class);
+        private static DotaItemDao itemDao;
+
+
+        private static List<DotaItemEntity> getItemFromSteamApi() {
+            String returnStr = "";
+            String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_GAME_ITEMS.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
+            try {
+                returnStr = HttpUtil.sendGet(url);
+            } catch (IOException e) {
+                logger.info("调用steam接口失败: " + e.toString());
+            }
+            JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
+            JSONArray itemsArray = result.getJSONArray("items");
+
+            return JSON.parseArray(itemsArray.toJSONString(), DotaItemEntity.class);
+        }
+
+
+        private static void setItemDao(DotaItemDao itemDao) {
+            InnerMethod.itemDao = itemDao;
+        }
     }
 
 }
