@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.aiyo.database.mongoDB.dao.DotaItemDao;
 import space.aiyo.database.mongoDB.entity.DotaItemEntity;
@@ -26,6 +27,7 @@ public class DotaItemServiceImpl implements DotaItemService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     final private DotaItemDao itemDao;
 
+    @Autowired
     public DotaItemServiceImpl(DotaItemDao itemDao) {
         this.itemDao = itemDao;
     }
@@ -33,7 +35,7 @@ public class DotaItemServiceImpl implements DotaItemService {
     /**
      * 通过id查找一个装备
      *
-     * @param id
+     * @param id 装备id
      * @return DotaItemEntity
      */
     @Override

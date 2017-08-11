@@ -15,8 +15,13 @@ import space.aiyo.steam.services.DotaItemService;
 public class DotaItemSchedule {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
+
     private DotaItemService dotaItemService;
+
+    @Autowired
+    public DotaItemSchedule(DotaItemService dotaItemService) {
+        this.dotaItemService = dotaItemService;
+    }
 
     /**
      * 定时更新dota游戏装备信息

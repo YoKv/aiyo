@@ -15,8 +15,12 @@ import space.aiyo.steam.services.DotaHeroService;
 public class DotaHeroSchedule {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
     private DotaHeroService dotaHeroService;
+
+    @Autowired
+    public DotaHeroSchedule(DotaHeroService dotaHeroService) {
+        this.dotaHeroService = dotaHeroService;
+    }
 
     /**
      * 定时更新dota英雄信息

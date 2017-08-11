@@ -18,8 +18,13 @@ import java.time.LocalTime;
 public class DotaMatchSchedule {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
+
     private DotaMatchService dotaMatchService;
+
+    @Autowired
+    public DotaMatchSchedule(DotaMatchService dotaMatchService) {
+        this.dotaMatchService = dotaMatchService;
+    }
 
     /**
      * 定时更新dota游戏比赛信息

@@ -11,9 +11,12 @@ import space.aiyo.steam.services.DotaMatchService;
  */
 @RestController
 public class DotaMatchApi {
+    private DotaMatchService dotaMatchService;
 
     @Autowired
-    private DotaMatchService dotaMatchService;
+    public DotaMatchApi(DotaMatchService dotaMatchService) {
+        this.dotaMatchService = dotaMatchService;
+    }
 
     @RequestMapping("/counts")
     public int getMatches() {

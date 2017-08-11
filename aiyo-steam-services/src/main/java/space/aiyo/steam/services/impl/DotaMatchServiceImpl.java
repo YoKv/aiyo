@@ -33,18 +33,18 @@ public class DotaMatchServiceImpl implements DotaMatchService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     final private DotaMatchDao matchDao;
-
-    public DotaMatchServiceImpl(DotaMatchDao matchDao) {
-        this.matchDao = matchDao;
-    }
+    final private MongoTemplate mongoTemplate;
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    public DotaMatchServiceImpl(DotaMatchDao matchDao, MongoTemplate mongoTemplate) {
+        this.matchDao = matchDao;
+        this.mongoTemplate = mongoTemplate;
+    }
 
     /**
      * 从steam获取数据，并入库
      *
-     * @param matchSeqNum
+     * @param matchSeqNum 开始的matchSeqNum
      */
     @Override
     public void saveMatchFromSteamByMatchSeqNum(long matchSeqNum) {
@@ -61,8 +61,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
      * 从steam 获取比赛信息
      * TODO 速度慢 8s
      *
-     * @param matchSeqNum
-     * @return
+     * @param matchSeqNum 开始的matchSeqNum
      */
     @Override
     public void getMatchFromSteamApiByMatchSeqNum(long matchSeqNum) {
@@ -108,7 +107,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     /**
      * 获取本地最大的sequenceNumber
      *
-     * @return
+     * @return 本地最大的sequenceNumber
      */
     @Override
     public long getRecentSequenceNumber() {
@@ -127,7 +126,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     /**
      * 单条插入
      *
-     * @param match
+     * @param match 比赛实体
      * @return 插入数据库后的记录
      */
     public DotaMatchEntity insert(DotaMatchEntity match) {
@@ -138,7 +137,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     /**
      * 批量插入
      *
-     * @param matches
+     * @param matches 比赛实体列表
      * @return 插入的数据
      */
     public List<DotaMatchEntity> insertAll(List<DotaMatchEntity> matches) {
@@ -154,7 +153,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
      * 无记录insert
      * 有记录update
      *
-     * @param match
+     * @param match 比赛实体
      * @return 插入数据库后的记录
      */
     public DotaMatchEntity save(DotaMatchEntity match) {
@@ -166,7 +165,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     /**
      * 批量保存
      *
-     * @param matches
+     * @param matches 比赛实体列表
      * @return 插入的数据
      */
     public List<DotaMatchEntity> saveAll(List<DotaMatchEntity> matches) {
@@ -184,14 +183,13 @@ public class DotaMatchServiceImpl implements DotaMatchService {
      */
     public int count() {
         long size = matchDao.count();
-        int count = Integer.parseInt(String.valueOf(size));
-        return count;
+        return Integer.parseInt(String.valueOf(size));
     }
 
     /**
      * 再找最优的方案
      *
-     * @return
+     * @return 最大的match_seq_num
      */
     public long maxSeqNum() {
 //        long skip = repository.count() - 1;

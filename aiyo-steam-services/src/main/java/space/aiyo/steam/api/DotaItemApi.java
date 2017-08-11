@@ -12,9 +12,15 @@ import space.aiyo.steam.services.DotaItemService;
  */
 @RestController
 public class DotaItemApi {
+    private DotaItemService dotaItemService;
 
     @Autowired
-    private DotaItemService dotaItemService;
+    public DotaItemApi(DotaItemService dotaItemService) {
+        this.dotaItemService = dotaItemService;
+    }
+
+    @Autowired
+
 
     @RequestMapping("/items")
     public DotaItemEntity getItem() {

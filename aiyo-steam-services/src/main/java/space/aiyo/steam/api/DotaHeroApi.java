@@ -14,9 +14,11 @@ import java.util.List;
  */
 @RestController
 public class DotaHeroApi {
-
-    @Autowired
     private DotaHeroService dotaHeroService;
+    @Autowired
+    public DotaHeroApi(DotaHeroService dotaHeroService) {
+        this.dotaHeroService = dotaHeroService;
+    }
 
     @RequestMapping("/heroes")
     public List<DotaHeroEntity> getHeros() {
