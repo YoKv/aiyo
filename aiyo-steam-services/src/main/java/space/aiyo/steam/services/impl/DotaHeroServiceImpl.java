@@ -32,7 +32,6 @@ public class DotaHeroServiceImpl implements DotaHeroService {
     public DotaHeroServiceImpl(DotaHeroDao heroDao) {
         this.heroDao = heroDao;
         Inner.heroDao = heroDao;
-        Inner.logger = logger;
     }
 
     /**
@@ -60,9 +59,8 @@ public class DotaHeroServiceImpl implements DotaHeroService {
      * 提供静态方法
      */
     private static class Inner {
+        private static Logger logger = LoggerFactory.getLogger(Inner.class);
         static DotaHeroDao heroDao;
-        static Logger logger;
-
         /**
          * 从steam获取英雄信息
          *
@@ -76,7 +74,7 @@ public class DotaHeroServiceImpl implements DotaHeroService {
             try {
                 returnStr = HttpUtil.sendGet(url.toString());
             } catch (IOException e) {
-                logger.info("调用steam接口失败: " + e.toString());
+                logger.warn("调用steam接口失败: " + e.toString());
             }
             if (!returnStr.isEmpty()) {
                 JSONObject result = (JSONObject) JSON.parseObject(returnStr).get("result");
