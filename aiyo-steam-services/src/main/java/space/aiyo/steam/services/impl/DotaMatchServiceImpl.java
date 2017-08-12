@@ -150,9 +150,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
          */
         private static List<DotaMatchEntity> insertAll(List<DotaMatchEntity> matches) {
             //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-            for (DotaMatchEntity match : matches) {
-                match.setId(match.getMatchSeqNum());
-            }
+            matches.forEach(match -> match.setId(match.getMatchSeqNum()));
             return matchDao.insert(matches);
         }
 
@@ -177,9 +175,7 @@ public class DotaMatchServiceImpl implements DotaMatchService {
          */
         private static List<DotaMatchEntity> saveAll(List<DotaMatchEntity> matches) {
             //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-            for (DotaMatchEntity match : matches) {
-                match.setId(match.getMatchSeqNum());
-            }
+            matches.forEach(match -> match.setId(match.getMatchSeqNum()));
             return matchDao.saveAll(matches);
         }
 
