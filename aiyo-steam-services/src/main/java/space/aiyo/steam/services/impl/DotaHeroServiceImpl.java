@@ -57,7 +57,7 @@ public class DotaHeroServiceImpl implements DotaHeroService {
 
 
     /**
-     * 提供静态方法
+     * 提供静态方法的内部静态类
      */
     private static class InnerMethod {
         private static Logger logger = LoggerFactory.getLogger(InnerMethod.class);

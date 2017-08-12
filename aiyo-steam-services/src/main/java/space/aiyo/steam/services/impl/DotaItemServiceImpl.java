@@ -53,18 +53,19 @@ public class DotaItemServiceImpl implements DotaItemService {
 
 
     /**
-     * 提供静态方法
+     * 提供静态方法的内部静态类
      */
     private static class InnerMethod {
         private static Logger logger = LoggerFactory.getLogger(DotaItemServiceImpl.InnerMethod.class);
         private static DotaItemDao itemDao;
 
-
         private static List<DotaItemEntity> getItemFromSteamApi() {
             String returnStr = "";
-            String url = SteamContsant.STEAM_API_PATH + SteamApiEnum.GET_GAME_ITEMS.getUrl() + "?language=zh&key=" + SteamContsant.STEAM_KEY;
+            StringBuilder url = new StringBuilder();
+            url.append(SteamContsant.STEAM_API_PATH).append(SteamApiEnum.GET_GAME_ITEMS.getUrl());
+            url.append("?language=zh&key=").append(SteamContsant.STEAM_KEY);
             try {
-                returnStr = HttpUtil.sendGet(url);
+                returnStr = HttpUtil.sendGet(url.toString());
             } catch (IOException e) {
                 logger.info("调用steam接口失败: " + e.toString());
             }
