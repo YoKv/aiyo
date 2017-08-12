@@ -8,5 +8,5 @@ import space.aiyo.database.mongoDB.entity.DotaHeroEntity;
  * Created by tang on 2017/8/11.
  */
 public interface DotaHeroDao extends MongoRepository<DotaHeroEntity, String> {
-
+    DotaHeroEntity findByIdOrNameOrLocalizedName(int id, String name, String localizedName);
 }

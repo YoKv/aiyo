@@ -30,7 +30,12 @@ public class HeroTest {
 
     @Test
     public void test() {
-        dotaHeroService.saveHeroFromSteamApi();
+
+        System.out.println(dotaHeroService.getHero(1,"",""));
+        System.out.println(dotaHeroService.getHero(0,"npc_dota_hero_axe",""));
+        System.out.println(dotaHeroService.getHero(0,"","米波"));
+
+
     }
 
     @After

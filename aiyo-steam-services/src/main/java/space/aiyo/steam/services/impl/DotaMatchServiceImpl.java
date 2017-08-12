@@ -65,7 +65,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
     @Override
     public long getRecentSequenceNumber() {
         Query query = new Query();
-//        query.with(new Sort(Sort.Order.desc("_id")));
         query.with(Sort.by(Sort.Direction.DESC, "_id"));
         query.limit(1);
         DotaMatchEntity match = mongoTemplate.findOne(query, DotaMatchEntity.class);
@@ -111,6 +110,12 @@ public class DotaMatchServiceImpl implements DotaMatchService {
         private static Logger logger = LoggerFactory.getLogger(DotaMatchServiceImpl.InnerMethod.class);
         private static DotaMatchDao matchDao;
 
+        /**
+         * 根据matchSeqNum获取比赛信息
+         *
+         * @param matchSeqNum 比赛序列号
+         * @return 比赛列表
+         */
         private static List<DotaMatchEntity> getMatchFromSteamApiByMatchSeqNum(long matchSeqNum) {
             StringBuilder url = new StringBuilder();
             url.append(SteamContsant.STEAM_API_PATH).append(SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getUrl());

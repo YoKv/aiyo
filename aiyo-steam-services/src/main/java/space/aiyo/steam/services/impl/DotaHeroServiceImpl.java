@@ -46,15 +46,24 @@ public class DotaHeroServiceImpl implements DotaHeroService {
     }
 
     @Override
+    public List<DotaHeroEntity> getSteamHeroes() {
+        return InnerMethod.getHeroFromSteamApi();
+    }
+
+    @Override
     public List<DotaHeroEntity> getHeroes() {
         return heroDao.findAll();
+    }
+
+    @Override
+    public DotaHeroEntity getHero(Integer id, String name, String localizedName) {
+        return heroDao.findByIdOrNameOrLocalizedName(id, name, localizedName);
     }
 
     @Override
     public List<DotaHeroEntity> save(List<DotaHeroEntity> heroes) {
         return heroDao.saveAll(heroes);
     }
-
 
     /**
      * 提供静态方法的内部静态类
@@ -72,9 +81,11 @@ public class DotaHeroServiceImpl implements DotaHeroService {
             String returnStr = "";
             StringBuilder url = new StringBuilder();
             url.append(SteamContsant.STEAM_API_PATH).append(SteamApiEnum.GET_HEROES.getUrl());
-            url.append("?language=zh&key=").append(SteamContsant.STEAM_KEY);
+            //TODO 英雄的详细信息
+            url.append("?language=zh&itemizedonly=").append(true).append("&key=").append(SteamContsant.STEAM_KEY);
             try {
                 returnStr = HttpUtil.sendGet(url.toString());
+//                System.out.println(returnStr);
             } catch (IOException e) {
                 logger.warn("调用steam接口失败: " + e.toString());
             }
