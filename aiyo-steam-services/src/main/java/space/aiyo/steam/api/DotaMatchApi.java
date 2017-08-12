@@ -1,12 +1,12 @@
 package space.aiyo.steam.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
 import space.aiyo.steam.services.DotaMatchService;
 
 /**
- * 游戏装备相关 RESTful API
+ * 游戏比赛相关 RESTful API
  * Created by yo on 2017/6/5.
  */
 @RestController
@@ -19,8 +19,20 @@ public class DotaMatchApi {
     }
 
     @RequestMapping("/counts")
-    public int getMatches() {
-
+    @ResponseBody
+    public int counts() {
         return dotaMatchService.count();
     }
+
+    /**
+     * 获取某个比赛
+     * @return 单个比赛
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/match")
+    @ResponseBody
+    public DotaMatchEntity getMatch(@RequestParam(value = "match", defaultValue = "0") DotaMatchEntity match) {
+        return null;
+    }
+
+
 }

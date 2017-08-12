@@ -9,5 +9,5 @@ import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
  * Created by Yo on 2017/5/26.
  */
 public interface DotaMatchDao extends MongoRepository<DotaMatchEntity, ObjectId> {
-
+    
 }
