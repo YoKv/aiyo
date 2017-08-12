@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 /**
  * Dota2英雄
- * TODO 技能点
  * Created by Yo on 2017/5/26.
  */
 @Document(collection = "dotaHero")

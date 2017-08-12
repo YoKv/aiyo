@@ -22,4 +22,5 @@ public interface DotaItemDao extends MongoRepository<DotaItemEntity, String> {
 
     DotaItemEntity findByNameLike(String name);
 
+    DotaItemEntity findByIdOrNameOrLocalizedName(Integer id, String name, String localizedName);
 }

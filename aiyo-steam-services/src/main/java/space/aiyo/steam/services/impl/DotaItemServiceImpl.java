@@ -24,6 +24,7 @@ import java.util.List;
 @Service
 public class DotaItemServiceImpl implements DotaItemService {
 
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     final private DotaItemDao itemDao;
 
@@ -33,22 +34,30 @@ public class DotaItemServiceImpl implements DotaItemService {
         InnerMethod.setItemDao(itemDao);
     }
 
-    /**
-     * 通过id查找一个装备
-     *
-     * @param id 装备id
-     * @return DotaItemEntity
-     */
     @Override
-    public DotaItemEntity findById(int id) {
-        return itemDao.findDotaItemEntityById(id);
+    public List<DotaItemEntity> saveItemFromSteamApi() {
+        List<DotaItemEntity> items = InnerMethod.getItemFromSteamApi();
+        return itemDao.saveAll(items);
     }
 
+    @Override
+    public List<DotaItemEntity> getSteamItems() {
+        return InnerMethod.getItemFromSteamApi();
+    }
 
     @Override
-    public void saveItemFromSteamApi() {
-        List<DotaItemEntity> items = InnerMethod.getItemFromSteamApi();
-        itemDao.saveAll(items);
+    public List<DotaItemEntity> getItems() {
+        return itemDao.findAll();
+    }
+
+    @Override
+    public DotaItemEntity getItem(Integer id, String name, String localizedName) {
+        return itemDao.findByIdOrNameOrLocalizedName(id, name, localizedName);
+    }
+
+    @Override
+    public List<DotaItemEntity> save(List<DotaItemEntity> items) {
+        return itemDao.saveAll(items);
     }
 
 
