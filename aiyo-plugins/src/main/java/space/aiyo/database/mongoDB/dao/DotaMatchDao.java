@@ -8,6 +8,7 @@ import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
  * repository作为持久层
  * Created by Yo on 2017/5/26.
  */
+//@NoRepositoryBean
 public interface DotaMatchDao extends MongoRepository<DotaMatchEntity, ObjectId> {
-    
+
 }
