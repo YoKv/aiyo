@@ -1,8 +1,8 @@
-package space.aiyo.database.mongoDB.dao;
+package space.aiyo.base.dao;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import space.aiyo.database.mongoDB.entity.DotaItemEntity;
+import space.aiyo.base.entity.DotaItemEntity;
 
 /**
  * repository作为持久层

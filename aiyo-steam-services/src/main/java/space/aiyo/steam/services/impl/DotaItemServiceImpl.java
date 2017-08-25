@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import space.aiyo.database.mongoDB.dao.DotaItemDao;
-import space.aiyo.database.mongoDB.entity.DotaItemEntity;
+import space.aiyo.base.dao.DotaItemDao;
+import space.aiyo.base.entity.DotaItemEntity;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.services.DotaItemService;
-import space.aiyo.util.HttpUtil;
+import space.aiyo.base.util.HttpUtil;
 
 import java.io.IOException;
 import java.util.List;

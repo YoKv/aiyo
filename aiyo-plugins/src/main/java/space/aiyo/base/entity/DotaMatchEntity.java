@@ -1,7 +1,9 @@
-package space.aiyo.database.mongoDB.entity.match;
+package space.aiyo.base.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import space.aiyo.base.entity.match.MatchPlayerEntity;
+import space.aiyo.base.entity.match.PicksBansEntity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,15 +15,12 @@ import java.util.List;
 
 @Document(collection = "dotaMatch")
 public class DotaMatchEntity implements Serializable {
-    /**
-     * 复制match_seq_num
-     */
-    @Id
-    private long id;
+
     private long matchId;
     /**
      * A 'sequence number', representing the order in which matches were recorded.
      */
+    @Id
     private long matchSeqNum;
     /**
      * Unix timestamp of when the match began.
@@ -148,17 +147,7 @@ public class DotaMatchEntity implements Serializable {
 
     @Override
     public String toString() {
-        return String.format(
-                "DotaMatchEntity[matchId=%s, matchSeqNum='%s', startTime='%s', leagueId='%s', gameMode='%s', radiantWin='%s']",
-                matchId, matchSeqNum, startTime, leagueId, gameMode, radiantWin);
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        return String.format("DotaMatchEntity[matchId=%s, matchSeqNum='%s', startTime='%s', leagueId='%s', gameMode='%s', radiantWin='%s']", matchId, matchSeqNum, startTime, leagueId, gameMode, radiantWin);
     }
 
     public long getMatchId() {

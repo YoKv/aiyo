@@ -1,4 +1,4 @@
-package space.aiyo.util;
+package space.aiyo.base.util;
 
 /**
  * Created by yo on 2017/6/1.

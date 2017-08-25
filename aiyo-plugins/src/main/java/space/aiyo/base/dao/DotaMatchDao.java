@@ -1,8 +1,8 @@
-package space.aiyo.database.mongoDB.dao;
+package space.aiyo.base.dao;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
+import space.aiyo.base.entity.DotaMatchEntity;
 
 /**
  * repository作为持久层
@@ -10,5 +10,4 @@ import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
  */
 //@NoRepositoryBean
 public interface DotaMatchDao extends MongoRepository<DotaMatchEntity, ObjectId> {
-
 }

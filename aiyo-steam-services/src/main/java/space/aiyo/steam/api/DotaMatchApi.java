@@ -2,7 +2,7 @@ package space.aiyo.steam.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
+import space.aiyo.base.entity.DotaMatchEntity;
 import space.aiyo.steam.services.DotaMatchService;
 
 /**
@@ -33,6 +33,9 @@ public class DotaMatchApi {
     public DotaMatchEntity getMatch(@RequestParam(value = "match", defaultValue = "0") DotaMatchEntity match) {
         return null;
     }
-
+    @RequestMapping("/matchById")
+    public DotaMatchEntity getbyid(@RequestParam(value = "id", defaultValue = "0") long id ) {
+        return null;
+    }
 
 }

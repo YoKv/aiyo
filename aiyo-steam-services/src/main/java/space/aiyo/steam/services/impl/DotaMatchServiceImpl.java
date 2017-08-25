@@ -12,13 +12,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import space.aiyo.database.mongoDB.dao.DotaMatchDao;
-import space.aiyo.database.mongoDB.entity.match.DotaMatchEntity;
+import space.aiyo.base.dao.DotaMatchDao;
+import space.aiyo.base.entity.DotaMatchEntity;
 import space.aiyo.steam.contsant.DotaContsant;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.services.DotaMatchService;
-import space.aiyo.util.HttpUtil;
+import space.aiyo.base.util.HttpUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -143,7 +143,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
          * @return 插入数据库后的记录
          */
         private static DotaMatchEntity insert(DotaMatchEntity match) {
-            match.setId(match.getMatchSeqNum());
             return matchDao.insert(match);
         }
 
@@ -154,8 +153,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
          * @return 插入的数据
          */
         private static List<DotaMatchEntity> insertAll(List<DotaMatchEntity> matches) {
-            //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-            matches.forEach(match -> match.setId(match.getMatchSeqNum()));
             return matchDao.insert(matches);
         }
 
@@ -168,7 +165,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
          * @return 插入数据库后的记录
          */
         private static DotaMatchEntity save(DotaMatchEntity match) {
-            match.setId(match.getMatchSeqNum());
             return matchDao.save(match);
         }
 
@@ -179,8 +175,6 @@ public class DotaMatchServiceImpl implements DotaMatchService {
          * @return 插入的数据
          */
         private static List<DotaMatchEntity> saveAll(List<DotaMatchEntity> matches) {
-            //将id冗余，避免使用match_seq_num做id，破坏本身数据结构
-            matches.forEach(match -> match.setId(match.getMatchSeqNum()));
             return matchDao.saveAll(matches);
         }
 

@@ -1,4 +1,4 @@
-package space.aiyo.database.mongoDB.entity.match;
+package space.aiyo.base.entity.match;
 
 import java.io.Serializable;
 import java.util.List;
