@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import space.aiyo.steam.services.DotaItemService;
-import space.aiyo.steam.services.DotaMatchService;
+import space.aiyo.core.services.DotaItemService;
+import space.aiyo.core.services.DotaMatchService;
 
 /**
  * mongo复杂查询
