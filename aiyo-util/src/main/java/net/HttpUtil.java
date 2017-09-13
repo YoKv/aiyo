@@ -1,8 +1,7 @@
-package space.aiyo.steam.util;
+package net;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,8 +14,8 @@ import java.util.stream.Stream;
  * Created by yo on 2017/5/17.
  */
 public class HttpUtil {
-    private static Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
+    private static final Logger logger = LogManager.getLogger(HttpUtil.class);
     /**
      * 模拟发送get请求
      */

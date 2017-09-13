@@ -1,3 +1,5 @@
+package transfer;
+
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
@@ -79,7 +81,7 @@ public abstract class RSAUtils {
         } catch (InvalidParameterException ex) {
             LOGGER.error("KeyPairGenerator does not support a key length of " + KEY_SIZE + ".", ex);
         } catch (NullPointerException ex) {
-            LOGGER.error("RSAUtils#KEY_PAIR_GEN is null, can not generate KeyPairGenerator instance.",
+            LOGGER.error("transfer.RSAUtils#KEY_PAIR_GEN is null, can not generate KeyPairGenerator instance.",
                     ex);
         }
         return null;
@@ -173,7 +175,7 @@ public abstract class RSAUtils {
         } catch (InvalidKeySpecException ex) {
             LOGGER.error("RSAPublicKeySpec is unavailable.", ex);
         } catch (NullPointerException ex) {
-            LOGGER.error("RSAUtils#KEY_FACTORY is null, can not generate KeyFactory instance.", ex);
+            LOGGER.error("transfer.RSAUtils#KEY_FACTORY is null, can not generate KeyFactory instance.", ex);
         }
         return null;
     }
@@ -193,7 +195,7 @@ public abstract class RSAUtils {
         } catch (InvalidKeySpecException ex) {
             LOGGER.error("RSAPrivateKeySpec is unavailable.", ex);
         } catch (NullPointerException ex) {
-            LOGGER.error("RSAUtils#KEY_FACTORY is null, can not generate KeyFactory instance.", ex);
+            LOGGER.error("transfer.RSAUtils#KEY_FACTORY is null, can not generate KeyFactory instance.", ex);
         }
         return null;
     }

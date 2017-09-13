@@ -12,7 +12,7 @@ import space.aiyo.steam.entity.DotaItemEntity;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.services.DotaItemService;
-import space.aiyo.steam.util.HttpUtil;
+import net.HttpUtil;
 
 import java.io.IOException;
 import java.util.List;
