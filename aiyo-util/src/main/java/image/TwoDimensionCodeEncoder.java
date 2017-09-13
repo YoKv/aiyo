@@ -88,7 +88,7 @@ public class TwoDimensionCodeEncoder {
 
     public static void main(String[] args) {
 
-        String contents = "net://127.0.0.1:8080/x.html?uId=1";
+        String contents = "http://127.0.0.1:8080/x.html?uId=1";
 
         Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
 

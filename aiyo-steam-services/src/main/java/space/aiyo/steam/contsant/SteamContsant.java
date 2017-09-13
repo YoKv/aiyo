@@ -15,7 +15,7 @@ public class SteamContsant {
     /**
      * Steam 接口路径
      */
-    public static final String STEAM_API_PATH = "net://api.steampowered.com";
+    public static final String STEAM_API_PATH = "http://api.steampowered.com";
 
     /**
      * GetMatchHistoryBySequenceNum 每次请求获取比赛数量 目前测试结果最大是100

@@ -11,7 +11,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class GEOUtil {
-    private static final String MAP_GEOCODER_API_URL = "net://api.business.baidu.com/geocoder/v2/";    //地图API地址
+    private static final String MAP_GEOCODER_API_URL = "http://api.business.baidu.com/geocoder/v2/";    //地图API地址
     private static final String AK = "";                        //key，需申请产生
     private static String output = "json";                                                        //输出格式，可选json或xml
     private static Integer poi = 0;                                                                //是否显示附近poi，1为显示，0为不显示
