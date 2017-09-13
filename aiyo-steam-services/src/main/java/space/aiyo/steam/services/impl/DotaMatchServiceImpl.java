@@ -12,13 +12,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import space.aiyo.base.dao.DotaMatchDao;
-import space.aiyo.base.entity.DotaMatchEntity;
+import space.aiyo.steam.dao.DotaMatchDao;
+import space.aiyo.steam.entity.DotaMatchEntity;
 import space.aiyo.steam.contsant.DotaContsant;
 import space.aiyo.steam.contsant.SteamContsant;
 import space.aiyo.steam.enums.SteamApiEnum;
 import space.aiyo.steam.services.DotaMatchService;
-import space.aiyo.base.util.HttpUtil;
+import space.aiyo.steam.util.HttpUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;

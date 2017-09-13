@@ -1,7 +1,7 @@
 ##
 1.  接口描述：
 
-2. url： http://api.steampowered.com/IDOTA2Match_570/GetMatchHistoryBySequenceNum/v1
+2. url： net://api.steampowered.com/IDOTA2Match_570/GetMatchHistoryBySequenceNum/v1
 
 3. 请求参数
 

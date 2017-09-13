@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit4.SpringRunner;
-import space.aiyo.base.dao.DotaMatchDao;
-import space.aiyo.base.entity.DotaMatchEntity;
+import space.aiyo.steam.dao.DotaMatchDao;
+import space.aiyo.steam.entity.DotaMatchEntity;
 import space.aiyo.steam.services.DotaMatchService;
 
 import java.util.List;

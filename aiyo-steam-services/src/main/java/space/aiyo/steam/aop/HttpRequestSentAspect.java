@@ -23,25 +23,26 @@ public class HttpRequestSentAspect {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("execution(public * space.aiyo.base.util.HttpUtil.send*(..))")
-    public void methods(){
+    @Pointcut("execution(public * space.aiyo.steam.util.HttpUtil.send*(..))")
+    public void methods() {
         System.out.println("methods");
     }
 
     @Before("methods()")
-    public void doBefore(){
+    public void doBefore() {
         System.out.println("doBefore");
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
 
         HttpServletRequest request = attributes.getRequest();
-        HttpServletResponse response =attributes.getResponse();
+        HttpServletResponse response = attributes.getResponse();
         logger.info("request url" + request.getRequestURL());
         logger.info("response status" + response.getStatus());
 
     }
+
     @After("methods()")
-    public void doAfter(){
+    public void doAfter() {
         System.out.println("doAfter");
     }
 }

@@ -11,8 +11,8 @@ steam-services.log
 aiyo-steam-services/target/
 aiyo-data-services/target/
 aiyo-api-web/target/
-aiyo-plugins/target/
 aiyo-api-admin/target/
+aiyo-util/target/
 
 \.idea/
 .idea/
