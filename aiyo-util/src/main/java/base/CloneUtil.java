@@ -6,8 +6,8 @@ public class CloneUtil {
     // 用序列化与反序列化实现深克隆
     public static Object deepClone(Object src) {
         Object o = null;
-        try {
-            if (src != null) {
+        if (src != null /* && src instanceof Serializable */) {
+            try {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 ObjectOutputStream oos = new ObjectOutputStream(baos);
                 oos.writeObject(src);
@@ -17,11 +17,9 @@ public class CloneUtil {
                 ObjectInputStream ois = new ObjectInputStream(bais);
                 o = ois.readObject();
                 ois.close();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         return o;
     }
