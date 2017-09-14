@@ -1,5 +1,5 @@
 #语法
-net://www.runoob.com/mongodb/mongodb-tutorial.html
+http://www.runoob.com/mongodb/mongodb-tutorial.html
 
 ##语句
 

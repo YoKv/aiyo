@@ -9,10 +9,10 @@ rmi rest对比项目
 https://github.com/kamoor/spring-boot-sample
 
 SpringBoot文档
-net://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-mongodb
+http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-mongodb
 
 数据库设计参考
-net://www.cnblogs.com/crazylights/archive/2013/05/08/3068098.html
+http://www.cnblogs.com/crazylights/archive/2013/05/08/3068098.html
 
 
 You are limited to one hundred thousand (100,000) calls 
