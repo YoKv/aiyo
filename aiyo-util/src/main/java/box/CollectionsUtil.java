@@ -15,11 +15,10 @@ public class CollectionsUtil {
      */
     public static List<Integer> union(List<Integer> list1,
                                       List<Integer> list2) {
-
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         list.addAll(list1);
         list.addAll(list2);
-        HashSet<Integer> hs = new HashSet<Integer>(list);
+        HashSet<Integer> hs = new HashSet<>(list);
         list.clear();
         list.addAll(hs);
         return list;

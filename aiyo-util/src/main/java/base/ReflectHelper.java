@@ -20,15 +20,7 @@ public class ReflectHelper {
             method.setAccessible(true); // 因为写成private 所以这里必须设置
             method.invoke(object, value);
             return true;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return false;
@@ -56,12 +48,7 @@ public class ReflectHelper {
                     return field.get(obj);
                 }
             }
-
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch (SecurityException | IllegalAccessException | IllegalArgumentException e) {
             e.printStackTrace();
         }
 
@@ -91,9 +78,7 @@ public class ReflectHelper {
                 }
             }
 
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch (SecurityException | IllegalArgumentException e) {
             e.printStackTrace();
         }
 

@@ -2,8 +2,8 @@ package base;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 作者 赵磊
@@ -176,9 +176,12 @@ public final class JsonUtil {
         }
         final StringBuilder sb = new StringBuilder(map.size() << 4); //4次方
         sb.append('{');
-        final Set<String> keys = map.keySet();
-        for (final String key : keys) {
-            final Object value = map.get(key);
+        Iterator entries = map.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry entry = (Map.Entry) entries.next();
+            String key = (String) entry.getKey();
+            Object value = entry.getValue();
+
             sb.append('\"');
             sb.append(key); //不能包含特殊字符
             sb.append('\"');

@@ -25,7 +25,7 @@ public class PropertiesHelp {
         InputStream in = null;
 
         try {
-            map = new HashMap<Object, Object>();
+            map = new HashMap<>();
             for (String name : fileName) {
                 in = PropertiesHelp.class.getResourceAsStream(name);
                 Properties props = new Properties();

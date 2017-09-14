@@ -50,7 +50,7 @@ public class SerializeUtil {
             return ois.readObject();
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
         return null;

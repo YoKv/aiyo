@@ -2,12 +2,13 @@ package net;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 /**
  * TODO 连接池
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 public class HttpUtil {
 
     private static final Logger logger = LogManager.getLogger(HttpUtil.class);
+
     /**
      * 模拟发送get请求
      */
@@ -31,46 +33,28 @@ public class HttpUtil {
     }
 
     private static String send(String urlStr, String type) throws IOException {
-        //System.setProperty("net.keepAlive", "false");
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-        // 服务器连接
         if ("POST".equals(type)) {
             connection.setRequestMethod("POST");// 提交模式
-            // conn.setConnectTimeout(10000);//连接超时 单位毫秒
-            // conn.setReadTimeout(2000);//读取超时 单位毫秒
-            // 发送POST请求必须设置如下两行
             connection.setDoOutput(true);
             connection.setDoInput(true);
         }
-//        connection.setRequestProperty("Connection", "close");
         connection.connect();
         int status = connection.getResponseCode();
         if (status == 429) {
             logger.warn("HTTP status 429, Too Many Requests (频繁请求)");
-            return "";
+            return null;
         } else if (status == 503) {
             logger.warn("HTTP status 503, 服务器目前无法使用（由于超载或停机维护）");
-            return "";
+            return null;
         }
 
-        // 取得输入流，并使用Reader读取 暂时使用utf-8
-//        The ISO639-1 language code for the language all tokenized strings should be returned in.
-//                Not all strings have been translated to every language.
-//        If a language does not have a string, the English string will be returned instead.
-//        If this parameter is omitted the string token will be returned for the strings.
-
-        // try-with-resources写法 不用close reader
-        try ( BufferedReader reader = new BufferedReader(new InputStreamReader(
-                connection.getInputStream(), "utf-8"))){
-            StringBuilder sb = new StringBuilder();
-            Stream<String> stringStream = reader.lines();
-
-            stringStream.forEach((String s) -> sb.append(s));
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+            String result = reader.lines().collect(Collectors.joining());
             // 断开连接
             connection.disconnect();
-            return sb.toString();
+            return result;
         }
     }
 
