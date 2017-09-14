@@ -12,8 +12,8 @@
 ### aiyo-steam-services
 核心数据来源，定时任务获取数据
 
-### aiyo-plugins
-一些中间件的封装 提供entity util等
+### aiyo-util
+一些静态方法封装
 
 ### document
 文档
