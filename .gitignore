@@ -1,20 +1,12 @@
 
-
-steam-services.log.6
-steam-services.log.5
-steam-services.log.4
-steam-services.log.3
-steam-services.log.2
-steam-services.log.1
-steam-services.log
-
-aiyo-steam-services/target/
-aiyo-data-services/target/
-aiyo-api-web/target/
-aiyo-api-admin/target/
-aiyo-util/target/
+*.log
+*.log.*
 
 \.idea/
-.idea/
 *.iml
-*/node_modules/
+
+node_modules/
+target/
+
+
+aiyo-util/.settings/
