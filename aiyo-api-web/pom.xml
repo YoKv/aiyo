@@ -25,6 +25,13 @@
 	</properties>
 
 	<dependencies>
+		<!--项目公用方法-->
+		<dependency>
+			<groupId>space.aiyo</groupId>
+			<artifactId>aiyo-util</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
