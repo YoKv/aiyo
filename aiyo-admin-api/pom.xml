@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>space.aiyo</groupId>
-	<artifactId>aiyo-api-admin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>aiyo-admin-api</artifactId>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>aiyo-api-admin</name>
