@@ -17,4 +17,4 @@ aiyo-util/target/
 \.idea/
 .idea/
 *.iml
-*/node_modules
+*/node_modules/
