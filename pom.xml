@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>aiyo.space</groupId>
+    <groupId>space.aiyo</groupId>
     <artifactId>aiyo</artifactId>
     <name>base</name>
     <description>base tool project</description>

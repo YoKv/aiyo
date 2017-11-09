@@ -37,7 +37,7 @@ public class HttpRequestSentAspect {
         HttpServletRequest request = attributes.getRequest();
         HttpServletResponse response = attributes.getResponse();
         logger.info("request url" + request.getRequestURL());
-        logger.info("response status" + response.getStatus());
+
 
     }
 

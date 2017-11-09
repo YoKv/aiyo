@@ -25,7 +25,7 @@ public class DotaHeroSchedule {
     /**
      * 定时更新dota英雄信息
      */
-    @Scheduled(cron = "0 0 8 1 * *")  //每月1号的上午08:00触发
+//    @Scheduled(cron = "0 0 8 1 * *")  //每月1号的上午08:00触发
     public void getDotaHero() {
         logger.info("定时任务，同步英雄信息");
         dotaHeroService.saveHeroFromSteamApi();
