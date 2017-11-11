@@ -21,10 +21,11 @@ dota游戏分析统计
 ### aiyo-services-steam
 核心数据来源，定时任务获取数据
 
-### aiyo-util
-一些静态方法封装
+### aiyo-static-base(jar包引用)
+一些工具方法，实体类，通用的枚举，异常，结果集
+
+### aiyo-static-tool(jar包引用)
+一些中间件开发的封装
 
 ### document
 文档
-
-## 未规划的是前端项目,计划采用react/vue.js技术栈

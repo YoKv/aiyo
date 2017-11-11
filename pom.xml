@@ -5,10 +5,8 @@
 
     <groupId>space.aiyo</groupId>
     <artifactId>aiyo</artifactId>
-    <name>base</name>
-    <description>base tool project</description>
 
-    <version>1.0.0</version>
+    <version>1.0.0</version>><!--子项目版本号 TODO -->
     <packaging>pom</packaging>
 
     <modules>
@@ -16,7 +14,8 @@
         <module>aiyo-api-web</module>
         <module>aiyo-services-data</module>
         <module>aiyo-services-steam</module>
-        <module>aiyo-util</module>
+        <module>aiyo-static-base</module>
+        <module>aiyo-static-tool</module>
     </modules>
 
     <properties>

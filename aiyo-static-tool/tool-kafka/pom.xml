@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <artifactId>tool-kafka</artifactId>
+    <packaging>jar</packaging>
+
+    <name>base-kafka</name>
+    <description>kafka-tool</description>
+
+    <parent>
+        <artifactId>aiyo-static-tool</artifactId>
+        <groupId>aiyo.space</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <properties>
+        <kafka.version>0.10.2.1</kafka.version>
+        <debezium.version>0.5.1</debezium.version>
+    </properties>
+
+    <dependencies>
+
+
+    </dependencies>
+
+</project>
