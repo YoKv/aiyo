@@ -8,9 +8,8 @@
 
 	<parent>
 		<artifactId>aiyo-static-tool</artifactId>
-		<groupId>aiyo.space</groupId>
+		<groupId>space.aiyo</groupId>
 		<version>1.0.0</version>
 	</parent>
-
 
 </project>

@@ -1,4 +1,4 @@
-package aiyo.space.kafka.annotation;
+package space.aiyo.kafka.annotation;
 
 /**
  * 结构文件，实现业务时删除
