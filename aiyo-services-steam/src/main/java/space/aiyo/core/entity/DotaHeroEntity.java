@@ -1,6 +1,6 @@
 package space.aiyo.core.entity;
 
-import entity.DotaHeroBaseEntity;
+import entity.dota.HeroBaseEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Created by Yo on 2017/5/26.
  */
 @Document(collection = "dotaHero")
-public class DotaHeroEntity extends DotaHeroBaseEntity {
+public class DotaHeroEntity extends HeroBaseEntity {
 
     @Id
     private int id;//id，以字母排序

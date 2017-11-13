@@ -1,10 +1,8 @@
 package space.aiyo.core.entity;
 
-import entity.DotaItemBaseEntity;
+import entity.dota.ItemBaseEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serializable;
 
 /**
  * Dota2游戏装备
@@ -12,7 +10,7 @@ import java.io.Serializable;
  */
 
 @Document(collection = "dotaItem")
-public class DotaItemEntity extends DotaItemBaseEntity {
+public class DotaItemEntity extends ItemBaseEntity {
     @Id
     private int id;
     private String name;//全名
