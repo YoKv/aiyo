@@ -1,4 +1,4 @@
-package space.aiyo.core.entity.match;
+package entity.match;
 
 import java.io.Serializable;
 import java.util.List;

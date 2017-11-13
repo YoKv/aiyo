@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import space.aiyo.core.dao.DotaMatchDao;
-import space.aiyo.core.entity.DotaMatchEntity;
+import entity.DotaMatchEntity;
 import space.aiyo.val.contsant.DotaContsant;
 import space.aiyo.val.contsant.SteamContsant;
 import space.aiyo.val.enums.SteamApiEnum;
