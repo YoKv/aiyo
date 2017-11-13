@@ -26,7 +26,7 @@ dota游戏分析统计
 ### aiyo-static-base(jar包引用)
 一些工具方法，实体类，通用的枚举，异常，结果集
 
-### aiyo-static-tool(jar包引用)
+### aiyo-static-middleware(jar包引用)
 一些中间件开发的封装
 
 ### document

@@ -15,7 +15,7 @@
         <module>aiyo-services-data</module>
         <module>aiyo-services-steam</module>
         <module>aiyo-static-base</module>
-        <module>aiyo-static-tool</module>
+        <module>aiyo-static-middleware</module>
     </modules>
 
     <properties>
