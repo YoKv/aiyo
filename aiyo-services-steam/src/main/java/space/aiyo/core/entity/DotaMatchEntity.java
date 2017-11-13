@@ -1,9 +1,10 @@
-package entity;
+package space.aiyo.core.entity;
 
+import entity.DotaMatchBaseEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import entity.match.MatchPlayerEntity;
-import entity.match.PicksBansEntity;
+import space.aiyo.core.entity.match.MatchPlayerEntity;
+import space.aiyo.core.entity.match.PicksBansEntity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 @Document(collection = "dotaMatch")
-public class DotaMatchEntity implements Serializable {
+public class DotaMatchEntity extends DotaMatchBaseEntity {
 
     private long matchId;
     /**

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.aiyo.core.dao.DotaItemDao;
-import entity.DotaItemEntity;
+import space.aiyo.core.entity.DotaItemEntity;
 import space.aiyo.val.contsant.SteamContsant;
 import space.aiyo.val.enums.SteamApiEnum;
 import space.aiyo.core.services.DotaItemService;

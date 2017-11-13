@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit4.SpringRunner;
 import space.aiyo.core.dao.DotaMatchDao;
-import entity.DotaMatchEntity;
+import space.aiyo.core.entity.DotaMatchEntity;
 import space.aiyo.core.services.DotaMatchService;
 
 import java.util.List;

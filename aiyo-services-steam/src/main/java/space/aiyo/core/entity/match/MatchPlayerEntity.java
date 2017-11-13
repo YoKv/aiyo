@@ -1,13 +1,12 @@
-package entity.match;
+package space.aiyo.core.entity.match;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * 一场比赛中的选手数据
  * Created by yo on 2017/5/27.
  */
-public class MatchPlayerEntity implements Serializable {
+public class MatchPlayerEntity {
 
     /**
      * 32-bit account ID

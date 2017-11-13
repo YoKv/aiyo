@@ -1,12 +1,10 @@
-package entity.match;
-
-import java.io.Serializable;
+package space.aiyo.core.entity.match;
 
 /**
  * bp
  * Created by Yo on 2017/6/10.
  */
-public class PicksBansEntity implements Serializable {
+public class PicksBansEntity {
     /**
      * Whether this entry is a pick (true) or a ban (false).
      */

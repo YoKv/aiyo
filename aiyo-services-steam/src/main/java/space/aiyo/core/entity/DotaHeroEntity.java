@@ -1,16 +1,15 @@
-package entity;
+package space.aiyo.core.entity;
 
+import entity.DotaHeroBaseEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serializable;
 
 /**
  * Dota2英雄
  * Created by Yo on 2017/5/26.
  */
 @Document(collection = "dotaHero")
-public class DotaHeroEntity implements Serializable {
+public class DotaHeroEntity extends DotaHeroBaseEntity {
 
     @Id
     private int id;//id，以字母排序

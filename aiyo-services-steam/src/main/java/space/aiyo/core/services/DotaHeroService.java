@@ -1,6 +1,6 @@
 package space.aiyo.core.services;
 
-import entity.DotaHeroEntity;
+import space.aiyo.core.entity.DotaHeroEntity;
 
 import java.util.List;
 

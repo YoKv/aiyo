@@ -2,7 +2,7 @@ package space.aiyo.core.dao;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import entity.DotaItemEntity;
+import space.aiyo.core.entity.DotaItemEntity;
 
 /**
  * repository作为持久层

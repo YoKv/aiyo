@@ -2,7 +2,7 @@ package space.aiyo.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import entity.DotaHeroEntity;
+import space.aiyo.core.entity.DotaHeroEntity;
 import space.aiyo.core.services.DotaHeroService;
 
 import java.util.List;
