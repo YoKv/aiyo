@@ -6,8 +6,6 @@
 
     <artifactId>middleware-kafka</artifactId>
     <packaging>jar</packaging>
-    <name>base-kafka</name>
-    <description>kafka-middleware</description>
 
     <parent>
         <artifactId>aiyo-static-middleware</artifactId>

@@ -14,19 +14,19 @@
         <module>aiyo-api-web</module>
         <module>aiyo-service-data</module>
         <module>aiyo-service-steam</module>
-        <module>aiyo-service-steam-copy</module>
         <module>aiyo-static-base</module>
         <module>aiyo-static-middleware</module>
-        <module>aiyo-service-steam-copy</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+
         <fastjson.version>1.2.31</fastjson.version>
         <vertx.version>3.5.0</vertx.version>
         <junit.version>4.12</junit.version>
+        <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -38,14 +38,35 @@
                 <version>${junit.version}</version>
             </dependency>
 
-
             <!--SpringBoot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>2.0.0.BUILD-SNAPSHOT</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--Spring Boot MongoDB-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
 
             <!--Vert.x-->

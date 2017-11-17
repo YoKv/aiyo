@@ -1,9 +1,7 @@
 package enums;
 
 public enum BizExceptionEnum {
-    FOO(0, "FOO")
-
-    ;
+    FOO(0, "FOO");
 
     private int errorCode;
     private String errorMsg;

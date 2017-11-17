@@ -1,9 +1,0 @@
-host: aiyo.space
-password: redis112
-port: 6379
-timeout: 2000
-pool:
-  max-idle: 8
-  min-idle: 0
-  max-active: 8
-  max-wait: -1
