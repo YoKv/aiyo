@@ -38,35 +38,13 @@
                 <version>${junit.version}</version>
             </dependency>
 
-            <!--SpringBoot-->
+            <!--SpringBoot parent-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-aop</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring-boot.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!--Spring Boot MongoDB-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-mongodb</artifactId>
-                <version>${spring-boot.version}</version>
             </dependency>
 
             <!--Vert.x-->
@@ -80,10 +58,8 @@
                 <artifactId>vertx-web-client</artifactId>
                 <version>${vertx.version}</version>
             </dependency>
-
+            
         </dependencies>
-
-
     </dependencyManagement>
 
     <dependencies>

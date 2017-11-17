@@ -7,6 +7,7 @@
 * 云盘项目完善
 * aiyo-data-services 大数据技术实现，es，spark,Hadoop，hive等
 * 项目日志，监控等(代理，aop)
+* 日志
 
 ## 学习任务
 
