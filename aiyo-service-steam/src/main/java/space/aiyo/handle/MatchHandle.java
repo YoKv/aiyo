@@ -5,4 +5,12 @@ package space.aiyo.handle;
  */
 public interface MatchHandle {
 
+  void saveMatchFromSteamApiByMatchSeqNum(long matchSeqNum);
+
+  /**
+   * 获取数据库中最新的sequence number
+   */
+  long getRecentSequenceNumber();
+
+  int count();
 }

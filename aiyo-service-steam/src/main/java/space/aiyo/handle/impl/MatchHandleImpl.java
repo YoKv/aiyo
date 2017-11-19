@@ -7,4 +7,18 @@ import space.aiyo.handle.MatchHandle;
  */
 public class MatchHandleImpl implements MatchHandle {
 
+  @Override
+  public void saveMatchFromSteamApiByMatchSeqNum(long matchSeqNum) {
+
+  }
+
+  @Override
+  public long getRecentSequenceNumber() {
+    return 0;
+  }
+
+  @Override
+  public int count() {
+    return 0;
+  }
 }
