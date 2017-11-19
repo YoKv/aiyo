@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 
-public class DotaMatchEntity {
+public class MatchEntity {
 
     private long matchId;
     /**
@@ -139,12 +139,12 @@ public class DotaMatchEntity {
      * 无参构造方法
      * 兼容fastjson
      */
-    public DotaMatchEntity() {
+    public MatchEntity() {
     }
 
     @Override
     public String toString() {
-        return String.format("DotaMatchEntity[matchId=%base, matchSeqNum='%base', startTime='%base', leagueId='%base', gameMode='%base', radiantWin='%base']", matchId, matchSeqNum, startTime, leagueId, gameMode, radiantWin);
+        return String.format("MatchEntity[matchId=%base, matchSeqNum='%base', startTime='%base', leagueId='%base', gameMode='%base', radiantWin='%base']", matchId, matchSeqNum, startTime, leagueId, gameMode, radiantWin);
     }
 
     public long getMatchId() {

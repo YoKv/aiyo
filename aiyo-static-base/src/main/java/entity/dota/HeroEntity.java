@@ -4,7 +4,7 @@ package entity.dota;
  * Dota2英雄
  * Created by Yo on 2017/5/26.
  */
-public class DotaHeroEntity {
+public class HeroEntity {
 
     private int id;//id，以字母排序
     private String name;//全名
@@ -14,10 +14,10 @@ public class DotaHeroEntity {
      * 无参构造方法
      * 兼容fastjson
      */
-    public DotaHeroEntity() {
+    public HeroEntity() {
     }
 
-    public DotaHeroEntity(int id, String name, String localizedName) {
+    public HeroEntity(int id, String name, String localizedName) {
         this.id = id;
         this.name = name;
         this.localizedName = localizedName;
@@ -25,7 +25,7 @@ public class DotaHeroEntity {
 
     @Override
     public String toString() {
-        return String.format("DotaHeroEntity[id=%base, name='%base', localizedName='%base']", id, name, localizedName);
+        return String.format("HeroEntity[id=%base, name='%base', localizedName='%base']", id, name, localizedName);
     }
 
     public int getId() {

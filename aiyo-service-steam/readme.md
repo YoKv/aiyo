@@ -1,4 +1,20 @@
 
+基础模块：（TODO）
+* 单元测试
+* 日志
+* aop
+* 调用链监控
+
+
+
+
+
+
+
+
+
+
+
 一些vert.x参考
 
 
@@ -17,4 +33,9 @@ POJO/POGO，普通类，供Verticle使用。
 
 第一也是最差的方式，就是采用callback hell方式，层层递进。
 第二种方法采用rxJava，利用Observable的运算来完成。
-第三种方式，利用Java的Atom对象，示例代码（Groovy）如下：
+第三种方式，利用Java的Atom对象，Atomic包
+
+
+
+Vert.x RxJava是一个非常受欢迎的响应式编程扩展程序包，
+3.4.X版本增强了对RxJava的支持，原本返回Observable的API全部更改为返回rx.Single，使其语义更加清晰

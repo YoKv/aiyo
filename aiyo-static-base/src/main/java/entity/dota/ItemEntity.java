@@ -4,7 +4,7 @@ package entity.dota;
  * Dota2游戏装备
  * Created by Yo on 2017/5/26.
  */
-public class DotaItemEntity {
+public class ItemEntity {
 
     private int id;
     private String name;//全名
@@ -18,10 +18,10 @@ public class DotaItemEntity {
      * 无参构造方法
      * 兼容fastjson
      */
-    public DotaItemEntity() {
+    public ItemEntity() {
     }
 
-    public DotaItemEntity(int id, String name, int cost, int secretShop, int sideShop, int recipe, String localizedName) {
+    public ItemEntity(int id, String name, int cost, int secretShop, int sideShop, int recipe, String localizedName) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -33,7 +33,7 @@ public class DotaItemEntity {
 
     @Override
     public String toString() {
-        return String.format("DotaItemEntity[id=%base, name='%base', cost='%base', localizedName='%base']", id, name, cost, localizedName);
+        return String.format("ItemEntity[id=%base, name='%base', cost='%base', localizedName='%base']", id, name, cost, localizedName);
     }
 
     public int getId() {

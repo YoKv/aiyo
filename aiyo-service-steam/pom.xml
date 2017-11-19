@@ -13,9 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>space.aiyo</groupId>
+            <artifactId>aiyo-static-base</artifactId>
         </dependency>
 
         <dependency>
