@@ -5,8 +5,8 @@ package space.aiyo.contsant;
  */
 public enum EventBusAddress {
   STEAM_CRAWLER_HERO("hero.steamCrawler.aiyo.space"),
-  STEAM_CRAWLER_ITEM("hero.steamCrawler.aiyo.space"),
-  STEAM_CRAWLER_MATCH("hero.steamCrawler.aiyo.space");
+  STEAM_CRAWLER_ITEM("item.steamCrawler.aiyo.space"),
+  STEAM_CRAWLER_MATCH("match.steamCrawler.aiyo.space");
 
 
   private String address;
