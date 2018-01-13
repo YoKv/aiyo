@@ -6,7 +6,7 @@
 
   <artifactId>aiyo-service-business</artifactId>
   <packaging>jar</packaging>
-
+  <version>1.0.0</version>
   <parent>
     <artifactId>aiyo</artifactId>
     <groupId>space.aiyo</groupId>

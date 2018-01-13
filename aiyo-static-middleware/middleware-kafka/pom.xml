@@ -7,7 +7,7 @@
 
   <artifactId>middleware-kafka</artifactId>
   <packaging>jar</packaging>
-
+  <version>1.0.0</version>
   <parent>
     <artifactId>aiyo-static-middleware</artifactId>
     <groupId>space.aiyo</groupId>
