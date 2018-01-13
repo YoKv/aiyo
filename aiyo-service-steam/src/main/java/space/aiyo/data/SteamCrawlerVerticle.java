@@ -4,9 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpClientOptions;
-import io.vertx.core.http.HttpClientRequest;
 import io.vertx.core.http.HttpMethod;
-import io.vertx.core.json.JsonObject;
 import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +21,6 @@ public class SteamCrawlerVerticle extends AbstractVerticle {
 
   @Override
   public void start() throws Exception {
-
     // todo HTTP2
     HttpClientOptions options = new HttpClientOptions()
         .setDefaultHost(SteamApiEnum.STEAM_API_DOMAIN);
@@ -34,35 +31,24 @@ public class SteamCrawlerVerticle extends AbstractVerticle {
     eventBus.consumer(EventBusAddress.STEAM_CRAWLER_HERO.getAddress()).handler(message -> {
           String method = (String) message.body();
           String uri;
-          //区分方法
           if (Objects.equals(method, SteamApiEnum.GET_HEROES.getName())) {
             uri = "http://" + SteamApiEnum.STEAM_API_DOMAIN + SteamApiEnum.GET_HEROES.getUrl()
-                + "?language=zh&itemizedonly=true&key="
-                + SteamApiEnum.STEAM_KEY;
-            logger.info("uri {} ", uri);
+                + "?language=zh&itemizedonly=true&key=" + SteamApiEnum.STEAM_KEY;
             client.request(HttpMethod.GET, uri, response -> {
-              response.handler(buffer -> {
-                JsonObject json = buffer.toJsonObject();
-                message.reply(json.getJsonObject("result").getJsonArray("heroes"));
-              });
+              if (response.statusCode() == 200) {
+                response.bodyHandler(buffer -> message
+                    .reply(buffer.toJsonObject().getJsonObject("result").getJsonArray("heroes")));
+              } else {
+                logger.error("getHeroes statusCode: {},message: {}", response.statusCode(),
+                    response.statusMessage());
+              }
             }).end();
 
-//            HttpClientRequest request = client.get(uri, response -> {
-//              System.out.println(response.statusCode());
-//              response.handler(buffer -> {
-//                logger.info(buffer.toString());
-//                JsonObject json = buffer.toJsonObject();
-//                message.reply(json.getJsonObject("result").getJsonArray("heroes"));
-//              });
-//            });
-//            request.exceptionHandler(e -> logger.error("exception  {}  {}", uri, e));
           } else {
             logger.warn("unknown message");
           }
         }
     );
-// http://api.steampowered.com/IEconDOTA2_570/GetHeroes/v1?language=zh&itemizedonly=true&key=AEC1E5CB1A7D9CC75CB4653B8C98875F
-    //                        /IEconDOTA2_570/GetHeroes/v1?language=zh&itemizedonly=true&key=AEC1E5CB1A7D9CC75CB4653B8C98875F
 
   }
 }

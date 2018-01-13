@@ -19,14 +19,12 @@ public class HeroSchedule extends AbstractVerticle {
   public void start() throws Exception {
     EventBus eventBus = vertx.eventBus();
     long timerID = vertx.setPeriodic(10000, id -> {
-      logger.info("GetHeroesFromSteam");
       eventBus
           .send(EventBusAddress.STEAM_CRAWLER_HERO.getAddress(), SteamApiEnum.GET_HEROES.getName(),
               reply -> {
                 if (reply.succeeded()) {
                   JsonArray array = (JsonArray) reply.result().body();
-                  System.out.println(array.size());
-                  System.out.println(array);
+                  logger.info("get heroes from steam,size: {}", array.size());
                 }
               });
     });

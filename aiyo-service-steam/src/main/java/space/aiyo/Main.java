@@ -19,12 +19,14 @@ public class Main {
   private static Logger logger = LoggerFactory.getLogger(Main.class);
 
   public static void main(String[] args) {
-    Vertx vertx = Vertx.vertx();
-
-    //日志相关
+    //日志相关  TODO 日志配置
     System.setProperty("vertx.logger-delegate-factory-class-name",
         "io.vertx.core.logging.SLF4JLogDelegateFactory");
-    System.setProperty ("vertx.disableDnsResolver", "true");
+    //一个netty引起的bug 不影响功能，暂时解决方式,https://github.com/eclipse/vert.x/issues/2204
+    System.setProperty("vertx.disableDnsResolver", "true");
+
+    Vertx vertx = Vertx.vertx();
+
     Handler<AsyncResult<String>> handler = result -> {
       if (result.succeeded()) {
         logger.info("Deployment id is: {}", result.result());
