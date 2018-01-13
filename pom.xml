@@ -27,6 +27,8 @@
         <fastjson.version>1.2.31</fastjson.version>
         <vertx.version>3.5.0</vertx.version>
         <junit.version>4.12</junit.version>
+        <log4j2.version>2.10.0</log4j2.version>
+        <slf4j.version>1.7.25</slf4j.version>
         <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
     </properties>
 
@@ -37,13 +39,6 @@
                 <groupId>space.aiyo</groupId>
                 <artifactId>aiyo-static-base</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-
-            <!--junit-->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
             </dependency>
 
             <!--SpringBoot parent-->
@@ -61,11 +56,37 @@
                 <artifactId>vertx-core</artifactId>
                 <version>${vertx.version}</version>
             </dependency>
+
+            <!--junit-->
             <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-web-client</artifactId>
-                <version>${vertx.version}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
             </dependency>
+
+            <!--日志相关-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!--log4j2实现-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

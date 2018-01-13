@@ -8,8 +8,8 @@ import io.vertx.core.http.HttpMethod;
 import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.contsant.EventBusAddress;
-import space.aiyo.contsant.SteamApiEnum;
+import space.aiyo.var.EventBusAddress;
+import space.aiyo.var.SteamApiEnum;
 
 
 /**

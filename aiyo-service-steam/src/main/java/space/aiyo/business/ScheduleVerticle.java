@@ -29,7 +29,7 @@ public class ScheduleVerticle extends AbstractVerticle {
           if (res.succeeded()) {
             int count = atomicInteger.incrementAndGet();
             if (Objects.equals(count, classNames.length)) {
-              logger.info("ScheduleVerticle deploy succeeded");
+              logger.info("scheduleVerticle deploy succeeded");
               startFuture.complete();
             }
           } else {

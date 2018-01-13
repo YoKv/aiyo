@@ -1,7 +1,7 @@
-package space.aiyo.contsant;
+package space.aiyo.var;
 
 /**
- * steam借口枚举
+ * steam接口枚举
  * Created by Yo on 2017/6/1.
  */
 public enum SteamApiEnum {

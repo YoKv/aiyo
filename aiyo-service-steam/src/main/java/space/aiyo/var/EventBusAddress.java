@@ -1,4 +1,4 @@
-package space.aiyo.contsant;
+package space.aiyo.var;
 
 /**
  * CREATE BY Yo ON 2018/1/13 17:57
