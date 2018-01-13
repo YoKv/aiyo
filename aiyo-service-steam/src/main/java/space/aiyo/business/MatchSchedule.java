@@ -1,11 +1,11 @@
-package space.aiyo.schedule;
+package space.aiyo.business;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.var.EventBusAddress;
+import space.aiyo.var.Route;
 import space.aiyo.var.SteamApiEnum;
 
 /**
@@ -21,7 +21,7 @@ public class MatchSchedule extends AbstractVerticle {
     EventBus eventBus = vertx.eventBus();
     long timerID = vertx.setPeriodic(10000, id -> {
       eventBus
-          .send(EventBusAddress.STEAM_CRAWLER_MATCH.getAddress(),
+          .send(Route.STEAM_CRAWLER_MATCH.getAddress(),
               SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getName(),
               reply -> {
                 if (reply.succeeded()) {

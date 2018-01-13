@@ -4,7 +4,7 @@
 
 \.idea/
 *.iml
-
+\.vertx/
 node_modules/
 \target/
 

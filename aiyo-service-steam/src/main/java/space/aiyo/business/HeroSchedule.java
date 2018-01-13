@@ -1,11 +1,11 @@
-package space.aiyo.schedule;
+package space.aiyo.business;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.var.EventBusAddress;
+import space.aiyo.var.Route;
 import space.aiyo.var.SteamApiEnum;
 
 /**
@@ -20,7 +20,7 @@ public class HeroSchedule extends AbstractVerticle {
     EventBus eventBus = vertx.eventBus();
     long timerID = vertx.setPeriodic(10000, id -> {
       eventBus
-          .send(EventBusAddress.STEAM_CRAWLER_HERO.getAddress(), SteamApiEnum.GET_HEROES.getName(),
+          .send(Route.STEAM_CRAWLER_HERO.getAddress(), SteamApiEnum.GET_HEROES.getName(),
               reply -> {
                 if (reply.succeeded()) {
                   JsonArray array = (JsonArray) reply.result().body();

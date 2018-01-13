@@ -5,10 +5,11 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.json.JsonObject;
 import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.var.EventBusAddress;
+import space.aiyo.var.Route;
 import space.aiyo.var.SteamApiEnum;
 
 
@@ -21,20 +22,24 @@ public class SteamCrawlerVerticle extends AbstractVerticle {
 
   @Override
   public void start() throws Exception {
+    JsonObject config = config();
+    String steamApiDomain = config.getString("STEAM_API_DOMAIN");
+    String steamKey = config.getString("STEAM_KEY");
+
     // todo HTTP2
     HttpClientOptions options = new HttpClientOptions()
-        .setDefaultHost(SteamApiEnum.STEAM_API_DOMAIN);
+        .setDefaultHost(steamApiDomain);
     HttpClient client = vertx.createHttpClient(options);
     //eventBus获取请求
     EventBus eventBus = vertx.eventBus();
 
     //注册hero相关处理器
-    eventBus.consumer(EventBusAddress.STEAM_CRAWLER_HERO.getAddress()).handler(message -> {
+    eventBus.consumer(Route.STEAM_CRAWLER_HERO.getAddress()).handler(message -> {
           String method = (String) message.body();
           String uri;
           if (Objects.equals(method, SteamApiEnum.GET_HEROES.getName())) {
-            uri = "http://" + SteamApiEnum.STEAM_API_DOMAIN + SteamApiEnum.GET_HEROES.getUrl()
-                + "?language=zh&itemizedonly=true&key=" + SteamApiEnum.STEAM_KEY;
+            uri = "http://" + steamApiDomain + SteamApiEnum.GET_HEROES.getUrl()
+                + "?language=zh&itemizedonly=true&key=" + steamKey;
             client.request(HttpMethod.GET, uri, response -> {
               if (response.statusCode() == 200) {
                 response.bodyHandler(buffer -> message
@@ -52,12 +57,12 @@ public class SteamCrawlerVerticle extends AbstractVerticle {
     );
 
     //注册item相关处理器
-    eventBus.consumer(EventBusAddress.STEAM_CRAWLER_ITEM.getAddress()).handler(message -> {
+    eventBus.consumer(Route.STEAM_CRAWLER_ITEM.getAddress()).handler(message -> {
           String method = (String) message.body();
           String uri;
           if (Objects.equals(method, SteamApiEnum.GET_GAME_ITEMS.getName())) {
-            uri = "http://" + SteamApiEnum.STEAM_API_DOMAIN + SteamApiEnum.GET_GAME_ITEMS.getUrl()
-                + "?language=zh&key=" + SteamApiEnum.STEAM_KEY;
+            uri = "http://" + steamApiDomain + SteamApiEnum.GET_GAME_ITEMS.getUrl()
+                + "?language=zh&key=" + steamKey;
             client.request(HttpMethod.GET, uri, response -> {
               if (response.statusCode() == 200) {
                 response.bodyHandler(buffer -> message
@@ -75,15 +80,15 @@ public class SteamCrawlerVerticle extends AbstractVerticle {
     );
 
     //注册item相关处理器
-    eventBus.consumer(EventBusAddress.STEAM_CRAWLER_MATCH.getAddress()).handler(message -> {
+    eventBus.consumer(Route.STEAM_CRAWLER_MATCH.getAddress()).handler(message -> {
           String method = (String) message.body();
           long sequenceNum = 2478669175L;
           String uri;
           if (Objects.equals(method, SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getName())) {
-            uri = "http://" + SteamApiEnum.STEAM_API_DOMAIN
+            uri = "http://" + steamApiDomain
                 + SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getUrl()
                 + "?start_at_match_seq_num=" + sequenceNum + "&matches_requested=100&key="
-                + SteamApiEnum.STEAM_KEY;
+                + steamKey;
             client.request(HttpMethod.GET, uri, response -> {
               if (response.statusCode() == 200) {
                 response.bodyHandler(buffer -> message
