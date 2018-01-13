@@ -21,7 +21,8 @@ public class ItemSchedule extends AbstractVerticle {
     EventBus eventBus = vertx.eventBus();
     long timerID = vertx.setPeriodic(10000, id -> {
       eventBus
-          .send(EventBusAddress.STEAM_CRAWLER_ITEM.getAddress(), SteamApiEnum.GET_GAME_ITEMS.getName(),
+          .send(EventBusAddress.STEAM_CRAWLER_ITEM.getAddress(),
+              SteamApiEnum.GET_GAME_ITEMS.getName(),
               reply -> {
                 if (reply.succeeded()) {
                   JsonArray array = (JsonArray) reply.result().body();

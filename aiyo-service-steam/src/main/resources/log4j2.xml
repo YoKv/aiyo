@@ -2,24 +2,24 @@
 <Configuration>
   <appenders>
     <Console name="Console" target="SYSTEM_OUT">
-      <PatternLayout pattern="%d %-5p %c{1} - %m%n" />
+      <PatternLayout pattern="%d %-5p %c{1} - %m%n"/>
     </Console>
-    <RollingFile name="DebugRollingFile" fileName="/logs/debug.log"
-      filePattern="/logs/%d{yyyy-MM}/debug-%d{yyyy-MM-dd}-%i.log">
+    <RollingFile fileName="/logs/debug.log" filePattern="/logs/%d{yyyy-MM}/debug-%d{yyyy-MM-dd}-%i.log"
+      name="DebugRollingFile">
       <PatternLayout>
         <Pattern>%d %t %-5p - %m%n</Pattern>
       </PatternLayout>
       <Policies>
-        <TimeBasedTriggeringPolicy />
-        <SizeBasedTriggeringPolicy size="50 MB" />
+        <TimeBasedTriggeringPolicy/>
+        <SizeBasedTriggeringPolicy size="50 MB"/>
       </Policies>
       <DefaultRolloverStrategy max="20"/>
     </RollingFile>
   </appenders>
   <Loggers>
     <Root level="debug">
-      <AppenderRef ref="Console" />
-      <AppenderRef ref="DebugRollingFile" level="debug" />
+      <AppenderRef ref="Console"/>
+      <AppenderRef level="debug" ref="DebugRollingFile"/>
     </Root>
   </Loggers>
 </Configuration>

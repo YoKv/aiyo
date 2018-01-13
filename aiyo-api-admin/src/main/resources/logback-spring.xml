@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml" />
-<!--    * 如果在 logback.xml 和 application.properties
-    中定义了相同的配置（如都配置了 org.springframework.web）但是输出级别不同，
-    则实际上 application.properties 的优先级高于 logback.xml *-->
-    <logger name="org.springframework.web" level="INFO"/>
-    <logger name="org.springboot.sample" level="TRACE" />
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+  <!--    * 如果在 logback.xml 和 application.properties
+      中定义了相同的配置（如都配置了 org.springframework.web）但是输出级别不同，
+      则实际上 application.properties 的优先级高于 logback.xml *-->
+  <logger level="INFO" name="org.springframework.web"/>
+  <logger level="TRACE" name="org.springboot.sample"/>
 
-    <!--appender TODO-->
+  <!--appender TODO-->
 </configuration>

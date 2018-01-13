@@ -5,52 +5,54 @@ package entity.dota.match;
  * Created by Yo on 2017/6/10.
  */
 public class AbilityUpgradesEntity {
-    /**
-     * ID of the ability upgraded.
-     */
-    private int ability;
-    /**
-     * Time since match start that the ability was upgraded.
-     */
-    private int time;
-    /**
-     * The level of the player at time of upgrading.
-     */
-    private int level;
 
-    /**
-     * 无参构造方法
-     * 兼容fastjson
-     */
-    public AbilityUpgradesEntity() {
-    }
+  /**
+   * ID of the ability upgraded.
+   */
+  private int ability;
+  /**
+   * Time since match start that the ability was upgraded.
+   */
+  private int time;
+  /**
+   * The level of the player at time of upgrading.
+   */
+  private int level;
 
-    @Override
-    public String toString() {
-        return "AbilityUpgradesEntity{" + "ability=" + ability + ", time=" + time + ", level=" + level + '}';
-    }
+  /**
+   * 无参构造方法
+   * 兼容fastjson
+   */
+  public AbilityUpgradesEntity() {
+  }
 
-    public int getAbility() {
-        return ability;
-    }
+  @Override
+  public String toString() {
+    return "AbilityUpgradesEntity{" + "ability=" + ability + ", time=" + time + ", level=" + level
+        + '}';
+  }
 
-    public void setAbility(int ability) {
-        this.ability = ability;
-    }
+  public int getAbility() {
+    return ability;
+  }
 
-    public int getTime() {
-        return time;
-    }
+  public void setAbility(int ability) {
+    this.ability = ability;
+  }
 
-    public void setTime(int time) {
-        this.time = time;
-    }
+  public int getTime() {
+    return time;
+  }
 
-    public int getLevel() {
-        return level;
-    }
+  public void setTime(int time) {
+    this.time = time;
+  }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
+  public int getLevel() {
+    return level;
+  }
+
+  public void setLevel(int level) {
+    this.level = level;
+  }
 }

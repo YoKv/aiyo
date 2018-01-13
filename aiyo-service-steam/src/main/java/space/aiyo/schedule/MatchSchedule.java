@@ -21,7 +21,8 @@ public class MatchSchedule extends AbstractVerticle {
     EventBus eventBus = vertx.eventBus();
     long timerID = vertx.setPeriodic(10000, id -> {
       eventBus
-          .send(EventBusAddress.STEAM_CRAWLER_MATCH.getAddress(), SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getName(),
+          .send(EventBusAddress.STEAM_CRAWLER_MATCH.getAddress(),
+              SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getName(),
               reply -> {
                 if (reply.succeeded()) {
                   JsonArray array = (JsonArray) reply.result().body();
