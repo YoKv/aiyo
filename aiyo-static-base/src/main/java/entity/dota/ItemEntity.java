@@ -1,12 +1,13 @@
 package entity.dota;
 
+import entity.BottomEntity;
+
 /**
  * Dota2游戏装备
  * Created by Yo on 2017/5/26.
  */
-public class ItemEntity {
+public class ItemEntity extends BottomEntity {
 
-  private int id;
   private String name;//全名
   private int cost;//价格
   private int secretShop;//神秘商店 0否1是
@@ -21,9 +22,9 @@ public class ItemEntity {
   public ItemEntity() {
   }
 
-  public ItemEntity(int id, String name, int cost, int secretShop, int sideShop, int recipe,
+  public ItemEntity(long id, String name, int cost, int secretShop, int sideShop, int recipe,
       String localizedName) {
-    this.id = id;
+    super(id);
     this.name = name;
     this.cost = cost;
     this.secretShop = secretShop;
@@ -35,17 +36,11 @@ public class ItemEntity {
   @Override
   public String toString() {
     return String
-        .format("ItemEntity[id=%base, name='%base', cost='%base', localizedName='%base']", id, name,
+        .format("ItemEntity[id=%base, name='%base', cost='%base', localizedName='%base']", getId(),
+            name,
             cost, localizedName);
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public String getName() {
     return name;

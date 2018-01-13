@@ -1,5 +1,7 @@
 package entity.user;
 
-public class UserLogEntity {
+import entity.BaseEntity;
+
+public class UserLogEntity extends BaseEntity {
 
 }

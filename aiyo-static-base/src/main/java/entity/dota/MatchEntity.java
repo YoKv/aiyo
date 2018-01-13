@@ -1,6 +1,6 @@
 package entity.dota;
 
-
+import entity.BottomEntity;
 import entity.dota.match.MatchPlayerEntity;
 import entity.dota.match.PicksBansEntity;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 
-public class MatchEntity {
+public class MatchEntity extends BottomEntity {
 
   private long matchId;
   /**

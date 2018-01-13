@@ -1,5 +1,7 @@
 package entity.log;
 
-public class ErrorLog {
+import entity.BaseEntity;
+
+public class ErrorLog extends BaseEntity {
 
 }

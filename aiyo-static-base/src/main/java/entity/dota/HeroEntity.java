@@ -1,12 +1,13 @@
 package entity.dota;
 
+import entity.BottomEntity;
+
 /**
  * Dota2英雄
  * Created by Yo on 2017/5/26.
  */
-public class HeroEntity {
+public class HeroEntity extends BottomEntity {
 
-  private int id;//id，以字母排序
   private String name;//全名
   private String localizedName;//中文名zh
 
@@ -17,24 +18,16 @@ public class HeroEntity {
   public HeroEntity() {
   }
 
-  public HeroEntity(int id, String name, String localizedName) {
-    this.id = id;
+  public HeroEntity(long id, String name, String localizedName) {
+    super(id);
     this.name = name;
     this.localizedName = localizedName;
   }
 
   @Override
   public String toString() {
-    return String.format("HeroEntity[id=%base, name='%base', localizedName='%base']", id, name,
+    return String.format("HeroEntity[id=%base, name='%base', localizedName='%base']", getId(), name,
         localizedName);
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getName() {

@@ -1,5 +1,7 @@
 package entity.log;
 
-public class SystemLog {
+import entity.BaseEntity;
+
+public class SystemLog extends BaseEntity {
 
 }

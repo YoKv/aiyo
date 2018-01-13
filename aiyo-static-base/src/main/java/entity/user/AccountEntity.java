@@ -1,13 +1,14 @@
 package entity.user;
 
 
-public class AccountEntity {
+import entity.BaseEntity;
 
-  private long id;
+public class AccountEntity extends BaseEntity {
+
   private String mobliePhone;
   private String username;
   private String password;
   private int status;
-  private String addTime;
+
 
 }
