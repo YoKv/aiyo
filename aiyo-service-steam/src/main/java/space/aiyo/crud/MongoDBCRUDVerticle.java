@@ -1,17 +1,19 @@
 package space.aiyo.crud;
 
-import entity.BottomEntity;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
-import java.util.List;
 
 /**
  * CREATE BY Yo ON 2018/1/14 00:46
  */
-public class CRUDVerticle<T extends BottomEntity> extends AbstractVerticle {
+public class MongoDBCRUDVerticle extends AbstractVerticle {
 
   private MongoClient client;
+  protected String documentName;
 
   @Override
   public JsonObject config() {
@@ -39,21 +41,21 @@ public class CRUDVerticle<T extends BottomEntity> extends AbstractVerticle {
   }
 
 
-  protected long insert(T t) {
+  protected long insert(JsonObject document) {
     return 0;
   }
 
 
-  protected int insertBatch(List<T> list) {
+  protected int insertBatch(JsonArray array) {
     return 0;
   }
 
-  protected T save(T t) {
-    return null;
+  protected void save(JsonObject document, Handler<AsyncResult<String>> handler) {
+    client.save(documentName, document, handler);
   }
 
 
-  protected int saveBatch(List<T> list) {
+  protected int saveBatch(JsonArray array) {
     return 0;
   }
 
@@ -73,12 +75,12 @@ public class CRUDVerticle<T extends BottomEntity> extends AbstractVerticle {
   }
 
 
-  protected List<T> findByQuery() {
+  protected JsonArray findByQuery() {
     return null;
   }
 
 
-  protected T findOne() {
+  protected JsonObject findOne() {
     return null;
   }
 

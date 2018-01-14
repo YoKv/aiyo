@@ -4,12 +4,12 @@ import entity.dota.HeroEntity;
 import io.vertx.core.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.crud.CRUDVerticle;
+import space.aiyo.crud.MongoDBCRUDVerticle;
 
 /**
  * CREATE BY Yo ON 2018/1/13 20:44
  */
-public class HeroDBVerticle extends CRUDVerticle<HeroEntity> {
+public class HeroDBVerticle extends MongoDBCRUDVerticle {
 
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
