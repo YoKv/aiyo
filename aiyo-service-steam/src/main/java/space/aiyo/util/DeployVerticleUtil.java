@@ -16,15 +16,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import space.aiyo.business.HeroSchedule;
+import space.aiyo.business.ItemSchedule;
+import space.aiyo.business.MatchSchedule;
 import space.aiyo.component.RedisManager;
 import space.aiyo.component.RocketMQManager;
 import space.aiyo.data.HeroDBVerticle;
 import space.aiyo.data.ItemDBVerticle;
 import space.aiyo.data.MatchDBVerticle;
 import space.aiyo.data.SteamCrawlerVerticle;
-import space.aiyo.business.HeroSchedule;
-import space.aiyo.business.ItemSchedule;
-import space.aiyo.business.MatchSchedule;
 
 /**
  * CREATE BY Yo ON 2018/1/13 22:00
@@ -74,9 +74,6 @@ public class DeployVerticleUtil {
 
   /**
    * 批量部署，减少代码量 TODO
-   * @param vertx
-   * @param consumer
-   * @param classNames
    */
   public static void deployVerticleBatch(Vertx vertx, Consumer<Integer> consumer,
       String... classNames) {

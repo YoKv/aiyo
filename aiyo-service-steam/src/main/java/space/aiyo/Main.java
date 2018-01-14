@@ -19,4 +19,7 @@ public class Main {
     //部署Verticle
     DeployVerticleUtil.deployVerticle(vertx);
   }
+
+  // TODO: 2018/1/14 mongo远程安装配置，日志配置,util,redis,MQ,API
+
 }

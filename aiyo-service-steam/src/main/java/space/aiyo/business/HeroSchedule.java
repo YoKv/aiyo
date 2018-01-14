@@ -4,8 +4,6 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.util.MessageInfo;
-import space.aiyo.var.EventEnum;
 import space.aiyo.var.Route;
 import space.aiyo.var.SteamApiEnum;
 
@@ -36,15 +34,14 @@ public class HeroSchedule extends AbstractVerticle {
   更新数据库信息
    */
   private void updateDB(JsonArray array) {
-
     vertx.eventBus()
-        .send(Route.DB_CRUD_HERO.getAddress(), new MessageInfo(EventEnum.UPDATE, array), reply -> {
-          if (reply.succeeded()) {
-            logger.info("replace heroes from steam,size: {}", reply.result());
-          } else {
-            logger.error("replace heroes from steam failed", reply.cause());
-          }
-        });
+        .send(Route.DB_HERO_UPDATE.getAddress(), array,
+            reply -> {
+              if (reply.succeeded()) {
+                logger.info("replace heroes from steam,size: {}", reply.result());
+              } else {
+                logger.error("replace heroes from steam failed", reply.cause());
+              }
+            });
   }
-
 }

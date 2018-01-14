@@ -20,15 +20,15 @@ import java.util.List;
  */
 public class MongoDBCRUDVerticle extends AbstractVerticle {
 
+  protected String documentName;
   private MongoClient client;
   private UpdateOptions updateOptions;
-  protected String documentName;
 
   @Override
   public void init(Vertx vertx, Context context) {
     super.init(vertx, context);
     client = MongoClient.createShared(vertx, config());
-    updateOptions = new UpdateOptions().setMulti(true).setUpsert(false);
+    updateOptions = new UpdateOptions().setMulti(true).setUpsert(true);
   }
 
   @Override

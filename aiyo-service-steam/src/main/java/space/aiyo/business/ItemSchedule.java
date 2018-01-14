@@ -27,9 +27,24 @@ public class ItemSchedule extends AbstractVerticle {
                 if (reply.succeeded()) {
                   JsonArray array = (JsonArray) reply.result().body();
                   logger.info("get items from steam,size: {}", array.size());
+                  updateDB(array);
                 }
               });
     });
   }
 
+  /*
+  更新数据库信息
+   */
+  private void updateDB(JsonArray array) {
+    vertx.eventBus()
+        .send(Route.DB_ITEM_UPDATE.getAddress(), array,
+            reply -> {
+              if (reply.succeeded()) {
+                logger.info("replace items from steam,size: {}", reply.result());
+              } else {
+                logger.error("replace items from steam failed", reply.cause());
+              }
+            });
+  }
 }

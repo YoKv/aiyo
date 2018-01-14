@@ -20,6 +20,7 @@ public class MatchSchedule extends AbstractVerticle {
     //TODO sequenceNum
     EventBus eventBus = vertx.eventBus();
     long timerID = vertx.setPeriodic(10000, id -> {
+      //TODO 查询sequenceNum实现
       eventBus
           .send(Route.STEAM_CRAWLER_MATCH.getAddress(),
               SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getName(),
@@ -27,10 +28,25 @@ public class MatchSchedule extends AbstractVerticle {
                 if (reply.succeeded()) {
                   JsonArray array = (JsonArray) reply.result().body();
                   logger.info("get macthes from steam,size: {}", array.size());
+                  insertDB(array);
                 }
               });
     });
 
   }
 
+  /*
+  插入数据库
+   */
+  private void insertDB(JsonArray array) {
+    vertx.eventBus()
+        .send(Route.DB_MATCH_INSERT.getAddress(), array,
+            reply -> {
+              if (reply.succeeded()) {
+                logger.info("insert matches from steam,size: {}", reply.result());
+              } else {
+                logger.error("insert matches from steam failed", reply.cause());
+              }
+            });
+  }
 }
