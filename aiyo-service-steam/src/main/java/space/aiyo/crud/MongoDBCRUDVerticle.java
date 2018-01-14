@@ -34,22 +34,9 @@ public class MongoDBCRUDVerticle extends AbstractVerticle {
   @Override
   public JsonObject config() {
     JsonObject config = super.config();
-    String env = config.getString("active");
-    JsonObject json = new JsonObject();
-    switch (env) {
-      case "dev":
-        json.put("2", "1");
-        break;
-      case "test":
-        break;
-      case "prod":
-        break;
-      default:
-        break;
-    }
-
-    return json;
+    return config.getJsonObject(config.getString("active")).getJsonObject("mongoDB");
   }
+
 
   @Override
   public void stop() throws Exception {

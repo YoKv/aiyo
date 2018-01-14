@@ -17,7 +17,7 @@ public class HeroDBVerticle extends MongoDBCRUDVerticle {
   public void start() throws Exception {
     super.start();
     EventBus eventBus = vertx.eventBus();
-
+    System.out.println(config());
 
   }
 
