@@ -80,7 +80,7 @@ public class MongoDBCRUDVerticle extends AbstractVerticle {
       Handler<AsyncResult<List<JsonObject>>> handler) {
     client.findWithOptions(documentName, query, findOptions, handler);
   }
-  
+
   protected void delete(JsonObject query,
       Handler<AsyncResult<MongoClientDeleteResult>> handler) {
     client.removeDocuments(documentName, query, handler);
