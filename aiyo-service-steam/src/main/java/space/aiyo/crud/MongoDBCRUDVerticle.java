@@ -37,7 +37,6 @@ public class MongoDBCRUDVerticle extends AbstractVerticle {
     return config.getJsonObject(config.getString("active")).getJsonObject("mongoDB");
   }
 
-
   @Override
   public void stop() throws Exception {
     super.stop();
@@ -46,7 +45,6 @@ public class MongoDBCRUDVerticle extends AbstractVerticle {
 
   protected void insert(JsonObject document, Handler<AsyncResult<String>> handler) {
     client.insert(documentName, document, handler);
-
   }
 
   protected void insertBatch(JsonArray array) {
