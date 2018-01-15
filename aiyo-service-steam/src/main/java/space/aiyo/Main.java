@@ -9,7 +9,7 @@ import space.aiyo.util.DeployVerticleUtil;
 public class Main {
 
   public static void main(String[] args) {
-    //日志相关  TODO 日志配置
+    //日志相关
     System.setProperty("vertx.logger-delegate-factory-class-name",
         "io.vertx.core.logging.SLF4JLogDelegateFactory");
     //一个netty引起的bug 不影响功能，暂时解决方式,https://github.com/eclipse/vert.x/issues/2204
@@ -20,6 +20,6 @@ public class Main {
     DeployVerticleUtil.deployVerticle(vertx);
   }
 
-  // TODO: 2018/1/14 mongo远程安装配置，日志配置,util,逻辑理顺,redis,MQ,API
+  // TODO: 2018/1/14 日志配置,逻辑理顺,redis,MQ,API
 
 }

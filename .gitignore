@@ -7,5 +7,6 @@
 \.vertx/
 node_modules/
 \target/
-
+.project
+\.settings/
 config.yaml
