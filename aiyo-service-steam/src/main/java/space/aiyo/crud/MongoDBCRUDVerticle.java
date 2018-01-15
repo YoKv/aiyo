@@ -25,16 +25,16 @@ public class MongoDBCRUDVerticle extends AbstractVerticle {
   private UpdateOptions updateOptions;
 
   @Override
+  public JsonObject config() {
+    JsonObject config = super.config();
+    return config.getJsonObject(config.getString("active")).getJsonObject("mongoDB");
+  }
+
+  @Override
   public void init(Vertx vertx, Context context) {
     super.init(vertx, context);
     client = MongoClient.createShared(vertx, config());
     updateOptions = new UpdateOptions().setMulti(true).setUpsert(true);
-  }
-
-  @Override
-  public JsonObject config() {
-    JsonObject config = super.config();
-    return config.getJsonObject(config.getString("active")).getJsonObject("mongoDB");
   }
 
   @Override
