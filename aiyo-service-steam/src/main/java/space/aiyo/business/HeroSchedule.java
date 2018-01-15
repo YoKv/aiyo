@@ -16,7 +16,7 @@ public class HeroSchedule extends AbstractVerticle {
 
   @Override
   public void start() throws Exception {
-    long timerID = vertx.setPeriodic(10000, id ->
+    long timerID = vertx.setPeriodic(1000000, id ->
         vertx.eventBus()
             .send(Route.STEAM_CRAWLER_HERO.getAddress(), SteamApiEnum.GET_HEROES.getName(),
                 reply -> {

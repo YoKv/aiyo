@@ -19,7 +19,7 @@ public class ItemSchedule extends AbstractVerticle {
   public void start() throws Exception {
 
     EventBus eventBus = vertx.eventBus();
-    long timerID = vertx.setPeriodic(10000, id -> {
+    long timerID = vertx.setPeriodic(1000000, id -> {
       eventBus
           .send(Route.STEAM_CRAWLER_ITEM.getAddress(),
               SteamApiEnum.GET_GAME_ITEMS.getName(),

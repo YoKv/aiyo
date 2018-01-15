@@ -79,29 +79,22 @@ public class SteamCrawlerVerticle extends AbstractVerticle {
         }
     );
 
-    //注册item相关处理器
+    //注册match相关处理器
     eventBus.consumer(Route.STEAM_CRAWLER_MATCH.getAddress()).handler(message -> {
-          String method = (String) message.body();
-          long sequenceNum = 2478669175L;
-          String uri;
-          if (Objects.equals(method, SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getName())) {
-            uri = "http://" + steamApiDomain
-                + SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getUrl()
-                + "?start_at_match_seq_num=" + sequenceNum + "&matches_requested=100&key="
-                + steamKey;
-            client.request(HttpMethod.GET, uri, response -> {
-              if (response.statusCode() == 200) {
-                response.bodyHandler(buffer -> message
-                    .reply(buffer.toJsonObject().getJsonObject("result").getJsonArray("matches")));
-              } else {
-                logger.error("getHeroes statusCode: {},message: {}", response.statusCode(),
-                    response.statusMessage());
-              }
-            }).end();
-
-          } else {
-            logger.warn("unknown message");
-          }
+          Long sequenceNum = (Long) message.body();
+          String uri = "http://" + steamApiDomain
+              + SteamApiEnum.GET_MATCH_HISTORY_BY_SEQUENCE_NUM.getUrl()
+              + "?start_at_match_seq_num=" + sequenceNum + "&matches_requested=100&key="
+              + steamKey;
+          client.request(HttpMethod.GET, uri, response -> {
+            if (response.statusCode() == 200) {
+              response.bodyHandler(buffer -> message
+                  .reply(buffer.toJsonObject().getJsonObject("result").getJsonArray("matches")));
+            } else {
+              logger.error("getHeroes statusCode: {},message: {}", response.statusCode(),
+                  response.statusMessage());
+            }
+          }).end();
         }
     );
 
