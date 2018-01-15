@@ -11,7 +11,8 @@ public enum Route {
   DB_HERO_UPDATE("space.aiyo.data.hero.update"),
   DB_ITEM_UPDATE("space.aiyo.data.item.update"),
   DB_MATCH_INSERT("space.aiyo.data.match.insert"),
-  DB_MATCH_FIND("space.aiyo.data.match.find");
+  DB_MATCH_FIND("space.aiyo.data.match.find"),
+  DB_MATCH_FINDWITHOPTIONS("space.aiyo.data.match.findWithOptions");
 
 
   private String address;

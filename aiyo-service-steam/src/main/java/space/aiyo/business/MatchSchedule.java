@@ -35,6 +35,12 @@ public class MatchSchedule extends AbstractVerticle {
 
   }
 
+  private void getMaxSequenceNum(){
+
+  }
+
+
+
   /*
   插入数据库
    */

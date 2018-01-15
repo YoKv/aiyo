@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,10 +49,10 @@ public class DeployVerticleUtil {
 
         retriever.getConfig(result -> {
             if (result.succeeded()) {
-                JsonObject config = result.result();
-                logger.info(config.toString());
                 //配置信息
-                DeploymentOptions options = new DeploymentOptions().setConfig(config);
+                DeploymentOptions options = new DeploymentOptions().setConfig(result.result());
+
+                //部署Verticle
                 vertx.deployVerticle(RocketMQManager.class.getName(), res -> {
                     if (res.failed()) {
                         logger.error("deployVerticle RocketMQManager failed", result.cause());
@@ -61,12 +62,12 @@ public class DeployVerticleUtil {
                 vertx.deployVerticle(RedisManager.class.getName(), options, res -> {
                     if (res.succeeded()) {
                         //业务Verticle
+                        //business包
                         vertx.deployVerticle(HeroSchedule.class.getName());
                         vertx.deployVerticle(ItemSchedule.class.getName());
                         vertx.deployVerticle(MatchSchedule.class.getName());
-
+                        //data包
                         vertx.deployVerticle(SteamCrawlerVerticle.class.getName(), options);
-
                         vertx.deployVerticle(HeroDBVerticle.class.getName(), options);
                         vertx.deployVerticle(ItemDBVerticle.class.getName(), options);
                         vertx.deployVerticle(MatchDBVerticle.class.getName(), options);
