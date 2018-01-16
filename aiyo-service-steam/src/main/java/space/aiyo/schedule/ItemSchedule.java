@@ -1,10 +1,12 @@
-package space.aiyo.business;
+package space.aiyo.schedule;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import space.aiyo.var.RedisKey;
 import space.aiyo.var.Route;
 import space.aiyo.var.SteamApiEnum;
 
@@ -16,7 +18,7 @@ public class ItemSchedule extends AbstractVerticle {
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Override
-  public void start() throws Exception {
+  public void start(){
 
     EventBus eventBus = vertx.eventBus();
     long timerID = vertx.setPeriodic(1000000, id -> {
@@ -31,6 +33,8 @@ public class ItemSchedule extends AbstractVerticle {
                 }
               });
     });
+      vertx.eventBus().send(Route.REDIS_SET.getAddress(),
+              new JsonObject().put("key", RedisKey.SCHEDULE_TIMEID).put("value", timerID).put("expire", -1));
   }
 
   /*

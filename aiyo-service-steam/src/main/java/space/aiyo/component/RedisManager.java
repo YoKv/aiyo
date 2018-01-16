@@ -42,6 +42,5 @@ public class RedisManager extends AbstractVerticle {
         });
     });
 
-
   }
 }

@@ -1,4 +1,4 @@
-package space.aiyo.business;
+package space.aiyo.schedule;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonArray;
@@ -7,6 +7,7 @@ import io.vertx.ext.mongo.FindOptions;
 import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import space.aiyo.var.RedisKey;
 import space.aiyo.var.Route;
 
 /**
@@ -17,15 +18,29 @@ public class MatchSchedule extends AbstractVerticle {
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Override
-  public void start() throws Exception {
+  public void start() {
     long timerID = vertx.setPeriodic(10000,
-        id -> getMaxSequenceNumFromDB(
+        id -> getMaxSequenceNumFromRedis(
             (sequenceNum) -> getMatchFromSteam(sequenceNum, this::insertDB)));
+      vertx.eventBus().send(Route.REDIS_SET.getAddress(),
+              new JsonObject().put("key", RedisKey.SCHEDULE_TIMEID).put("value", timerID).put("expire", -1));
   }
 
   //TODO redis 存一份最大的sequenceNum,基准，包括未存入的
   private void getMaxSequenceNumFromRedis(Consumer<Long> consumer) {
-
+      vertx.eventBus().send(Route.REDIS_GET.getAddress(),
+              new JsonObject().put("key", RedisKey.SEQUENCENUM),reply->{
+                  if (reply.succeeded()) {
+                      Long sequenceNum = (Long) reply.result().body();
+                        if(null == sequenceNum){
+                            getMaxSequenceNumFromDB(consumer);
+                        }else {
+                            consumer.accept(sequenceNum);
+                        }
+                  }else{
+                      getMaxSequenceNumFromDB(consumer);
+                  }
+              });
   }
 
   /**
@@ -34,6 +49,7 @@ public class MatchSchedule extends AbstractVerticle {
   private void getMaxSequenceNumFromDB(Consumer<Long> consumer) {
     JsonObject fields = new JsonObject().put("int","matchSeqNum");
     JsonObject sort =  new JsonObject().put("int", "matchSeqNum");
+    //FIXME
     FindOptions options = new FindOptions(new JsonObject().put("fields",fields)
         .put("sort", sort).put("limit", 1));
     vertx.eventBus()

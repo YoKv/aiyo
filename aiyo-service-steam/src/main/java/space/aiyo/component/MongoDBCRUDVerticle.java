@@ -1,4 +1,4 @@
-package space.aiyo.crud;
+package space.aiyo.component;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;

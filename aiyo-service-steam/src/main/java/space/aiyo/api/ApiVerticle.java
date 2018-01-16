@@ -1,4 +1,4 @@
-package space.aiyo.business;
+package space.aiyo.api;
 
 import io.vertx.core.AbstractVerticle;
 

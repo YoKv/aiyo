@@ -3,25 +3,15 @@ package space.aiyo.util;
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
 import io.vertx.config.ConfigStoreOptions;
-import io.vertx.core.CompositeFuture;
 import io.vertx.core.DeploymentOptions;
-import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
-import java.util.function.Function;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.business.HeroSchedule;
-import space.aiyo.business.ItemSchedule;
-import space.aiyo.business.MatchSchedule;
+import space.aiyo.schedule.HeroSchedule;
+import space.aiyo.schedule.ItemSchedule;
+import space.aiyo.schedule.MatchSchedule;
 import space.aiyo.component.RedisManager;
 import space.aiyo.component.RocketMQManager;
 import space.aiyo.data.HeroDBVerticle;
@@ -62,7 +52,7 @@ public class DeployVerticleUtil {
                 vertx.deployVerticle(RedisManager.class.getName(), options, res -> {
                     if (res.succeeded()) {
                         //业务Verticle
-                        //business包
+                        //schedule包
                         vertx.deployVerticle(HeroSchedule.class.getName());
                         vertx.deployVerticle(ItemSchedule.class.getName());
                         vertx.deployVerticle(MatchSchedule.class.getName());
