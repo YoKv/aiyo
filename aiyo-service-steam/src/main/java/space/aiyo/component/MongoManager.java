@@ -18,7 +18,7 @@ import java.util.List;
  * MongoClient透明,便于切换数据源
  * CREATE BY Yo ON 2018/1/14 00:46
  */
-public class MongoDBCRUDVerticle extends AbstractVerticle {
+public class MongoManager extends AbstractVerticle {
 
   protected String documentName;
   private MongoClient client;

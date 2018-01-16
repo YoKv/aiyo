@@ -20,46 +20,47 @@ public class MatchSchedule extends AbstractVerticle {
   @Override
   public void start() {
     long timerID = vertx.setPeriodic(10000,
-        id -> getMaxSequenceNumFromRedis(
+        id -> getMaxSequenceNumFromDB(
             (sequenceNum) -> getMatchFromSteam(sequenceNum, this::insertDB)));
-      vertx.eventBus().send(Route.REDIS_SET.getAddress(),
-              new JsonObject().put("key", RedisKey.SCHEDULE_TIMEID).put("value", timerID).put("expire", -1));
+    vertx.eventBus().send(Route.REDIS_SET.getAddress(),
+        new JsonObject().put("key", RedisKey.SCHEDULE_TIMEID).put("value", timerID)
+            .put("expire", -1));
   }
 
   //TODO redis 存一份最大的sequenceNum,基准，包括未存入的
   private void getMaxSequenceNumFromRedis(Consumer<Long> consumer) {
-      vertx.eventBus().send(Route.REDIS_GET.getAddress(),
-              new JsonObject().put("key", RedisKey.SEQUENCENUM),reply->{
-                  if (reply.succeeded()) {
-                      Long sequenceNum = (Long) reply.result().body();
-                        if(null == sequenceNum){
-                            getMaxSequenceNumFromDB(consumer);
-                        }else {
-                            consumer.accept(sequenceNum);
-                        }
-                  }else{
-                      getMaxSequenceNumFromDB(consumer);
-                  }
-              });
+    vertx.eventBus().send(Route.REDIS_GET.getAddress(),
+        new JsonObject().put("key", RedisKey.SEQUENCENUM), reply -> {
+          if (reply.succeeded()) {
+            Long sequenceNum = (Long) reply.result().body();
+            if (null == sequenceNum) {
+              getMaxSequenceNumFromDB(consumer);
+            } else {
+              consumer.accept(sequenceNum);
+            }
+          } else {
+            getMaxSequenceNumFromDB(consumer);
+          }
+        });
   }
 
   /**
    * 获取当前数据库中最大的sequenceNum
    */
   private void getMaxSequenceNumFromDB(Consumer<Long> consumer) {
-    JsonObject fields = new JsonObject().put("int","matchSeqNum");
-    JsonObject sort =  new JsonObject().put("int", "matchSeqNum");
-    //FIXME
-    FindOptions options = new FindOptions(new JsonObject().put("fields",fields)
-        .put("sort", sort).put("limit", 1));
     vertx.eventBus()
         .send(Route.DB_MATCH_FINDWITHOPTIONS.getAddress(),
-            new JsonObject().put("query", new JsonObject()).put("options", options),
+            "",
             reply -> {
               if (reply.succeeded()) {
-                Long sequenceNum = (Long) reply.result().body();
-                if (null == sequenceNum) {
-                  sequenceNum = 2478669175L;
+                JsonArray array = (JsonArray) reply.result().body();
+                Long sequenceNum;
+                if (array.size() > 0) {
+                  sequenceNum = array.getJsonObject(0).getLong("match_seq_num");
+                } else {
+                  //2018年1月的一场比赛
+                  sequenceNum = 3681559318L;
+                  logger.info("sequenceNum  {}", sequenceNum);
                 }
                 consumer.accept(sequenceNum);
               } else {

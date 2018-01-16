@@ -1,7 +1,7 @@
 package space.aiyo;
 
 import io.vertx.core.Vertx;
-import space.aiyo.util.DeployVerticleUtil;
+import space.aiyo.util.DeployUtil;
 
 /**
  * CREATE BY Yo ON 2018/1/13 12:43
@@ -17,7 +17,7 @@ public class Main {
 
     Vertx vertx = Vertx.vertx();
     //部署Verticle
-    DeployVerticleUtil.deployVerticle(vertx);
+    DeployUtil.deployVerticle(vertx);
   }
 
   // TODO: 2018/1/14 日志配置,逻辑理顺,redis,MQ,API

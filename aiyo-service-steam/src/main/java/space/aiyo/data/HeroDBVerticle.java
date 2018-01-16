@@ -4,13 +4,13 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.component.MongoDBCRUDVerticle;
+import space.aiyo.component.MongoManager;
 import space.aiyo.var.Route;
 
 /**
  * CREATE BY Yo ON 2018/1/13 20:44
  */
-public class HeroDBVerticle extends MongoDBCRUDVerticle {
+public class HeroDBVerticle extends MongoManager {
 
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 

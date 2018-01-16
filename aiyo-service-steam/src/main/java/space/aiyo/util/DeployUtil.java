@@ -22,9 +22,9 @@ import space.aiyo.data.SteamCrawlerVerticle;
 /**
  * CREATE BY Yo ON 2018/1/13 22:00
  */
-public class DeployVerticleUtil {
+public class DeployUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(DeployVerticleUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(DeployUtil.class);
 
     public static void deployVerticle(Vertx vertx) {
         ConfigStoreOptions store = new ConfigStoreOptions()
