@@ -58,8 +58,8 @@ public class MatchSchedule extends AbstractVerticle {
                 if (array.size() > 0) {
                   sequenceNum = array.getJsonObject(0).getLong("match_seq_num");
                 } else {
-                  //2018年1月的一场比赛
-                  sequenceNum = 3681559318L;
+                  //2018年1月16日的一场比赛
+                  sequenceNum = 3199601005L;
                   logger.info("sequenceNum  {}", sequenceNum);
                 }
                 consumer.accept(sequenceNum);
