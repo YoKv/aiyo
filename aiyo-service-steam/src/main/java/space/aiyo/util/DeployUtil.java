@@ -9,15 +9,15 @@ import io.vertx.core.json.JsonObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import space.aiyo.component.RedisWrapper;
 import space.aiyo.schedule.HeroSchedule;
 import space.aiyo.schedule.ItemSchedule;
 import space.aiyo.schedule.MatchSchedule;
-import space.aiyo.component.RedisManager;
-import space.aiyo.component.RocketMQManager;
-import space.aiyo.data.HeroDBVerticle;
-import space.aiyo.data.ItemDBVerticle;
-import space.aiyo.data.MatchDBVerticle;
-import space.aiyo.data.SteamCrawlerVerticle;
+import space.aiyo.component.RocketMQWrapper;
+import space.aiyo.service.HeroDBVerticle;
+import space.aiyo.service.ItemDBVerticle;
+import space.aiyo.service.MatchDBVerticle;
+import space.aiyo.service.SteamCrawlerVerticle;
 
 /**
  * CREATE BY Yo ON 2018/1/13 22:00
@@ -43,13 +43,13 @@ public class DeployUtil {
                 DeploymentOptions options = new DeploymentOptions().setConfig(result.result());
 
                 //部署Verticle
-                vertx.deployVerticle(RocketMQManager.class.getName(), res -> {
+                vertx.deployVerticle(RocketMQWrapper.class.getName(), res -> {
                     if (res.failed()) {
-                        logger.error("deployVerticle RocketMQManager failed", result.cause());
+                        logger.error("deployVerticle RocketMQWrapper failed", result.cause());
                         vertx.close();
                     }
                 });
-                vertx.deployVerticle(RedisManager.class.getName(), options, res -> {
+                vertx.deployVerticle(RedisWrapper.class.getName(), options, res -> {
                     if (res.succeeded()) {
                         //业务Verticle
                         //schedule包
@@ -62,7 +62,7 @@ public class DeployUtil {
                         vertx.deployVerticle(ItemDBVerticle.class.getName(), options);
                         vertx.deployVerticle(MatchDBVerticle.class.getName(), options);
                     } else {
-                        logger.error("deployVerticle RedisManager failed", result.cause());
+                        logger.error("deployVerticle RedisWrapper failed", result.cause());
                         vertx.close();
                     }
                 });

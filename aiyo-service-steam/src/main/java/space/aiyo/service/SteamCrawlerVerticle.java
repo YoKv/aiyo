@@ -1,4 +1,4 @@
-package space.aiyo.data;
+package space.aiyo.service;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;

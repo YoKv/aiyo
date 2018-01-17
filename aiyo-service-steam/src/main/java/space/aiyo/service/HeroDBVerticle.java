@@ -1,16 +1,16 @@
-package space.aiyo.data;
+package space.aiyo.service;
 
+import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import space.aiyo.component.MongoManager;
 import space.aiyo.var.Route;
 
 /**
  * CREATE BY Yo ON 2018/1/13 20:44
  */
-public class HeroDBVerticle extends MongoManager {
+public class HeroDBVerticle extends AbstractVerticle {
 
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -26,6 +26,7 @@ public class HeroDBVerticle extends MongoManager {
               array.forEach(jsonObject -> {
                   JsonObject json = (JsonObject) jsonObject;
                   JsonObject query = new JsonObject().put("id", json.getLong("id"));
+                  // todo 批量修改
                   update(json, query, result -> {
                       if (result.succeeded()) {
                           logger.info("update hero from steam to db succeeded: {}", result.result());
