@@ -1,6 +1,9 @@
 package space.aiyo;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.MessageCodec;
+import space.aiyo.message.CrudMessage;
+import space.aiyo.message.RedisMessage;
 import space.aiyo.util.DeployUtil;
 
 /**
@@ -16,6 +19,7 @@ public class Main {
     System.setProperty("vertx.disableDnsResolver", "true");
 
     Vertx vertx = Vertx.vertx();
+    vertx.eventBus().registerCodec(new CrudMessage());
     //部署Verticle
     DeployUtil.deployVerticle(vertx);
   }

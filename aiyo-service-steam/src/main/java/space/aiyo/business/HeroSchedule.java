@@ -20,7 +20,7 @@ public class HeroSchedule extends AbstractVerticle {
 
   @Override
   public void start() {
-    vertx.setPeriodic(1000000, id -> {
+    vertx.setPeriodic(1000, id -> {
       vertx.eventBus().send(Route.STEAM_CRAWLER_HERO.getAddress(), "", update());
 
       Map<String, Long> map = new HashMap<>();

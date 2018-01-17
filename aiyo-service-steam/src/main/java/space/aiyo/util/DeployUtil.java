@@ -49,11 +49,16 @@ public class DeployUtil {
             vertx.deployVerticle(MatchSchedule.class.getName());
             vertx.deployVerticle(SteamCrawlerVerticle.class.getName(), options);
           } else {
-            logger.error("deployVerticle RedisWrapper failed", result.cause());
+            logger.error("deployVerticle RedisWrapper failed", res.cause());
             vertx.close();
           }
         });
-        vertx.deployVerticle(MongoWrapper.class.getName());
+        vertx.deployVerticle(MongoWrapper.class.getName(), options, res -> {
+          if (res.failed()) {
+            logger.error("deployVerticle MongoWrapper failed", res.cause());
+            vertx.close();
+          }
+        });
         vertx.deployVerticle(RocketMQWrapper.class.getName());
 
 
