@@ -10,7 +10,8 @@ public class Main {
 
   public static void main(String[] args) {
     //日志相关
-    System.setProperty("vertx.logger-delegate-factory-class-name", "io.vertx.core.logging.SLF4JLogDelegateFactory");
+    System.setProperty("vertx.logger-delegate-factory-class-name",
+        "io.vertx.core.logging.SLF4JLogDelegateFactory");
     //一个netty引起的bug 不影响功能，暂时解决方式,https://github.com/eclipse/vert.x/issues/2204
     System.setProperty("vertx.disableDnsResolver", "true");
 
