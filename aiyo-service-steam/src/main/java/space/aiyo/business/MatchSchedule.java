@@ -21,7 +21,7 @@ public class MatchSchedule extends AbstractVerticle {
   @Override
   public void start() {
 
-    vertx.setPeriodic(1000000,
+    long timeId = vertx.setPeriodic(1000000,
         id -> {
           RedisMessage redisMessage = new RedisMessage();
           redisMessage.setRedisKey(RedisKey.SEQUENCENUM);
@@ -51,14 +51,15 @@ public class MatchSchedule extends AbstractVerticle {
             }
           });
 
-          Map<String, Long> map = new HashMap<>();
-          map.put("STEAM_CRAWLER_MATCH_PERIODIC", id);
-          redisMessage = new RedisMessage();
-          redisMessage.setHashData(map);
-          redisMessage.setRedisKey(RedisKey.SCHEDULE_TIMEID);
-          vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage);
+
         }
     );
+    Map<String, Long> map = new HashMap<>();
+    map.put("STEAM_CRAWLER_MATCH_PERIODIC", timeId);
+    RedisMessage redisMessage = new RedisMessage();
+    redisMessage.setHashData(map);
+    redisMessage.setRedisKey(RedisKey.SCHEDULE_TIMEID);
+    vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage);
   }
 
   private Handler<AsyncResult<Message<JsonArray>>> insert() {
