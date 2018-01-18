@@ -6,6 +6,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import java.util.HashMap;
 import java.util.Map;
 import space.aiyo.message.CrudMessage;
@@ -21,32 +22,31 @@ public class HeroSchedule extends AbstractVerticle {
 
   @Override
   public void start() {
-    vertx.setPeriodic(1000, id -> {
-      vertx.eventBus().send(Route.STEAM_CRAWLER_HERO.getAddress(), "", update());
+    long timeId = vertx.setPeriodic(1000,
+        id -> vertx.eventBus().send(Route.STEAM_CRAWLER_HERO.getAddress(), "", update()));
+    Map<String, Long> map = new HashMap<>();
+    map.put("STEAM_CRAWLER_HERO_PERIODIC_ID", timeId);
+    RedisMessage redisMessage = new RedisMessage();
+    redisMessage.setHashData(map);
+    redisMessage.setRedisKey(RedisKey.SCHEDULE_TIMEID);
 
-      Map<String, Long> map = new HashMap<>();
-      map.put("STEAM_CRAWLER_HERO_PERIODIC", id);
-      RedisMessage redisMessage = new RedisMessage();
-      redisMessage.setHashData(map);
-      redisMessage.setRedisKey(RedisKey.SCHEDULE_TIMEID);
-
-      DeliveryOptions options = new DeliveryOptions().setCodecName("RedisMessage");
-
-      vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage, options);
-    });
-
-
+    DeliveryOptions options = new DeliveryOptions().setCodecName("RedisMessage");
+    vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage, options);
   }
 
   private Handler<AsyncResult<Message<JsonArray>>> update() {
     return message -> {
       if (message.succeeded()) {
-        CrudMessage crudMessage = new CrudMessage();
-        crudMessage.setArrayData(message.result().body());
-        crudMessage.setDocumentName(Documents.DOTA_HERO.getName());
-
-        DeliveryOptions options = new DeliveryOptions().setCodecName("CrudMessage");
-        vertx.eventBus().send(Route.DB_UPDATE.getAddress(), crudMessage, options);
+        JsonArray array = message.result().body();
+        array.getList().forEach(obj -> {
+          JsonObject hero = (JsonObject) obj;
+          CrudMessage crudMessage = new CrudMessage();
+          crudMessage.setUpdate(new JsonObject().put("$set", hero));
+          crudMessage.setQuery(new JsonObject().put("id", hero.getLong("id")));
+          crudMessage.setDocumentName(Documents.DOTA_HERO.getName());
+          DeliveryOptions options = new DeliveryOptions().setCodecName("CrudMessage");
+          vertx.eventBus().send(Route.DB_UPDATE.getAddress(), crudMessage, options);
+        });
       }
     };
   }

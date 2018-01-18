@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
+import space.aiyo.util.AbstractCodec;
 import space.aiyo.var.RedisKey;
 
 public class RedisMessage extends AbstractCodec<RedisMessage, RedisMessage> {

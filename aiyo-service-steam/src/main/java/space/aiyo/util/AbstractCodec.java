@@ -1,4 +1,4 @@
-package space.aiyo.message;
+package space.aiyo.util;
 
 import io.netty.util.CharsetUtil;
 import io.vertx.core.buffer.Buffer;
