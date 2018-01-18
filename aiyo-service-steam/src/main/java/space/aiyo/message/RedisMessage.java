@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import space.aiyo.var.RedisKey;
 
-public class RedisMessage {
+public class RedisMessage extends AbstractCodec<RedisMessage, RedisMessage> {
 
   private RedisKey redisKey;
   private long expire;
@@ -17,6 +17,25 @@ public class RedisMessage {
   private Set setData;
   private SortedSet sortedSetData;
   private Map hashData;
+
+  @Override
+  public RedisMessage transform(RedisMessage redisMessage) {
+    RedisMessage message = new RedisMessage();
+    message.setRedisKey(redisMessage.getRedisKey());
+    message.setExpire(redisMessage.getExpire());
+    message.setStringData(redisMessage.getStringData());
+    message.setListData(redisMessage.getListData());
+    message.setSetData(redisMessage.getSetData());
+    message.setSortedSetData(redisMessage.getSortedSetData());
+    message.setHashData(redisMessage.getHashData());
+
+    return message;
+  }
+
+  @Override
+  protected Class<RedisMessage> getInstanceClass() {
+    return RedisMessage.class;
+  }
 
   @Override
   public String toString() {

@@ -19,7 +19,7 @@ public class Main {
     System.setProperty("vertx.disableDnsResolver", "true");
 
     Vertx vertx = Vertx.vertx();
-    vertx.eventBus().registerCodec(new CrudMessage());
+    vertx.eventBus().registerCodec(new CrudMessage()).registerCodec(new RedisMessage());
     //部署Verticle
     DeployUtil.deployVerticle(vertx);
   }

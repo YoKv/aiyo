@@ -1,13 +1,11 @@
 package space.aiyo.message;
 
 
-import io.vertx.core.buffer.Buffer;
-import io.vertx.core.eventbus.MessageCodec;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
 
-public class CrudMessage implements MessageCodec<CrudMessage, CrudMessage> {
+public class CrudMessage extends AbstractCodec<CrudMessage, CrudMessage> {
 
   private String documentName;
   private JsonObject jsonData;
@@ -17,34 +15,20 @@ public class CrudMessage implements MessageCodec<CrudMessage, CrudMessage> {
   private FindOptions findOptions;
 
   @Override
-  public void encodeToWire(Buffer buffer, CrudMessage o) {
-
+  public CrudMessage transform(CrudMessage crudMessage) {
+    CrudMessage message = new CrudMessage();
+    message.setDocumentName(crudMessage.getDocumentName());
+    message.setArrayData(crudMessage.getArrayData());
+    message.setFindOptions(crudMessage.getFindOptions());
+    message.setJsonData(crudMessage.getJsonData());
+    message.setQuery(crudMessage.getQuery());
+    message.setUpdate(crudMessage.getUpdate());
+    return message;
   }
 
   @Override
-  public CrudMessage decodeFromWire(int pos, Buffer buffer) {
-    return null;
-  }
-
-  @Override
-  public CrudMessage transform(CrudMessage o) {
-    CrudMessage crudMessage = null;
-    try {
-      crudMessage = (CrudMessage) o.clone();
-    } catch (CloneNotSupportedException e) {
-      e.printStackTrace();
-    }
-    return crudMessage;
-  }
-
-  @Override
-  public String name() {
-    return "cudMessage";
-  }
-
-  @Override
-  public byte systemCodecID() {
-    return 106;
+  protected Class<CrudMessage> getInstanceClass() {
+    return CrudMessage.class;
   }
 
   @Override

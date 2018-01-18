@@ -41,6 +41,7 @@ public class RedisWrapper extends AbstractVerticle {
 
   private Handler<Message<RedisMessage>> set() {
     return message -> {
+      logger.info("REDIS_SET  {}",message.body());
     };
   }
 

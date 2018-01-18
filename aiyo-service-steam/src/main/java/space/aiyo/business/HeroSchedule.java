@@ -3,6 +3,7 @@ package space.aiyo.business;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import java.util.HashMap;
@@ -28,7 +29,10 @@ public class HeroSchedule extends AbstractVerticle {
       RedisMessage redisMessage = new RedisMessage();
       redisMessage.setHashData(map);
       redisMessage.setRedisKey(RedisKey.SCHEDULE_TIMEID);
-      vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage);
+
+      DeliveryOptions options = new DeliveryOptions().setCodecName("RedisMessage");
+
+      vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage, options);
     });
 
 
@@ -40,7 +44,9 @@ public class HeroSchedule extends AbstractVerticle {
         CrudMessage crudMessage = new CrudMessage();
         crudMessage.setArrayData(message.result().body());
         crudMessage.setDocumentName(Documents.DOTA_HERO.getName());
-        vertx.eventBus().send(Route.DB_UPDATE.getAddress(), crudMessage);
+
+        DeliveryOptions options = new DeliveryOptions().setCodecName("CrudMessage");
+        vertx.eventBus().send(Route.DB_UPDATE.getAddress(), crudMessage, options);
       }
     };
   }
