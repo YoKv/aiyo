@@ -2,7 +2,7 @@ package space.aiyo.var;
 
 public enum RedisKey {
   SCHEDULE_TIMEID("SCHEDULE_TIMEID", RedisType.HASH),
-  SEQUENCENUM("SEQUENCENUM", RedisType.STRING),;
+  MATCHSEQNUM("MATCHSEQNUM", RedisType.STRING),;
 
   private String key;
   private RedisType dataType;

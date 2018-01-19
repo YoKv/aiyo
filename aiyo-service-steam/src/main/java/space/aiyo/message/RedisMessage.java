@@ -26,13 +26,13 @@ public class RedisMessage extends AbstractCodec<RedisMessage, RedisMessage> {
   @Override
   public String toString() {
     return "{\"RedisMessage\":"
-            + super.toString()
-            + ",\"redisKey\":\"" + redisKey + "\""
-            + ",\"expire\":\"" + expire + "\""
-            + ",\"data\":\"" + data + "\""
-            + ",\"start\":\"" + start + "\""
-            + ",\"end\":\"" + end + "\""
-            + "}";
+        + super.toString()
+        + ",\"redisKey\":\"" + redisKey + "\""
+        + ",\"expire\":\"" + expire + "\""
+        + ",\"data\":\"" + data + "\""
+        + ",\"start\":\"" + start + "\""
+        + ",\"end\":\"" + end + "\""
+        + "}";
   }
 
   @Override

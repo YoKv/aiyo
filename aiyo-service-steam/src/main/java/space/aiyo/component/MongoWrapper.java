@@ -4,7 +4,6 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Handler;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
@@ -86,7 +85,7 @@ public class MongoWrapper extends AbstractVerticle {
         client.find(message.body().getDocumentName(), message.body().getQuery(), result -> {
           if (result.succeeded()) {
             message.reply(new JsonArray(result.result()));
-            logger.info("find succeeded {}",result.result());
+            logger.info("find succeeded {}", result.result());
           } else {
             logger.error("find {} failed", message.body().getDocumentName(), result.cause());
           }
@@ -99,7 +98,7 @@ public class MongoWrapper extends AbstractVerticle {
             message.body().getFindOptions(), result -> {
               if (result.succeeded()) {
                 message.reply(new JsonArray(result.result()));
-                  logger.info("findWithOptions succeeded {}",result.result());
+                logger.info("findWithOptions succeeded {}", result.result());
               } else {
                 logger.error("find {} failed", message.body().getDocumentName(), result.cause());
               }

@@ -1,23 +1,20 @@
 package space.aiyo.component;
 
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.redis.RedisClient;
 import io.vertx.redis.RedisOptions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import space.aiyo.message.RedisMessage;
-import space.aiyo.var.RedisKey;
-import space.aiyo.var.RedisType;
-import space.aiyo.var.Route;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import space.aiyo.message.RedisMessage;
+import space.aiyo.var.RedisType;
+import space.aiyo.var.Route;
 
 /**
  * CREATE BY Yo ON 2018/1/13 12:57
@@ -50,62 +47,72 @@ public class RedisWrapper extends AbstractVerticle {
     return message -> {
       RedisType type = message.body().getRedisKey().getDataType();
       String key = message.body().getRedisKey().getKey();
-      if(Objects.equals(type,RedisType.STRING)){
-        client.set(key,message.body().getData(),result->message.reply(result.result()));
-      }else if(Objects.equals(type,RedisType.LIST)){
-        client.rpush(key,message.body().getData(),result->message.reply(result.result()));
-      }else if(Objects.equals(type,RedisType.SET)){
-        client.sadd(key,message.body().getData(),result->message.reply(result.result()));
-      }else if(Objects.equals(type,RedisType.SORTSET)){
-        client.zadd(key,Double.valueOf(message.body().getData()),message.body().getData(),result->message.reply(result.result()));
-      }else if(Objects.equals(type,RedisType.HASH)){
-        client.hmset(key,new JsonObject(message.body().getData()),result-> message.reply(result.result()));
-      }else {
-        logger.error("error redis set, message: {}",message);
+      if (Objects.equals(type, RedisType.STRING)) {
+        client.set(key, message.body().getData(), result -> message.reply(result.result()));
+      } else if (Objects.equals(type, RedisType.LIST)) {
+        client.rpush(key, message.body().getData(), result -> message.reply(result.result()));
+      } else if (Objects.equals(type, RedisType.SET)) {
+        client.sadd(key, message.body().getData(), result -> message.reply(result.result()));
+      } else if (Objects.equals(type, RedisType.SORTSET)) {
+        client.zadd(key, Double.valueOf(message.body().getData()), message.body().getData(),
+            result -> message.reply(result.result()));
+      } else if (Objects.equals(type, RedisType.HASH)) {
+        client.hmset(key, new JsonObject(message.body().getData()),
+            result -> message.reply(result.result()));
+      } else {
+        logger.error("error redis set, message: {}", message);
       }
     };
   }
 
   private Handler<Message<RedisMessage>> get() {
     return message -> {
-        RedisType type = message.body().getRedisKey().getDataType();
-        String key = message.body().getRedisKey().getKey();
-        if(Objects.equals(type,RedisType.STRING)){
-          client.get(key,result->message.reply(result.result()));
-        }else if(Objects.equals(type,RedisType.LIST)){
-          client.getrange(key,message.body().getStart(),message.body().getEnd(),result->message.reply(result.result()));
-        }else if(Objects.equals(type,RedisType.SET)){
-          client.smembers(key,result->message.reply(result.result()));
-        }else if(Objects.equals(type,RedisType.SORTSET)){
-          client.zrange(key,message.body().getStart(),message.body().getEnd(),result->message.reply(result.result()));
-        }else if(Objects.equals(type,RedisType.HASH)){
-          client.hget(key,message.body().getData(),result->message.reply(result.result()));
-        }else {
-          logger.error("error redis get, message: {}",message);
-        }
+      RedisType type = message.body().getRedisKey().getDataType();
+      String key = message.body().getRedisKey().getKey();
+      if (Objects.equals(type, RedisType.STRING)) {
+        client.get(key, result -> message.reply(result.result()));
+      } else if (Objects.equals(type, RedisType.LIST)) {
+        client.getrange(key, message.body().getStart(), message.body().getEnd(),
+            result -> message.reply(result.result()));
+      } else if (Objects.equals(type, RedisType.SET)) {
+        client.smembers(key, result -> message.reply(result.result()));
+      } else if (Objects.equals(type, RedisType.SORTSET)) {
+        client.zrange(key, message.body().getStart(), message.body().getEnd(),
+            result -> message.reply(result.result()));
+      } else if (Objects.equals(type, RedisType.HASH)) {
+        client.hget(key, message.body().getData(), result -> message.reply(result.result()));
+      } else {
+        logger.error("error redis get, message: {}", message);
+      }
     };
   }
 
   //可以按数据结构区分删除,有需求再实现
   private Handler<Message<RedisMessage>> delete() {
-    return message -> client.del(message.body().getRedisKey().getKey(),result->message.reply(result.result()));
+    return message -> client
+        .del(message.body().getRedisKey().getKey(), result -> message.reply(result.result()));
   }
 
   private Handler<Message<RedisMessage>> delMany() {
-    return message -> client.delMany(new ArrayList<String>(Arrays.asList(message.body().getData().split(","))), result->message.reply(result.result()));
+    return message -> client
+        .delMany(new ArrayList<String>(Arrays.asList(message.body().getData().split(","))),
+            result -> message.reply(result.result()));
   }
 
   private Handler<Message<Void>> flushdb() {
-    return message -> client.flushdb(result->message.reply(result.result()));
+    return message -> client.flushdb(result -> message.reply(result.result()));
   }
 
   //每个set handle 调用，先不实现
   private Handler<Message<RedisMessage>> expire() {
-    return message -> client.expire(message.body().getRedisKey().getKey(),message.body().getExpire(),result->message.reply(result.result()));
+    return message -> client
+        .expire(message.body().getRedisKey().getKey(), message.body().getExpire(),
+            result -> message.reply(result.result()));
   }
 
   private Handler<Message<RedisMessage>> exists() {
-    return message -> client.exists(message.body().getRedisKey().getKey(),result->message.reply(result.result()));
+    return message -> client
+        .exists(message.body().getRedisKey().getKey(), result -> message.reply(result.result()));
   }
 
 }

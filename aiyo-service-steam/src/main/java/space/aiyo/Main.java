@@ -1,7 +1,6 @@
 package space.aiyo;
 
 import io.vertx.core.Vertx;
-import io.vertx.core.eventbus.MessageCodec;
 import space.aiyo.message.CrudMessage;
 import space.aiyo.message.RedisMessage;
 import space.aiyo.util.DeployUtil;
@@ -24,6 +23,6 @@ public class Main {
     DeployUtil.deployVerticle(vertx);
   }
 
-  // TODO: 2018/1/14 日志配置,逻辑理顺,redis,MQ,API
+  // TODO: 2018/1/14 日志配置,逻辑理顺,MQ,API
 
 }
