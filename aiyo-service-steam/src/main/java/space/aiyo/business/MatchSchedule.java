@@ -33,17 +33,14 @@ public class MatchSchedule extends AbstractVerticle {
 
   @Override
   public void start() {
-    // todo sequenceNum逻辑再定现在有问题
     long timeId = vertx.setPeriodic(4000,
         id -> {
           RedisMessage redisMessage = new RedisMessage();
           redisMessage.setRedisKey(RedisKey.MATCHSEQNUM);
-
           vertx.eventBus()
               .send(Route.REDIS_GET.getAddress(), redisMessage, redisMessageOptions, message -> {
                 if (message.succeeded()) {
-                  Long matchSeqNum = Long.valueOf((String) message.result().body());
-                  if (null == matchSeqNum) {
+                  if (null == message.result().body()) {
                     CrudMessage crudMessage = new CrudMessage();
                     FindOptions findOptions = new FindOptions().setLimit(1)
                         .setSort(new JsonObject().put("match_seq_num", -1));
@@ -54,19 +51,20 @@ public class MatchSchedule extends AbstractVerticle {
                         crudMessageOptions, msg -> {
                           if (msg.succeeded()) {
                             JsonArray array = (JsonArray) msg.result().body();
-                            Long sequenceNum;
+                            Long matchSeqNum;
                             if (array.size() > 0) {
-                              sequenceNum = array.getJsonObject(0).getLong("match_seq_num");
+                              matchSeqNum = array.getJsonObject(0).getLong("match_seq_num");
                             } else {
                               //2018年1月16日的一场比赛
-                              sequenceNum = 3199601005L;
+                              matchSeqNum = 3199601005L;
                             }
                             vertx.eventBus()
-                                .send(Route.STEAM_CRAWLER_MATCH.getAddress(), sequenceNum + 1,
+                                .send(Route.STEAM_CRAWLER_MATCH.getAddress(), matchSeqNum + 1,
                                     insert());
                           }
                         });
                   } else {
+                    Long matchSeqNum = Long.valueOf((String) message.result().body());
                     vertx.eventBus()
                         .send(Route.STEAM_CRAWLER_MATCH.getAddress(), matchSeqNum + 1, insert());
                   }
@@ -81,7 +79,6 @@ public class MatchSchedule extends AbstractVerticle {
     vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage, redisMessageOptions);
   }
 
-  //TODO insert前 把sequenceNum插入redis
   private Handler<AsyncResult<Message<JsonArray>>> insert() {
     return message -> {
       if (message.succeeded()) {
