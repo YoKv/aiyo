@@ -1,12 +1,14 @@
 package space.aiyo;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+import io.vertx.core.Vertx;
+
 public class Application {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    Vertx vertx = Vertx.vertx();
+
+    vertx.close();
+
   }
 }
