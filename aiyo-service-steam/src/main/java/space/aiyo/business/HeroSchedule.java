@@ -1,8 +1,6 @@
 package space.aiyo.business;
 
-import io.vertx.core.AbstractVerticle;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
+import io.vertx.core.*;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
@@ -19,19 +17,29 @@ import space.aiyo.var.Route;
  * CREATE BY Yo ON 2018/1/13 16:06
  */
 public class HeroSchedule extends AbstractVerticle {
+  private DeliveryOptions redisMessageOptions;
+  private DeliveryOptions crudMessageOptions;
+
+  @Override
+  public void init(Vertx vertx, Context context) {
+    super.init(vertx, context);
+    redisMessageOptions = new DeliveryOptions().setCodecName("RedisMessage");
+    crudMessageOptions = new DeliveryOptions().setCodecName("CrudMessage");
+  }
 
   @Override
   public void start() {
+//    long timeId = vertx.setPeriodic(1000,
+//        id -> vertx.eventBus().send(Route.STEAM_CRAWLER_HERO.getAddress(), "", update()));
     long timeId = vertx.setPeriodic(1000,
-        id -> vertx.eventBus().send(Route.STEAM_CRAWLER_HERO.getAddress(), "", update()));
-    Map<String, Long> map = new HashMap<>();
-    map.put("STEAM_CRAWLER_HERO_PERIODIC_ID", timeId);
+        id -> System.out.println(1));
+
+    JsonObject json = new JsonObject().put("STEAM_CRAWLER_HERO_PERIODIC_ID", timeId);
     RedisMessage redisMessage = new RedisMessage();
-    redisMessage.setHashData(map);
+    redisMessage.setData(json.toString());
     redisMessage.setRedisKey(RedisKey.SCHEDULE_TIMEID);
 
-    DeliveryOptions options = new DeliveryOptions().setCodecName("RedisMessage");
-    vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage, options);
+    vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage, redisMessageOptions);
   }
 
   private Handler<AsyncResult<Message<JsonArray>>> update() {
@@ -44,8 +52,7 @@ public class HeroSchedule extends AbstractVerticle {
           crudMessage.setUpdate(new JsonObject().put("$set", hero));
           crudMessage.setQuery(new JsonObject().put("id", hero.getLong("id")));
           crudMessage.setDocumentName(Documents.DOTA_HERO.getName());
-          DeliveryOptions options = new DeliveryOptions().setCodecName("CrudMessage");
-          vertx.eventBus().send(Route.DB_UPDATE.getAddress(), crudMessage, options);
+          vertx.eventBus().send(Route.DB_UPDATE.getAddress(), crudMessage, crudMessageOptions);
         });
       }
     };

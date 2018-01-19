@@ -1,8 +1,6 @@
 package space.aiyo.business;
 
-import io.vertx.core.AbstractVerticle;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
+import io.vertx.core.*;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
@@ -19,17 +17,27 @@ import space.aiyo.var.Route;
  * CREATE BY Yo ON 2018/1/13 16:06
  */
 public class ItemSchedule extends AbstractVerticle {
+  private DeliveryOptions redisMessageOptions;
+  private DeliveryOptions crudMessageOptions;
+
+  @Override
+  public void init(Vertx vertx, Context context) {
+    super.init(vertx, context);
+    redisMessageOptions = new DeliveryOptions().setCodecName("RedisMessage");
+    crudMessageOptions = new DeliveryOptions().setCodecName("CrudMessage");
+  }
 
   @Override
   public void start() {
-    long timeId = vertx.setPeriodic(1000,
+    long timeId = vertx.setPeriodic(100000,
         id -> vertx.eventBus().send(Route.STEAM_CRAWLER_ITEM.getAddress(), "", update()));
-    Map<String, Long> map = new HashMap<>();
-    map.put("STEAM_CRAWLER_ITEM_PERIODIC", timeId);
+
+    JsonObject json = new JsonObject().put("STEAM_CRAWLER_ITEM_PERIODIC_ID", timeId);
     RedisMessage redisMessage = new RedisMessage();
-    redisMessage.setHashData(map);
+    redisMessage.setData(json.toString());
     redisMessage.setRedisKey(RedisKey.SCHEDULE_TIMEID);
-    vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage);
+
+    vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage,redisMessageOptions);
   }
 
   private Handler<AsyncResult<Message<JsonArray>>> update() {
@@ -42,8 +50,7 @@ public class ItemSchedule extends AbstractVerticle {
           crudMessage.setUpdate(new JsonObject().put("$set", item));
           crudMessage.setQuery(new JsonObject().put("id", item.getLong("id")));
           crudMessage.setDocumentName(Documents.DOTA_ITEM.getName());
-          DeliveryOptions options = new DeliveryOptions().setCodecName("CrudMessage");
-          vertx.eventBus().send(Route.DB_UPDATE.getAddress(), crudMessage, options);
+          vertx.eventBus().send(Route.DB_UPDATE.getAddress(), crudMessage, crudMessageOptions);
         });
       }
     };

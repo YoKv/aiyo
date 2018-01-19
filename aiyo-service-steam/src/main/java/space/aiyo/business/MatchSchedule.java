@@ -1,12 +1,14 @@
 package space.aiyo.business;
 
-import io.vertx.core.AbstractVerticle;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
+import io.vertx.core.*;
+import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.mongo.FindOptions;
 import space.aiyo.message.CrudMessage;
 import space.aiyo.message.RedisMessage;
 import space.aiyo.var.Documents;
@@ -17,20 +19,34 @@ import space.aiyo.var.Route;
  * CREATE BY Yo ON 2018/1/13 16:06
  */
 public class MatchSchedule extends AbstractVerticle {
+  private DeliveryOptions redisMessageOptions;
+  private DeliveryOptions crudMessageOptions;
+
+  @Override
+  public void init(Vertx vertx, Context context) {
+    super.init(vertx, context);
+    redisMessageOptions = new DeliveryOptions().setCodecName("RedisMessage");
+    crudMessageOptions = new DeliveryOptions().setCodecName("CrudMessage");
+  }
 
   @Override
   public void start() {
-
-    long timeId = vertx.setPeriodic(1000000,
+    // todo sequenceNum逻辑再定现在有问题
+    long timeId = vertx.setPeriodic(100000,
         id -> {
           RedisMessage redisMessage = new RedisMessage();
           redisMessage.setRedisKey(RedisKey.SEQUENCENUM);
-          vertx.eventBus().send(Route.REDIS_GET.getAddress(), redisMessage, message -> {
+
+          vertx.eventBus().send(Route.REDIS_GET.getAddress(), redisMessage, redisMessageOptions,message -> {
             if (message.succeeded()) {
               Long matchSeqNum = (Long) message.result().body();
               if (null == matchSeqNum) {
                 CrudMessage crudMessage = new CrudMessage();
-                vertx.eventBus().send(Route.DB_FINDWITHOPTIONS.getAddress(), crudMessage, msg -> {
+                FindOptions findOptions = new FindOptions().setLimit(1).setSort(new JsonObject().put("match_seq_num",-1));
+                crudMessage.setFindOptions(findOptions);
+                crudMessage.setQuery(new JsonObject());
+                crudMessage.setDocumentName(Documents.DOTA_MATCH.getName());
+                vertx.eventBus().send(Route.DB_FINDWITHOPTIONS.getAddress(), crudMessage,crudMessageOptions, msg -> {
                   if (msg.succeeded()) {
                     JsonArray array = (JsonArray) msg.result().body();
                     Long sequenceNum;
@@ -50,23 +66,28 @@ public class MatchSchedule extends AbstractVerticle {
               }
             }
           });
-
-
         }
     );
-    Map<String, Long> map = new HashMap<>();
-    map.put("STEAM_CRAWLER_MATCH_PERIODIC", timeId);
+    JsonObject json = new JsonObject().put("STEAM_CRAWLER_MATCH_PERIODIC_ID", timeId);
     RedisMessage redisMessage = new RedisMessage();
-    redisMessage.setHashData(map);
+    redisMessage.setData(json.toString());
     redisMessage.setRedisKey(RedisKey.SCHEDULE_TIMEID);
-    vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage);
+    vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage,redisMessageOptions);
   }
 
+  //TODO insert前 把sequenceNum插入redis
   private Handler<AsyncResult<Message<JsonArray>>> insert() {
     return message -> {
-      CrudMessage crudMessage = new CrudMessage();
-      crudMessage.setDocumentName(Documents.DOTA_MATCH.getName());
-      vertx.eventBus().send(Route.DB_INSERT.getAddress(), crudMessage);
+        if (message.succeeded()){
+            JsonArray array = message.result().body();
+            array.getList().forEach(obj -> {
+                JsonObject item = (JsonObject) obj;
+                CrudMessage crudMessage = new CrudMessage();
+                crudMessage.setJsonData(item);
+                crudMessage.setDocumentName(Documents.DOTA_MATCH.getName());
+                vertx.eventBus().send(Route.DB_INSERT.getAddress(), crudMessage,crudMessageOptions);
+            });
+        }
 
     };
   }

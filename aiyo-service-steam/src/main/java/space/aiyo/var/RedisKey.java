@@ -19,13 +19,4 @@ public enum RedisKey {
   public RedisType getDataType() {
     return dataType;
   }
-
-  enum RedisType {
-    STRING,
-    LIST,
-    SET,
-    SORTSET,
-    HASH;
-  }
-
 }

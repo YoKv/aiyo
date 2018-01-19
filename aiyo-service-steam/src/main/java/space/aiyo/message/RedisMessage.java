@@ -1,10 +1,5 @@
 package space.aiyo.message;
 
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
 import space.aiyo.util.AbstractCodec;
 import space.aiyo.var.RedisKey;
 
@@ -13,42 +8,36 @@ public class RedisMessage extends AbstractCodec<RedisMessage, RedisMessage> {
   private RedisKey redisKey;
   private long expire;
 
-  private String stringData;
-  private List listData;
-  private Set setData;
-  private SortedSet sortedSetData;
-  private Map hashData;
+  private String data;
+  private long start;
+  private long end;
 
   @Override
   public RedisMessage transform(RedisMessage redisMessage) {
     RedisMessage message = new RedisMessage();
     message.setRedisKey(redisMessage.getRedisKey());
     message.setExpire(redisMessage.getExpire());
-    message.setStringData(redisMessage.getStringData());
-    message.setListData(redisMessage.getListData());
-    message.setSetData(redisMessage.getSetData());
-    message.setSortedSetData(redisMessage.getSortedSetData());
-    message.setHashData(redisMessage.getHashData());
-
+    message.setData(redisMessage.getData());
+    message.setStart(redisMessage.getStart());
+    message.setEnd(redisMessage.getEnd());
     return message;
+  }
+
+  @Override
+  public String toString() {
+    return "{\"RedisMessage\":"
+            + super.toString()
+            + ",\"redisKey\":\"" + redisKey + "\""
+            + ",\"expire\":\"" + expire + "\""
+            + ",\"data\":\"" + data + "\""
+            + ",\"start\":\"" + start + "\""
+            + ",\"end\":\"" + end + "\""
+            + "}";
   }
 
   @Override
   protected Class<RedisMessage> getInstanceClass() {
     return RedisMessage.class;
-  }
-
-  @Override
-  public String toString() {
-    return "{\"RedisMessage\":{"
-        + "\"redisKey\":\"" + redisKey + "\""
-        + ",\"expire\":\"" + expire + "\""
-        + ",\"stringData\":\"" + stringData + "\""
-        + ",\"listData\":" + listData
-        + ",\"setData\":" + setData
-        + ",\"sortedSetData\":" + sortedSetData
-        + ",\"hashData\":" + hashData
-        + "}}";
   }
 
   public RedisKey getRedisKey() {
@@ -67,43 +56,27 @@ public class RedisMessage extends AbstractCodec<RedisMessage, RedisMessage> {
     this.expire = expire;
   }
 
-  public String getStringData() {
-    return stringData;
+  public String getData() {
+    return data;
   }
 
-  public void setStringData(String stringData) {
-    this.stringData = stringData;
+  public void setData(String data) {
+    this.data = data;
   }
 
-  public List getListData() {
-    return listData;
+  public long getStart() {
+    return start;
   }
 
-  public void setListData(List listData) {
-    this.listData = listData;
+  public void setStart(long start) {
+    this.start = start;
   }
 
-  public Set getSetData() {
-    return setData;
+  public long getEnd() {
+    return end;
   }
 
-  public void setSetData(Set setData) {
-    this.setData = setData;
-  }
-
-  public SortedSet getSortedSetData() {
-    return sortedSetData;
-  }
-
-  public void setSortedSetData(SortedSet sortedSetData) {
-    this.sortedSetData = sortedSetData;
-  }
-
-  public Map getHashData() {
-    return hashData;
-  }
-
-  public void setHashData(Map hashData) {
-    this.hashData = hashData;
+  public void setEnd(long end) {
+    this.end = end;
   }
 }
