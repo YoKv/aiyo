@@ -11,8 +11,8 @@
   <version>${project.version}</version>
 
   <modules>
-    <module>aiyo-api-admin</module>
     <module>aiyo-api-web</module>
+    <module>aiyo-service-business</module>
     <module>aiyo-service-data</module>
     <module>aiyo-service-steam</module>
     <module>aiyo-static-base</module>
