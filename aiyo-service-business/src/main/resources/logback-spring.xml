@@ -7,5 +7,4 @@
   <logger level="INFO" name="org.springframework.web"/>
   <logger level="TRACE" name="org.springboot.sample"/>
 
-  <!--appender TODO-->
 </configuration>

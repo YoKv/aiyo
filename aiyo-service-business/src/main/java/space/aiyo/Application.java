@@ -1,16 +1,25 @@
 package space.aiyo;
 
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 /**
  * CREATE BY Yo ON 2018/1/19 23:48
  */
-@SpringBootApplication()
-public class Application {
+@SpringBootApplication
+public class Application implements CommandLineRunner {
 
-  //以非web方式部署
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    //非web环境
+    new SpringApplicationBuilder(Application.class).web(WebApplicationType.NONE).run(args);
+  }
+
+  @Override
+  public void run(String... strings) throws Exception {
+    //线程阻塞
+    Thread.currentThread().join();
+    System.out.println("aiyo-service-business startup");
   }
 }

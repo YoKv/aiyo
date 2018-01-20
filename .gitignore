@@ -11,3 +11,4 @@ node_modules/
 \.settings/
 config.yaml
 aiyo-service-data/src/main/resources/application.yml
+aiyo-service-business/src/main/resources/application.yml
