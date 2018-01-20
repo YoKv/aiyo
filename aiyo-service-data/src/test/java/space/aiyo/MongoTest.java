@@ -27,7 +27,7 @@ public class MongoTest {
 
   @Test
   public void contextLoads() {
-    MatchEntity matchEntity = repository.findOne(new ObjectId("5a61f441ce6907266041dbc1"));
+    MatchEntity matchEntity = repository.findById(new ObjectId("5a61f441ce6907266041dbc1")).get();
     System.out.println(matchEntity);
 
     List<HeroRepositoryEntity> list = heroRepository.findAll();

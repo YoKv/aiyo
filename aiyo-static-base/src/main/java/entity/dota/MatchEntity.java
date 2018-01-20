@@ -13,15 +13,15 @@ import java.util.List;
 
 public class MatchEntity {
 
-  private long matchId;
+  private long match_id;
   /**
    * A 'sequence number', representing the order in which matches were recorded.
    */
-  private long matchSeqNum;
+  private long match_seq_num;
   /**
    * Unix timestamp of when the match began.
    */
-  private int startTime;
+  private int start_time;
   /**
    * -1 - Invalid
    * 0 - Public matchmaking
@@ -34,22 +34,22 @@ public class MatchEntity {
    * 7 - Ranked Matchmaking
    * 8 - 1v1 Solo Mid
    */
-  private int lobbyType;
+  private int lobby_type;
   /**
    * The season the game was played in.
    */
   private int season;
-  private int radiantTeamId;
-  private int direTeamId;
+  private int radiant_team_id;
+  private int dire_team_id;
   /**
    * Dictates the winner of the match, true for radiant; false for dire.
    */
-  private boolean radiantWin;
+  private boolean radiant_win;
   /**
    * The length of the match, in seconds since the match began.
    */
   private int duration;
-  private int preGameDuration;
+  private int pre_game_duration;
   /**
    * A particular teams tower status is given as a 16-bit unsigned integer.
    * The rightmost 11 bits represent individual towers belonging to that team;
@@ -69,8 +69,8 @@ public class MatchEntity {
    * │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │
    * 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
    */
-  private int towerStatusRadiant;
-  private int towerStatusDire;
+  private int tower_status_radiant;
+  private int tower_status_dire;
   /**
    * A particular teams tower status is given as an 8-bit unsigned integer.
    * The rightmost 6 bits represent the barracks belonging to that team;
@@ -85,21 +85,21 @@ public class MatchEntity {
    * │ │ │ │ │ │ │ │
    * 0 0 0 0 0 0 0 0
    */
-  private int barracksStatusRadiant;
-  private int barracksStatusDire;
+  private int barracks_status_radiant;
+  private int barracks_status_dire;
   /**
    * The server cluster the match was played upon. Used for downloading replays of matches.
    */
   private int cluster;
-  private int firstBloodTime;
-  private int humanPlayers;
+  private int first_blood_time;
+  private int human_players;
   /**
    * The league that this match was a part of.
    * A list of league IDs can be found via the GetLeagueListing method.
    */
-  private int leagueId;
-  private int positiveVotes;
-  private int negativeVotes;
+  private int league_id;
+  private int positive_votes;
+  private int negative_votes;
   /**
    * 0 - None
    * 1 - All Pick
@@ -123,15 +123,15 @@ public class MatchEntity {
    * 21 - 1v1 Mid Only
    * 22 - Ranked Matchmaking
    */
-  private int gameMode;
+  private int game_mode;
   /**
    * A list of the picks and bans in the match, if the game mode is Captains Mode.
    */
-  private List<PicksBansEntity> picksBans;
+  private List<PicksBansEntity> picks_bans;
   private int flags;
   private int engine;
-  private int radiantScore;
-  private int direScore;
+  private int radiant_score;
+  private int dire_score;
   private List<MatchPlayerEntity> players;
 
   /**
@@ -141,36 +141,36 @@ public class MatchEntity {
   public MatchEntity() {
   }
 
-  public long getMatchId() {
-    return matchId;
+  public long getMatch_id() {
+    return match_id;
   }
 
-  public void setMatchId(long matchId) {
-    this.matchId = matchId;
+  public void setMatch_id(long match_id) {
+    this.match_id = match_id;
   }
 
-  public long getMatchSeqNum() {
-    return matchSeqNum;
+  public long getMatch_seq_num() {
+    return match_seq_num;
   }
 
-  public void setMatchSeqNum(long matchSeqNum) {
-    this.matchSeqNum = matchSeqNum;
+  public void setMatch_seq_num(long match_seq_num) {
+    this.match_seq_num = match_seq_num;
   }
 
-  public int getStartTime() {
-    return startTime;
+  public int getStart_time() {
+    return start_time;
   }
 
-  public void setStartTime(int startTime) {
-    this.startTime = startTime;
+  public void setStart_time(int start_time) {
+    this.start_time = start_time;
   }
 
-  public int getLobbyType() {
-    return lobbyType;
+  public int getLobby_type() {
+    return lobby_type;
   }
 
-  public void setLobbyType(int lobbyType) {
-    this.lobbyType = lobbyType;
+  public void setLobby_type(int lobby_type) {
+    this.lobby_type = lobby_type;
   }
 
   public int getSeason() {
@@ -181,28 +181,28 @@ public class MatchEntity {
     this.season = season;
   }
 
-  public int getRadiantTeamId() {
-    return radiantTeamId;
+  public int getRadiant_team_id() {
+    return radiant_team_id;
   }
 
-  public void setRadiantTeamId(int radiantTeamId) {
-    this.radiantTeamId = radiantTeamId;
+  public void setRadiant_team_id(int radiant_team_id) {
+    this.radiant_team_id = radiant_team_id;
   }
 
-  public int getDireTeamId() {
-    return direTeamId;
+  public int getDire_team_id() {
+    return dire_team_id;
   }
 
-  public void setDireTeamId(int direTeamId) {
-    this.direTeamId = direTeamId;
+  public void setDire_team_id(int dire_team_id) {
+    this.dire_team_id = dire_team_id;
   }
 
-  public boolean isRadiantWin() {
-    return radiantWin;
+  public boolean isRadiant_win() {
+    return radiant_win;
   }
 
-  public void setRadiantWin(boolean radiantWin) {
-    this.radiantWin = radiantWin;
+  public void setRadiant_win(boolean radiant_win) {
+    this.radiant_win = radiant_win;
   }
 
   public int getDuration() {
@@ -213,44 +213,44 @@ public class MatchEntity {
     this.duration = duration;
   }
 
-  public int getPreGameDuration() {
-    return preGameDuration;
+  public int getPre_game_duration() {
+    return pre_game_duration;
   }
 
-  public void setPreGameDuration(int preGameDuration) {
-    this.preGameDuration = preGameDuration;
+  public void setPre_game_duration(int pre_game_duration) {
+    this.pre_game_duration = pre_game_duration;
   }
 
-  public int getTowerStatusRadiant() {
-    return towerStatusRadiant;
+  public int getTower_status_radiant() {
+    return tower_status_radiant;
   }
 
-  public void setTowerStatusRadiant(int towerStatusRadiant) {
-    this.towerStatusRadiant = towerStatusRadiant;
+  public void setTower_status_radiant(int tower_status_radiant) {
+    this.tower_status_radiant = tower_status_radiant;
   }
 
-  public int getTowerStatusDire() {
-    return towerStatusDire;
+  public int getTower_status_dire() {
+    return tower_status_dire;
   }
 
-  public void setTowerStatusDire(int towerStatusDire) {
-    this.towerStatusDire = towerStatusDire;
+  public void setTower_status_dire(int tower_status_dire) {
+    this.tower_status_dire = tower_status_dire;
   }
 
-  public int getBarracksStatusRadiant() {
-    return barracksStatusRadiant;
+  public int getBarracks_status_radiant() {
+    return barracks_status_radiant;
   }
 
-  public void setBarracksStatusRadiant(int barracksStatusRadiant) {
-    this.barracksStatusRadiant = barracksStatusRadiant;
+  public void setBarracks_status_radiant(int barracks_status_radiant) {
+    this.barracks_status_radiant = barracks_status_radiant;
   }
 
-  public int getBarracksStatusDire() {
-    return barracksStatusDire;
+  public int getBarracks_status_dire() {
+    return barracks_status_dire;
   }
 
-  public void setBarracksStatusDire(int barracksStatusDire) {
-    this.barracksStatusDire = barracksStatusDire;
+  public void setBarracks_status_dire(int barracks_status_dire) {
+    this.barracks_status_dire = barracks_status_dire;
   }
 
   public int getCluster() {
@@ -261,60 +261,60 @@ public class MatchEntity {
     this.cluster = cluster;
   }
 
-  public int getFirstBloodTime() {
-    return firstBloodTime;
+  public int getFirst_blood_time() {
+    return first_blood_time;
   }
 
-  public void setFirstBloodTime(int firstBloodTime) {
-    this.firstBloodTime = firstBloodTime;
+  public void setFirst_blood_time(int first_blood_time) {
+    this.first_blood_time = first_blood_time;
   }
 
-  public int getHumanPlayers() {
-    return humanPlayers;
+  public int getHuman_players() {
+    return human_players;
   }
 
-  public void setHumanPlayers(int humanPlayers) {
-    this.humanPlayers = humanPlayers;
+  public void setHuman_players(int human_players) {
+    this.human_players = human_players;
   }
 
-  public int getLeagueId() {
-    return leagueId;
+  public int getLeague_id() {
+    return league_id;
   }
 
-  public void setLeagueId(int leagueId) {
-    this.leagueId = leagueId;
+  public void setLeague_id(int league_id) {
+    this.league_id = league_id;
   }
 
-  public int getPositiveVotes() {
-    return positiveVotes;
+  public int getPositive_votes() {
+    return positive_votes;
   }
 
-  public void setPositiveVotes(int positiveVotes) {
-    this.positiveVotes = positiveVotes;
+  public void setPositive_votes(int positive_votes) {
+    this.positive_votes = positive_votes;
   }
 
-  public int getNegativeVotes() {
-    return negativeVotes;
+  public int getNegative_votes() {
+    return negative_votes;
   }
 
-  public void setNegativeVotes(int negativeVotes) {
-    this.negativeVotes = negativeVotes;
+  public void setNegative_votes(int negative_votes) {
+    this.negative_votes = negative_votes;
   }
 
-  public int getGameMode() {
-    return gameMode;
+  public int getGame_mode() {
+    return game_mode;
   }
 
-  public void setGameMode(int gameMode) {
-    this.gameMode = gameMode;
+  public void setGame_mode(int game_mode) {
+    this.game_mode = game_mode;
   }
 
-  public List<PicksBansEntity> getPicksBans() {
-    return picksBans;
+  public List<PicksBansEntity> getPicks_bans() {
+    return picks_bans;
   }
 
-  public void setPicksBans(List<PicksBansEntity> picksBans) {
-    this.picksBans = picksBans;
+  public void setPicks_bans(List<PicksBansEntity> picks_bans) {
+    this.picks_bans = picks_bans;
   }
 
   public int getFlags() {
@@ -333,20 +333,20 @@ public class MatchEntity {
     this.engine = engine;
   }
 
-  public int getRadiantScore() {
-    return radiantScore;
+  public int getRadiant_score() {
+    return radiant_score;
   }
 
-  public void setRadiantScore(int radiantScore) {
-    this.radiantScore = radiantScore;
+  public void setRadiant_score(int radiant_score) {
+    this.radiant_score = radiant_score;
   }
 
-  public int getDireScore() {
-    return direScore;
+  public int getDire_score() {
+    return dire_score;
   }
 
-  public void setDireScore(int direScore) {
-    this.direScore = direScore;
+  public void setDire_score(int dire_score) {
+    this.dire_score = dire_score;
   }
 
   public List<MatchPlayerEntity> getPlayers() {
@@ -360,32 +360,32 @@ public class MatchEntity {
   @Override
   public String toString() {
     return "MatchEntity{" +
-        "matchId=" + matchId +
-        ", matchSeqNum=" + matchSeqNum +
-        ", startTime=" + startTime +
-        ", lobbyType=" + lobbyType +
+        "match_id=" + match_id +
+        ", match_seq_num=" + match_seq_num +
+        ", start_time=" + start_time +
+        ", lobby_type=" + lobby_type +
         ", season=" + season +
-        ", radiantTeamId=" + radiantTeamId +
-        ", direTeamId=" + direTeamId +
-        ", radiantWin=" + radiantWin +
+        ", radiant_team_id=" + radiant_team_id +
+        ", dire_team_id=" + dire_team_id +
+        ", radiant_win=" + radiant_win +
         ", duration=" + duration +
-        ", preGameDuration=" + preGameDuration +
-        ", towerStatusRadiant=" + towerStatusRadiant +
-        ", towerStatusDire=" + towerStatusDire +
-        ", barracksStatusRadiant=" + barracksStatusRadiant +
-        ", barracksStatusDire=" + barracksStatusDire +
+        ", pre_game_duration=" + pre_game_duration +
+        ", tower_status_radiant=" + tower_status_radiant +
+        ", tower_status_dire=" + tower_status_dire +
+        ", barracks_status_radiant=" + barracks_status_radiant +
+        ", barracks_status_dire=" + barracks_status_dire +
         ", cluster=" + cluster +
-        ", firstBloodTime=" + firstBloodTime +
-        ", humanPlayers=" + humanPlayers +
-        ", leagueId=" + leagueId +
-        ", positiveVotes=" + positiveVotes +
-        ", negativeVotes=" + negativeVotes +
-        ", gameMode=" + gameMode +
-        ", picksBans=" + picksBans +
+        ", first_blood_time=" + first_blood_time +
+        ", human_players=" + human_players +
+        ", league_id=" + league_id +
+        ", positive_votes=" + positive_votes +
+        ", negative_votes=" + negative_votes +
+        ", game_mode=" + game_mode +
+        ", picks_bans=" + picks_bans +
         ", flags=" + flags +
         ", engine=" + engine +
-        ", radiantScore=" + radiantScore +
-        ", direScore=" + direScore +
+        ", radiant_score=" + radiant_score +
+        ", dire_score=" + dire_score +
         ", players=" + players +
         '}';
   }

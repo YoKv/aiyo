@@ -9,27 +9,16 @@ public class ItemEntity {
   private int id;
   private String name;//全名
   private int cost;//价格
-  private int secretShop;//神秘商店 0否1是
-  private int sideShop;//边路商店 0否1是
+  private int secret_shop;//神秘商店 0否1是
+  private int side_shop;//边路商店 0否1是
   private int recipe;//卷轴 0否1是
-  private String localizedName;//中文名zh
+  private String localized_name;//中文名zh
 
   /**
    * 无参构造方法
    * 兼容fastjson
    */
   public ItemEntity() {
-  }
-
-  public ItemEntity(int id, String name, int cost, int secretShop, int sideShop, int recipe,
-      String localizedName) {
-    this.id = id;
-    this.name = name;
-    this.cost = cost;
-    this.secretShop = secretShop;
-    this.sideShop = sideShop;
-    this.recipe = recipe;
-    this.localizedName = localizedName;
   }
 
   public int getId() {
@@ -56,20 +45,20 @@ public class ItemEntity {
     this.cost = cost;
   }
 
-  public int getSecretShop() {
-    return secretShop;
+  public int getSecret_shop() {
+    return secret_shop;
   }
 
-  public void setSecretShop(int secretShop) {
-    this.secretShop = secretShop;
+  public void setSecret_shop(int secret_shop) {
+    this.secret_shop = secret_shop;
   }
 
-  public int getSideShop() {
-    return sideShop;
+  public int getSide_shop() {
+    return side_shop;
   }
 
-  public void setSideShop(int sideShop) {
-    this.sideShop = sideShop;
+  public void setSide_shop(int side_shop) {
+    this.side_shop = side_shop;
   }
 
   public int getRecipe() {
@@ -80,12 +69,12 @@ public class ItemEntity {
     this.recipe = recipe;
   }
 
-  public String getLocalizedName() {
-    return localizedName;
+  public String getLocalized_name() {
+    return localized_name;
   }
 
-  public void setLocalizedName(String localizedName) {
-    this.localizedName = localizedName;
+  public void setLocalized_name(String localized_name) {
+    this.localized_name = localized_name;
   }
 
   @Override
@@ -94,10 +83,10 @@ public class ItemEntity {
         "id=" + id +
         ", name='" + name + '\'' +
         ", cost=" + cost +
-        ", secretShop=" + secretShop +
-        ", sideShop=" + sideShop +
+        ", secret_shop=" + secret_shop +
+        ", side_shop=" + side_shop +
         ", recipe=" + recipe +
-        ", localizedName='" + localizedName + '\'' +
+        ", localized_name='" + localized_name + '\'' +
         '}';
   }
 }

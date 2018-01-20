@@ -23,7 +23,7 @@ public class Application implements CommandLineRunner {
   @Override
   public void run(String... strings) throws Exception {
     //线程阻塞
-    Thread.currentThread().join();
+//    Thread.currentThread().join();
     System.out.println("aiyo-service-data startup");
   }
 }
