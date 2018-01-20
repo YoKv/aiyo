@@ -3,7 +3,7 @@ dota游戏分析统计
 
 ## 项目结构说明
 
-### aiyo-front-web(vue.js)
+### aiyo-front-web(node.js)
 发布的网站前端项目
 
 ### aiyo-api-web(Vert.x)
@@ -27,5 +27,3 @@ dota游戏分析统计
 ### aiyo-static-base(jar包引用)
 一些工具方法，实体类，通用的枚举，异常，结果集
 
-### document
-文档
