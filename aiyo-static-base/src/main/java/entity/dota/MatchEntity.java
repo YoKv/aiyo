@@ -141,13 +141,6 @@ public class MatchEntity {
   public MatchEntity() {
   }
 
-  @Override
-  public String toString() {
-    return String.format(
-        "MatchEntity[matchId=%base, matchSeqNum='%base', startTime='%base', leagueId='%base', gameMode='%base', radiantWin='%base']",
-        matchId, matchSeqNum, startTime, leagueId, gameMode, radiantWin);
-  }
-
   public long getMatchId() {
     return matchId;
   }
@@ -362,5 +355,38 @@ public class MatchEntity {
 
   public void setPlayers(List<MatchPlayerEntity> players) {
     this.players = players;
+  }
+
+  @Override
+  public String toString() {
+    return "MatchEntity{" +
+        "matchId=" + matchId +
+        ", matchSeqNum=" + matchSeqNum +
+        ", startTime=" + startTime +
+        ", lobbyType=" + lobbyType +
+        ", season=" + season +
+        ", radiantTeamId=" + radiantTeamId +
+        ", direTeamId=" + direTeamId +
+        ", radiantWin=" + radiantWin +
+        ", duration=" + duration +
+        ", preGameDuration=" + preGameDuration +
+        ", towerStatusRadiant=" + towerStatusRadiant +
+        ", towerStatusDire=" + towerStatusDire +
+        ", barracksStatusRadiant=" + barracksStatusRadiant +
+        ", barracksStatusDire=" + barracksStatusDire +
+        ", cluster=" + cluster +
+        ", firstBloodTime=" + firstBloodTime +
+        ", humanPlayers=" + humanPlayers +
+        ", leagueId=" + leagueId +
+        ", positiveVotes=" + positiveVotes +
+        ", negativeVotes=" + negativeVotes +
+        ", gameMode=" + gameMode +
+        ", picksBans=" + picksBans +
+        ", flags=" + flags +
+        ", engine=" + engine +
+        ", radiantScore=" + radiantScore +
+        ", direScore=" + direScore +
+        ", players=" + players +
+        '}';
   }
 }

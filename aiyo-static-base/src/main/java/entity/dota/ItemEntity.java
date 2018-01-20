@@ -32,13 +32,6 @@ public class ItemEntity {
     this.localizedName = localizedName;
   }
 
-  @Override
-  public String toString() {
-    return String
-        .format("ItemEntity[id=%base, name='%base', cost='%base', localizedName='%base']", id, name,
-            cost, localizedName);
-  }
-
   public int getId() {
     return id;
   }
@@ -93,5 +86,18 @@ public class ItemEntity {
 
   public void setLocalizedName(String localizedName) {
     this.localizedName = localizedName;
+  }
+
+  @Override
+  public String toString() {
+    return "ItemEntity{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", cost=" + cost +
+        ", secretShop=" + secretShop +
+        ", sideShop=" + sideShop +
+        ", recipe=" + recipe +
+        ", localizedName='" + localizedName + '\'' +
+        '}';
   }
 }

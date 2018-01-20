@@ -10,3 +10,4 @@ node_modules/
 .project
 \.settings/
 config.yaml
+aiyo-service-data/src/main/resources/application.yml

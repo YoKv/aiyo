@@ -25,8 +25,11 @@ public class HeroEntity {
 
   @Override
   public String toString() {
-    return String.format("HeroEntity[id=%base, name='%base', localizedName='%base']", id, name,
-        localizedName);
+    return "HeroEntity{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", localizedName='" + localizedName + '\'' +
+        '}';
   }
 
   public int getId() {

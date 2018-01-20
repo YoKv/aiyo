@@ -1,13 +1,14 @@
 package space.aiyo;
 
-import entity.dota.HeroEntity;
 import entity.dota.MatchEntity;
 import java.util.List;
 import org.bson.types.ObjectId;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import space.aiyo.entity.HeroRepositoryEntity;
 import space.aiyo.repository.HeroRepository;
 import space.aiyo.repository.MatchRepository;
 
@@ -16,7 +17,7 @@ import space.aiyo.repository.MatchRepository;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Test {
+public class MongoTest {
 
   @Autowired
   private MatchRepository repository;
@@ -24,17 +25,14 @@ public class Test {
   private HeroRepository heroRepository;
 
 
-  @org.junit.Test
+  @Test
   public void contextLoads() {
-
-    System.out.println("test");
-
     MatchEntity matchEntity = repository.findOne(new ObjectId("5a61f441ce6907266041dbc1"));
     System.out.println(matchEntity);
 
-    List<HeroEntity> list = heroRepository.findAll();
+    List<HeroRepositoryEntity> list = heroRepository.findAll();
     System.out.println(list.size());
+    System.out.println(list.get(1));
 
-    //FIXME mongo的entity注解没有
   }
 }
