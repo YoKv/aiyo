@@ -13,7 +13,7 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import space.aiyo.message.RedisMessage;
-import space.aiyo.var.RedisType;
+import enums.RedisType;
 import space.aiyo.var.Route;
 
 /**

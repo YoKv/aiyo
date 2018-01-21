@@ -13,7 +13,7 @@ import io.vertx.ext.mongo.FindOptions;
 import space.aiyo.message.CrudMessage;
 import space.aiyo.message.RedisMessage;
 import space.aiyo.var.Documents;
-import space.aiyo.var.RedisKey;
+import enums.RedisKey;
 import space.aiyo.var.Route;
 
 /**
@@ -36,7 +36,7 @@ public class MatchSchedule extends AbstractVerticle {
     long timeId = vertx.setPeriodic(4000,
         id -> {
           RedisMessage redisMessage = new RedisMessage();
-          redisMessage.setRedisKey(RedisKey.MATCHSEQNUM);
+          redisMessage.setRedisKey(RedisKey.MATCH_SEQ_NUM);
           vertx.eventBus()
               .send(Route.REDIS_GET.getAddress(), redisMessage, redisMessageOptions, message -> {
                 if (message.succeeded()) {
@@ -99,7 +99,7 @@ public class MatchSchedule extends AbstractVerticle {
   private void resetMatchSeqNum(JsonObject json) {
     RedisMessage redisMessage = new RedisMessage();
     redisMessage.setData(json.getLong("match_seq_num").toString());
-    redisMessage.setRedisKey(RedisKey.MATCHSEQNUM);
+    redisMessage.setRedisKey(RedisKey.MATCH_SEQ_NUM);
     vertx.eventBus().send(Route.REDIS_SET.getAddress(), redisMessage, redisMessageOptions);
   }
 
