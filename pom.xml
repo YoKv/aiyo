@@ -8,14 +8,13 @@
   <groupId>space.aiyo</groupId>
 
   <packaging>pom</packaging>
-  <version>${project.version}</version>
+  <version>1.0.0</version>
 
   <modules>
     <module>aiyo-api-web</module>
     <module>aiyo-service-business</module>
     <module>aiyo-service-data</module>
     <module>aiyo-service-steam</module>
-    <module>aiyo-static-base</module>
   </modules>
 
   <properties>
@@ -30,18 +29,12 @@
     <log4j2.version>2.10.0</log4j2.version>
     <slf4j.version>1.7.25</slf4j.version>
     <postgresql.version>42.1.4</postgresql.version>
+    <fastjson.version>1.2.31</fastjson.version>
     <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
-      <!--项目基础类库-->
-      <dependency>
-        <groupId>space.aiyo</groupId>
-        <artifactId>aiyo-static-base</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
       <!--SpringBoot parent-->
       <dependency>
         <groupId>org.springframework.boot</groupId>

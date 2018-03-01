@@ -1,6 +1,5 @@
 package space.aiyo.entity;
 
-import entity.dota.MatchEntity;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * CREATE BY Yo ON 2018/1/20 11:57
  */
 @Document(collection = "dotaMatch")
-public class MatchRepositoryEntity extends MatchEntity {
+public class MatchRepositoryEntity {
 
   @Id
   private ObjectId _id;

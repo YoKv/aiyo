@@ -15,10 +15,6 @@
 
 
   <dependencies>
-    <dependency>
-      <groupId>space.aiyo</groupId>
-      <artifactId>aiyo-static-base</artifactId>
-    </dependency>
     <!--spring-boot-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -37,11 +33,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-mongodb</artifactId>
     </dependency>
-    <!--json-->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-    </dependency>
+
   </dependencies>
 
 </project>

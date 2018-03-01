@@ -1,6 +1,5 @@
 ## 项目说明
 dota游戏分析统计
-
 ## 项目结构说明
 
 ### aiyo-front-web(node.js)
@@ -24,6 +23,4 @@ dota游戏分析统计
 ### aiyo-services-steam(Vert.x) 基本完成，缺基于MQ的服务调用
 核心数据来源，定时任务获取数据
 
-### aiyo-static-base(jar包引用)
-一些工具方法，实体类，通用的枚举，异常，结果集
-
+项目间使用rest接口通信

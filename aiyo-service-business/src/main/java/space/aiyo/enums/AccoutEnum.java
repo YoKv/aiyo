@@ -1,4 +1,4 @@
-package enums;
+package space.aiyo.enums;
 
 /**
  * CREATE BY Yo ON 2018/1/21 11:49

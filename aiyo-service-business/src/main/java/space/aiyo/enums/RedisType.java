@@ -1,4 +1,4 @@
-package enums;
+package space.aiyo.enums;
 
 public enum RedisType {
   STRING,

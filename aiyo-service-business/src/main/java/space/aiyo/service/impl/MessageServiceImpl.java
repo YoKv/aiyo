@@ -1,12 +1,12 @@
 package space.aiyo.service.impl;
 
-import enums.RedisKey;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import space.aiyo.enums.RedisKey;
 import space.aiyo.service.MessageService;
 
 /**
@@ -32,7 +32,7 @@ public class MessageServiceImpl implements MessageService {
         .set(RedisKey.VERIFICATION_CODE.getKey() + phone, verificationCode, verificationCodeExpire,
             TimeUnit.SECONDS);
 
-    send(phone,verificationCode);
+    send(phone, verificationCode);
 
     return false;
   }

@@ -14,11 +14,6 @@
   </parent>
 
   <dependencies>
-    <!--项目公用代码-->
-    <dependency>
-      <groupId>space.aiyo</groupId>
-      <artifactId>aiyo-static-base</artifactId>
-    </dependency>
     <!--vertx核心库-->
     <dependency>
       <groupId>io.vertx</groupId>

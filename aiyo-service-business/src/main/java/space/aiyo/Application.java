@@ -18,7 +18,7 @@ public class Application implements CommandLineRunner {
 
   @Override
   public void run(String... strings) throws Exception {
-    //线程阻塞
+    //线程阻塞,实现不好 FIXME
     Thread.currentThread().join();
     System.out.println("aiyo-service-business startup");
   }
