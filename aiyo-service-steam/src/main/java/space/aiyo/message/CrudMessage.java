@@ -4,7 +4,6 @@ package space.aiyo.message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
-import space.aiyo.util.AbstractCodec;
 
 public class CrudMessage extends AbstractCodec<CrudMessage, CrudMessage> {
 

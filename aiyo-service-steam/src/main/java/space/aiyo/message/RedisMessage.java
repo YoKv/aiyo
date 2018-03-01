@@ -1,7 +1,6 @@
 package space.aiyo.message;
 
-import space.aiyo.enums.RedisKey;
-import space.aiyo.util.AbstractCodec;
+import space.aiyo.var.RedisKey;
 
 public class RedisMessage extends AbstractCodec<RedisMessage, RedisMessage> {
 

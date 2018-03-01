@@ -1,4 +1,4 @@
-package space.aiyo.util;
+package space.aiyo;
 
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
@@ -19,9 +19,9 @@ import space.aiyo.component.RocketMQWrapper;
 /**
  * CREATE BY Yo ON 2018/1/13 22:00
  */
-public class DeployUtil {
+public class DeployHelper {
 
-  private static Logger logger = LoggerFactory.getLogger(DeployUtil.class);
+  private static Logger logger = LoggerFactory.getLogger(DeployHelper.class);
 
   public static void deployVerticle(Vertx vertx) {
     ConfigStoreOptions store = new ConfigStoreOptions()

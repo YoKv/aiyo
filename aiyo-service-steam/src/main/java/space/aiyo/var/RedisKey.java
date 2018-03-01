@@ -1,4 +1,4 @@
-package space.aiyo.enums;
+package space.aiyo.var;
 
 public enum RedisKey {
   SCHEDULE_TIMEID("SCHEDULE_TIMEID", RedisType.HASH),
